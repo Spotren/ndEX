@@ -6,17 +6,19 @@ import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
 import expressiveCode from 'astro-expressive-code'
 import { remarkPlugins, rehypePlugins } from './plugins'
-import { SITE } from './src/config'
+import { THEME_CONFIG } from './src/config'
+import siteContent from './src/content/site.json'
 
 export default defineConfig({
-  site: SITE.website,
-  base: SITE.base,
+  site: siteContent.default.site.website,
+  base: THEME_CONFIG.base,
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport',
   },
   vite: {
-    plugins: [tailwindcss()],
+    // Work around duplicated Vite type trees pulled by Astro and @tailwindcss/vite.
+    plugins: [tailwindcss()] as any,
     build: {
       chunkSizeWarningLimit: 1500,
     },
