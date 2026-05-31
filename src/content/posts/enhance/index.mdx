@@ -2,7 +2,7 @@
 title: 'Markdown enhanced syntax'
 description: 'Enhance Markdown with callouts, Expressive Code blocks, image caption directives, video embeds, styled links, badges, and details.'
 pubDate: 2025-08-12
-author: 'Dnzzk2'
+author: 'ndEX'
 cover: assets/cover.png
 recommend: true
 tags: ['Litos', 'Documentation']
@@ -383,7 +383,7 @@ Use the [`:::image`](https://github.com/lin-stephanie/remark-directive-sugar?tab
 
 > [!warning]
 >
-> Setting an image's `width` attribute directly may cause blurriness. [Learn more](https://github.com/Dnzzk2/Litos/discussions/17)
+> Setting an image's `width` attribute directly may cause blurriness. [Learn more](https://github.com/ndEX/Litos/discussions/17)
 
 ### image-a
 
@@ -394,15 +394,15 @@ The custom directive wraps an image inside a link, making it clickable.
 `![alt](image path)(<img> attrs)`: Same as above.
 
 ```md title=':::image-a.md'
-:::image-a{href="https://github.com/Dnzzk2/Litos"}
+:::image-a{href="https://github.com/ndEX/Litos"}
 ![OG image](assets/cover.png)
 :::
 
-:::image-a{href="https://github.com/Dnzzk2/Litos" style="display:block" .custom-class}
+:::image-a{href="https://github.com/ndEX/Litos" style="display:block" .custom-class}
 ![OG image](assets/cover.png)(style: margin-bottom: -1rem; transform:scaleX(1.1) scaleY(1.1);, loading: eager)
 :::
 
-::::image-a{href="https://github.com/Dnzzk2/Litos"}
+::::image-a{href="https://github.com/ndEX/Litos"}
 :::image-figure[This example shows `:::image-a` wraps around `:::image-figure` (both are interchangeable).]
 ![OG image](assets/cover.png)
 :::
@@ -415,15 +415,15 @@ The custom directive wraps an image inside a link, making it clickable.
 :::
 ```
 
-:::image-a{href="https://github.com/Dnzzk2/Litos"}
+:::image-a{href="https://github.com/ndEX/Litos"}
 ![OG image](assets/cover.png)
 :::
 
-:::image-a{href="https://github.com/Dnzzk2/Litos" style="display:block" .custom-class}
+:::image-a{href="https://github.com/ndEX/Litos" style="display:block" .custom-class}
 ![OG image](assets/cover.png)(style: margin-bottom: -1rem; transform:scaleX(1.1) scaleY(1.1);, loading: eager)
 :::
 
-::::image-a{href="https://github.com/Dnzzk2/Litos"}
+::::image-a{href="https://github.com/ndEX/Litos"}
 :::image-figure[This example shows `:::image-a` wraps around `:::image-figure` (both are interchangeable).]
 ![OG image](assets/cover.png)(style:padding-top:1rem;)
 :::
@@ -496,10 +496,10 @@ cover.png
 Congratulations from :link[oopsunix]{#@oopsunix}
 
 ```md title=':::github-card.md'
-::github{repo="Dnzzk2/Litos"}
+::github{repo="ndEX/Litos"}
 ```
 
-::github{repo="Dnzzk2/Litos"}
+::github{repo="ndEX/Litos"}
 
 ## Video Embedding
 
@@ -543,11 +543,11 @@ Use the [`:link`](https://github.com/lin-stephanie/remark-directive-sugar?tab=re
 
 **Link to a GitHub user or organization (prepend `id` with `@`)**
 
-**Example 1**: `:link[Dnzzk2]{#@Dnzzk2}` links to the GitHub profile of the project maintainer, :link[Dnzzk2]{#@Dnzzk2}.
+**Example 1**: `:link[ndEX]{#@ndEX}` links to the GitHub profile of the project maintainer, :link[ndEX]{#@ndEX}.
 
 **Example 2**: `:link[Vite]{id=@vitejs}` links to the GitHub profile of the :link[Vite]{id=@vitejs} organization.
 
-**Example 3**: `:link{#@Dnzzk2 tab=repositories}` links directly to the repositories tab of the GitHub user, like :link{#@Dnzzk2 tab=repositories}. For GitHub users, valid `tab` options: `'repositories','projects', 'packages', 'stars', 'sponsoring', 'sponsors'`.
+**Example 3**: `:link{#@ndEX tab=repositories}` links directly to the repositories tab of the GitHub user, like :link{#@ndEX tab=repositories}. For GitHub users, valid `tab` options: `'repositories','projects', 'packages', 'stars', 'sponsoring', 'sponsors'`.
 
 **Example 4**: `:link{#@vitejs tab=org-people}` links directly to the people section of a GitHub organization, like :link{#@vitejs tab=org-people}. For GitHub organizations, valid `tab` options: `'org-repositories', 'org-projects', 'org-packages', 'org-sponsoring', and 'org-people'`.
 
@@ -573,9 +573,9 @@ Use the [`:link`](https://github.com/lin-stephanie/remark-directive-sugar?tab=re
 
 **Example 11**: `:link[Vite]{id=@vitejs img=https://vitejs.dev/logo.svg}` creates a :link[Vite]{id=@vitejs img=https://vitejs.dev/logo.svg} that displays a custom logo by using the `img`.
 
-**Example 12**: `:link{id=Dnzzk2/Litos class=github}` creates a :link{id=Dnzzk2/Litos class=github} with `class=github` (or `.github`) to override the default style of a GitHub repository.
+**Example 12**: `:link{id=ndEX/Litos class=github}` creates a :link{id=ndEX/Litos class=github} with `class=github` (or `.github`) to override the default style of a GitHub repository.
 
-**Example 13**: `:link[Litos Themes]{id=https://github.com/Dnzzk2/Litos img=https://github.githubassets.com/assets/mona-e50f14d05e4b.png}` fully customizes a link. :link[Litos Themes]{id=https://github.com/Dnzzk2/Litos img=
+**Example 13**: `:link[Litos Themes]{id=https://github.com/ndEX/Litos img=https://github.githubassets.com/assets/mona-e50f14d05e4b.png}` fully customizes a link. :link[Litos Themes]{id=https://github.com/ndEX/Litos img=
 https://litos.vercel.app/favicon.ico}
 
 ## Badges

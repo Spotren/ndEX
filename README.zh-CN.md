@@ -1,7 +1,7 @@
 <div align="center">
 <img src="./src/assets/readme/logo.png" width="400" alt="Litos Logo" />
 
-![License](https://img.shields.io/github/license/Dnzzk2/Litos?color=blue&style=flat-square)
+![License](https://img.shields.io/github/license/ndEX/Litos?color=blue&style=flat-square)
 ![Astro](https://img.shields.io/badge/Astro-v5.0-orange?style=flat-square&logo=astro)
 ![React](https://img.shields.io/badge/React-v19.0-blue?style=flat-square&logo=react)
 ![Tailwind](https://img.shields.io/badge/TailwindCSS-v4.0-38b2ac?style=flat-square&logo=tailwindcss)
@@ -11,7 +11,7 @@
 
 [English](./README.md) | **简体中文**
 
-[在线演示](https://litos.vercel.app/) · [反馈问题](https://github.com/Dnzzk2/Litos/issues) · [功能建议](https://github.com/Dnzzk2/Litos/issues)
+[在线演示](https://litos.vercel.app/) · [反馈问题](https://github.com/ndEX/Litos/issues) · [功能建议](https://github.com/ndEX/Litos/issues)
 
 </div>
 
@@ -38,8 +38,8 @@ Litos 是一个使用 **Astro**、**React** 和 **TailwindCSS** 精心打造的�
 
 一键部署你的 Litos 博客：
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Dnzzk2/Litos)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Dnzzk2/Litos)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ndEX/Litos)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ndEX/Litos)
 
 ## 快速开始
 
@@ -53,7 +53,7 @@ Litos 是一个使用 **Astro**、**React** 和 **TailwindCSS** 精心打造的�
 1.  **克隆仓库**
 
     ```bash
-    git clone https://github.com/Dnzzk2/Litos.git
+    git clone https://github.com/ndEX/Litos.git
     cd Litos
     ```
 
@@ -111,16 +111,16 @@ Litos 是一个使用 **Astro**、**React** 和 **TailwindCSS** 精心打造的�
 
 ## Star 趋势
 
-<a href="https://www.star-history.com/#Dnzzk2/Litos&type=date&legend=top-left">
+<a href="https://www.star-history.com/#ndEX/Litos&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Dnzzk2/Litos&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Dnzzk2/Litos&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Dnzzk2/Litos&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ndEX/Litos&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ndEX/Litos&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ndEX/Litos&type=date&legend=top-left" />
  </picture>
 </a>
 
 ---
 
 <p align="center">
-made with 💗 by <a href="https://github.com/Dnzzk2">Dnzzk2</a> !
+made with 💗 by <a href="https://github.com/ndEX">ndEX</a> !
 </p>

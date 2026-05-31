@@ -13,12 +13,12 @@ export const THEME_CONFIG = {
 //--- Posts Page Config ---
 export const POSTS_CONFIG: PostConfig = {
   title: 'Posts',
-  description: 'Posts by Dnzzk2',
+  description: 'Posts by ndEX',
   introduce: 'Here, I will share the usage instructions for this theme to help you quickly use it.',
-  author: 'Dnzzk2',
+  author: 'ndEX',
   homePageConfig: {
     size: 2,
-    type: 'minimal',
+    type: 'image',
   },
   postPageConfig: {
     size: 10,
