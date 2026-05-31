@@ -1,0 +1,36 @@
+---
+import { cn } from '~/lib/utils'
+
+interface Props {
+  icon: string
+  primaryValue: number | string
+  primaryLabel?: string
+  secondaryValue?: number | string
+  secondaryLabel?: string
+  class?: string | Record<string, boolean>
+}
+
+const {
+  icon,
+  primaryValue,
+  primaryLabel,
+  secondaryValue,
+  secondaryLabel,
+  class: className,
+}: Props = Astro.props
+---
+
+<div class={cn('flex items-center gap-2', className)}>
+  <span class={cn('h-6 w-6 text-muted-foreground', icon)}></span>
+  <span class="text-muted-foreground text-sm">
+    {primaryValue}
+    {primaryLabel ? ` ${primaryLabel}` : ''}
+    {secondaryValue !== undefined && (
+      <>
+        {' '}
+        {typeof secondaryValue === 'number' ? Intl.NumberFormat('en-US').format(secondaryValue) : secondaryValue}
+        {secondaryLabel ? ` ${secondaryLabel}` : ''}
+      </>
+    )}
+  </span>
+</div>

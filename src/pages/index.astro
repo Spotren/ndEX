@@ -1,17 +1,16 @@
 ---
-import { SITE, SKILLSSHOWCASE_CONFIG, SOCIAL_LINKS } from '~/config.ts'
-import { GITHUB_CONFIG, POSTS_CONFIG } from '~/config.ts'
+import { POSTS_CONFIG } from '~/config.ts'
+import HeroMetric from '~/components/base/HeroMetric.astro'
 import Layout from '~/layouts/Layout.astro'
 import SectionDivider from '~/components/base/SectionDivider.astro'
-import GithubContributions from '~/components/base/GithubContributions.tsx'
 import SocialLink from '~/components/base/SocialLink.astro'
 import List from '~/components/posts/card/List.astro'
-import SkillsShowcase from '~/components/base/SkillsShowcase.astro'
 import { getNumPosts, getPinnedPosts } from '~/lib/data'
+import { getSiteData } from '~/lib/site-data'
+import { truncateText } from '~/lib/utils'
 
-const { ENABLED, GITHUB_USERNAME, TOOLTIP_ENABLED } = GITHUB_CONFIG
 const { size, type } = POSTS_CONFIG.homePageConfig
-const { SKILLS_ENABLED, SKILLS_DATA } = SKILLSSHOWCASE_CONFIG
+const siteData = await getSiteData()
 
 let showPosts = []
 const pinnedPosts = await getPinnedPosts()
@@ -23,62 +22,60 @@ if (hasPinnedPosts) {
 }
 ---
 
-<Layout title="Readme" description={SITE.description}>
+<Layout title="Readme" description={siteData.site.description}>
   <div class="relative z-[1]">
     <div class="py-8 pb-10 px-6 sm:px-8">
       <h1 class="flex flex-col gap-2">
-        <span class="text-4xl sm:text-5xl tracking-tight"> Litos </span>
+        <span class="text-4xl sm:text-5xl tracking-tight">{siteData.hero.title}</span>
         <span class="text-muted-foreground font-light text-xl sm:text-2xl block tracking-wide text-balance">
-          A Simple & Modern Blog Theme for Astro
+          {siteData.hero.eyebrow}
         </span>
       </h1>
       <div class="pro text-muted-foreground text-pretty">
-        <p>
-          Litos is a clean and modern Astro blog theme focused on content presentation and reading experience. More than just a blog, it's a
-          personal space to showcase your skills, projects, and life.
-        </p>
-        <p>
-          Built with Tailwind CSS for elegant responsive design and React components for smooth interactions. Features light/dark theme
-          switching, multiple article layouts, GitHub contribution charts, and more. Inspired by
-          <a href="https://github.com/needim" target="_blank" rel="nofollow noreferrer">@needim</a>, redesigned by
-          <a href="https://github.com/Dnzzk2" target="_blank" rel="nofollow noreferrer">@Dnzzk2</a> based on Astro.
-        </p>
+        <p>{truncateText(siteData.hero.description, 150)}</p>
+      </div>
+      <div class="mt-6 grid gap-4 md:grid-cols-[1fr_1.2fr_0.8fr]">
+        <div class="flex items-start gap-3">
+          <span class="icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
+          <div>
+            <p class="text-sm font-medium text-muted-foreground">{siteData.nap.company}</p>
+            <p class="text-sm text-green-600">{siteData.nap.status}</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="icon-[mdi--map-marker] block size-6 shrink-0 text-primary"></span>
+          <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="icon-[mdi--phone] block size-6 shrink-0 text-primary"></span>
+          <p class="text-sm text-muted-foreground">{siteData.nap.phone}</p>
+        </div>
       </div>
       <div class="mt-6 flex gap-6">
+        <HeroMetric
+          icon={siteData.heroMetric.icon}
+          primaryValue={siteData.heroMetric.primaryValue}
+          primaryLabel={siteData.heroMetric.primaryLabel}
+          secondaryValue={siteData.heroMetric.secondaryValue}
+          secondaryLabel={siteData.heroMetric.secondaryLabel}
+        />
         {
-          SOCIAL_LINKS.map((item) => {
-            return <SocialLink href={item.url} icon={item.icon} aria-label={`Link of ${item.name}`} count={item.count} label="followers" />
+          siteData.socialLinks.map((item) => {
+            return <SocialLink href={item.url} icon={item.icon} aria-label={`Link of ${item.name}`} count={item.count} label={item.label} />
           })
         }
       </div>
     </div>
     {
-      ENABLED && (
+      siteData.homeSections.map((section) => (
         <>
           <SectionDivider />
-          <div class="py-8 pb-10 px-6 max-md:px-6">
-            <div class="px-2 max-md:px-0">
-              <h2 class="text-2xl sm:text-3xl">Spotlight</h2>
-              <p class="text-muted-foreground mb-6 mt-1">GitHub contributions in the past year:</p>
-            </div>
-            <GithubContributions username={GITHUB_USERNAME} tooltipEnabled={TOOLTIP_ENABLED} client:load transition:animate="none" />
+          <div class="py-8 pb-10 px-6 sm:px-8">
+            <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
+            <p class="text-muted-foreground mb-6 mt-1">{section.description}</p>
           </div>
         </>
-      )
-    }
-    {
-      SKILLS_ENABLED && SKILLS_DATA.length > 0 && (
-        <>
-          <SectionDivider />
-          <div class="py-8 pb-10 px-6 max-md:px-6">
-            <div class="px-2 max-md:px-0">
-              <h2 class="text-2xl sm:text-3xl tracking-tight">Skills</h2>
-              <p class="text-muted-foreground mb-6 mt-1">It's not just skills, but also tools:</p>
-            </div>
-            <SkillsShowcase skillsData={SKILLS_DATA} />
-          </div>
-        </>
-      )
+      ))
     }
     <SectionDivider />
     <div class="py-8 pb-10 px-6 sm:px-8">

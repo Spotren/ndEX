@@ -1,4 +1,6 @@
 ---
+import { truncateText } from '~/lib/utils'
+
 interface Props {
   title: string
   introduce: string
@@ -11,5 +13,5 @@ const { title, introduce } = Astro.props
   {title}
 </h1>
 <div class="pro text-muted-foreground">
-  <p class="mt-2">{introduce}</p>
+  <p class="mt-2">{truncateText(introduce, 150)}</p>
 </div>

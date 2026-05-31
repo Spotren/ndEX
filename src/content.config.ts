@@ -1,7 +1,8 @@
-import { glob } from 'astro/loaders'
+import { file, glob } from 'astro/loaders'
 import { defineCollection } from 'astro:content'
 import { z } from 'astro/zod'
 import { POSTS_CONFIG } from '~/config'
+import { siteSchema } from '~/lib/site-schema'
 import type { CoverLayout, PostType } from '~/types'
 
 const posts = defineCollection({
@@ -33,24 +34,9 @@ const posts = defineCollection({
       })),
 })
 
-const projects = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/projects',
-  }),
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      description: z.string(),
-      githubUrl: z.string(),
-      website: z.string(),
-      type: z.string(),
-      icon: image().optional(),
-      imageClass: z.string().optional(),
-      star: z.number(),
-      fork: z.number(),
-      draft: z.boolean().default(false),
-    }),
+const site = defineCollection({
+  loader: file('src/content/site.json'),
+  schema: siteSchema,
 })
 
-export const collections = { posts, projects }
+export const collections = { posts, site }

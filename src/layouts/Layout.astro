@@ -3,7 +3,8 @@ import '~/styles/global.css'
 import '~/styles/markdown.css'
 import '~/styles/lqip.css'
 import '~/styles/github-card.css'
-import { SITE } from '~/config'
+import { THEME_CONFIG } from '~/config'
+import { getSiteData } from '~/lib/site-data'
 import Head from '~/components/base/Head.astro'
 import Header from './Header.astro'
 import Footer from './Footer.astro'
@@ -16,12 +17,13 @@ type Props = {
 }
 
 const { title, description, image, disableViewTransition }: Props = Astro.props
+const siteData = await getSiteData()
 ---
 
 <!doctype html>
-<html lang={SITE.lang} transition:name="root" transition:animate={SITE.transition && !disableViewTransition ? 'fade' : 'none'}>
+<html lang={siteData.site.lang} transition:name="root" transition:animate={THEME_CONFIG.transition && !disableViewTransition ? 'fade' : 'none'}>
   <head>
-    <Head title={`${title} | ${SITE.title}`} {description} {image} />
+    <Head title={`${title} | ${siteData.site.title}`} {description} {image} />
   </head>
   <body class="flex flex-col">
     <Header />

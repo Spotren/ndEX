@@ -1,12 +1,14 @@
 ---
-import { HEADER_LINKS } from '~/config'
 import ThemeToggle from '~/components/theme/ThemeToggle'
 import HeaderGradient from '~/components/theme/HeaderGradient.astro'
 import SectionDivider from '~/components/base/SectionDivider.astro'
 import HeaderLink from '~/components/base/HeaderLink.astro'
 import SearchSwitch from '~/components/base/SearchSwitch.astro'
+import { getSiteData } from '~/lib/site-data'
 import { Image } from 'astro:assets'
 import favicon from '../../public/favicon.svg'
+
+const siteData = await getSiteData()
 ---
 
 <HeaderGradient />
@@ -18,7 +20,7 @@ import favicon from '../../public/favicon.svg'
       </a>
       <div class="flex gap-1">
         {
-          HEADER_LINKS.map((link) => (
+          siteData.headerLinks.map((link) => (
             <HeaderLink href={link.url} background>
               {link.name}
             </HeaderLink>

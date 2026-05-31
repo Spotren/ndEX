@@ -6,6 +6,11 @@ export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes))
 }
 
+export function truncateText(text: string, maxLength: number) {
+  if (text.length <= maxLength) return text
+  return `${text.slice(0, maxLength).trimEnd()}...`
+}
+
 // 文章按时间排序
 export function postsSort(posts: CollectionEntry<'posts'>[]) {
   return posts.slice().sort((a, b) => {

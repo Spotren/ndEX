@@ -1,4 +1,3 @@
-import { SITE } from '~/config'
 import { getAllPosts } from '../lib/data'
 import type { CollectionEntry } from 'astro:content'
 import sanitizeHtml from 'sanitize-html'
@@ -6,6 +5,7 @@ import { createMarkdownProcessor } from '@astrojs/markdown-remark'
 import { remarkPlugins, rehypePlugins } from '../../plugins'
 import { getImage } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
+import { getSiteData } from './site-data'
 
 interface RSSConfig {
   siteUrl: string
@@ -17,12 +17,13 @@ interface RSSConfig {
 }
 
 // 站点配置
+const siteData = await getSiteData()
 const config: RSSConfig = {
-  siteUrl: SITE.website,
-  title: SITE.title,
-  description: SITE.description,
-  author: SITE.author,
-  lang: SITE.lang,
+  siteUrl: siteData.site.website,
+  title: siteData.site.title,
+  description: siteData.site.description,
+  author: siteData.site.author,
+  lang: siteData.site.lang,
   posts: await getAllPosts(),
 }
 

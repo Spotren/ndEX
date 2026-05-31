@@ -1,0 +1,92 @@
+{
+  "default": {
+    "site": {
+      "title": "Litos",
+      "description": "Litos is a modern blogging theme built on Astro.js, designed for developers who want a fast, content-focused publishing experience.",
+      "website": "https://litos.vercel.app/",
+      "lang": "en",
+      "author": "Dnzzk2",
+      "ogImage": "/og-image.webp"
+    },
+    "headerLinks": [
+      {
+        "name": "Posts",
+        "url": "/posts"
+      }
+    ],
+    "footerLinks": [
+      {
+        "name": "Readme",
+        "url": "/"
+      },
+      {
+        "name": "Posts",
+        "url": "/posts"
+      },
+      {
+        "name": "Tags",
+        "url": "/tags"
+      }
+    ],
+    "hero": {
+      "title": "Litos",
+      "eyebrow": "A Simple & Modern Blog Theme for Astro",
+      "description": "Litos is a clean and modern Astro blog theme focused on content presentation, local business storytelling, and a polished reading experience."
+    },
+    "heroMetric": {
+      "icon": "icon-[mdi--star]",
+      "primaryValue": "4.9",
+      "primaryLabel": "/",
+      "secondaryValue": 50,
+      "secondaryLabel": "reviews"
+    },
+    "socialLinks": [
+      {
+        "name": "facebook",
+        "url": "https://facebook.com/yourpage",
+        "icon": "icon-[ri--facebook-line]"
+      },
+      {
+        "name": "instagram",
+        "url": "https://instagram.com/yourprofile",
+        "icon": "icon-[ri--instagram-line]"
+      },
+      {
+        "name": "linkedin",
+        "url": "https://linkedin.com/company/yourcompany",
+        "icon": "icon-[ri--linkedin-fill]"
+      }
+    ],
+    "nap": {
+      "company": "Northwind Dental Studio",
+      "status": "Open now",
+      "address": "1284 Market Street, Suite 300, Portland, OR 97205",
+      "phone": "(503) 555-0147"
+    },
+    "homeSections": [
+      {
+        "key": "location",
+        "title": "Location",
+        "description": "A dedicated section for location details will be added here."
+      },
+      {
+        "key": "reviews",
+        "title": "Reviews",
+        "description": "A dedicated section for reviews will be added here."
+      },
+      {
+        "key": "products",
+        "title": "Products",
+        "description": "A dedicated section for products will be added here."
+      },
+      {
+        "key": "services",
+        "title": "Services",
+        "description": "A dedicated section for services will be added here."
+      }
+    ],
+    "footer": {
+      "sourceUrl": "https://github.com/Dnzzk2/Litos"
+    }
+  }
+}

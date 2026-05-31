@@ -28,12 +28,8 @@ Unlike traditional themes, Litos emphasizes visual aesthetics without compromisi
 - **Modern Architecture** — Astro 5 + React 19 for blazing fast performance and dynamic interactivity.
 - **Elegant Design** — Fully responsive, meticulously crafted UI with TailwindCSS 4.
 - **Posts** — Multiple layout options (compact, cover image) with rich Markdown support.
-- **Projects** — Dedicated portfolio section with filterable tags.
-- **Photos** — Beautiful masonry layout for photography collections.
-- **Skills Showcase** — Visually represented technical stack configuration.
 - **Code Highlighting** — Integrated Expressive Code for beautiful syntax highlighting.
 - **Math Support** — KaTeX for rendering mathematical equations.
-- **Comments** — Gitalk integration for GitHub-based discussions.
 - **SEO** — Built-in sitemaps, robots.txt, and meta tags.
 - **Analytics** — Configurable Vercount and Umami analytics.
 - **Dark Mode** — Native light and dark theme support.
@@ -77,34 +73,27 @@ Deploy your own Litos blog with one click:
 
 ## Configuration
 
-The primary configuration file is located at `src/config.ts`.
+Content and theme behavior are split across:
+
+- `src/content/site.json` for site metadata, homepage content, navigation links, hero metric, and social links
+- `src/config.ts` for theme behavior and posts configuration
 
 ### Site Settings
-```typescript
-export const SITE: Site = {
-  title: 'Litos',
-  description: 'Your site description here.',
-  website: 'https://your-domain.com',
-  author: 'Your Name',
-  // ...other settings
-}
-```
-
-### Feature Toggles
-```typescript
-export const SKILLSSHOWCASE_CONFIG = {
-  SKILLS_ENABLED: true,
-  // ...
-}
-
-export const GITHUB_CONFIG = {
-  ENABLED: true,
-  // ...
+```json
+{
+  "default": {
+    "site": {
+      "title": "Litos",
+      "description": "Your site description here.",
+      "website": "https://your-domain.com",
+      "author": "Your Name"
+    }
+  }
 }
 ```
 
 ### Navigation
-Links for the Header and Footer can be managed via `HEADER_LINKS` and `FOOTER_LINKS`.
+Header and footer links can be managed via `headerLinks` and `footerLinks` in `src/content/site.json`.
 
 ## Scripts
 
