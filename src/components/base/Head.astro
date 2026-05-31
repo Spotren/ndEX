@@ -38,9 +38,8 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 <meta name="color-scheme" content="light dark" />
 
 <!-- icon -->
-<link rel="icon" href="/favicon.ico" sizes="32x32" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="icon" href={siteData.site.icon.src} sizes="180x180" />
+<link rel="apple-touch-icon" href={siteData.site.icon.src} />
 
 {/* RSS Feed Link */}
 <link rel="alternate" type="application/rss+xml" title={siteData.site.title} href={new URL('/rss.xml', Astro.site).href} />

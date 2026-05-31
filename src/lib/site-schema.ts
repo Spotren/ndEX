@@ -21,40 +21,80 @@ const heroMetricSchema = z.object({
   secondaryLabel: z.string().trim().min(1).optional(),
 })
 
-const homeSectionSchema = z.object({
-  key: z.string().trim().min(1),
-  title: z.string().trim().min(1),
-  description: z.string().trim().min(1),
-})
-
-export const siteSchema = z.object({
-  site: z.object({
-    title: z.string().trim().min(1).max(255),
-    description: z.string().trim().min(1),
-    website: z.string().trim().min(1),
-    lang: z.string().trim().min(1),
-    author: z.string().trim().min(1),
-    ogImage: z.string().trim().min(1),
-  }),
-  headerLinks: z.array(linkSchema),
-  footerLinks: z.array(linkSchema),
-  hero: z.object({
+const homeSectionSchema = (image: () => any) =>
+  z.object({
+    key: z.string().trim().min(1),
     title: z.string().trim().min(1),
-    eyebrow: z.string().trim().min(1),
-    description: z.string().trim().min(1),
-  }),
-  heroMetric: heroMetricSchema,
-  socialLinks: z.array(socialLinkSchema),
-  nap: z.object({
-    company: z.string().trim().min(1),
-    status: z.string().trim().min(1),
-    address: z.string().trim().min(1),
-    phone: z.string().trim().min(1),
-  }),
-  homeSections: z.array(homeSectionSchema),
-  footer: z.object({
-    sourceUrl: z.string().trim().min(1),
-  }),
-})
+    description: z.string(),
+    latitude: z.number().optional(),
+    longitude: z.number().optional(),
+    map_url: image().optional(),
+    items: z
+      .array(
+        z.object({
+          name: z.string().trim().min(1),
+          role: z.string().trim().min(1).optional(),
+          rating: z.number().int().min(1).max(5),
+          quote: z.string().trim().min(1),
+        })
+      )
+      .optional(),
+    services: z
+      .array(
+        z.object({
+          name: z.string().trim().min(1),
+          type: z.string().trim().min(1),
+          price: z.string().trim().min(1).optional(),
+        })
+      )
+      .optional(),
+    products: z
+      .array(
+        z.object({
+          image: image(),
+          name: z.string().trim().min(1),
+          category: z.string().trim().min(1),
+          price: z.string().trim().min(1).optional(),
+          description: z.string().trim().min(1).optional(),
+          url: z.string().trim().min(1).optional(),
+        })
+      )
+      .optional(),
+  })
 
-export type SiteContent = z.infer<typeof siteSchema>
+export const siteSchema = (image: () => any) =>
+  z.object({
+    site: z.object({
+      title: z.string().trim().min(1).max(255),
+      description: z.string().trim().min(1),
+      website: z.string().trim().min(1),
+      lang: z.string().trim().min(1),
+      author: z.string().trim().min(1),
+      city: z.string().trim().min(1),
+      ogImage: z.string().trim().min(1),
+      icon: image(),
+      logo: image(),
+    }),
+    headerLinks: z.array(linkSchema),
+    footerLinks: z.array(linkSchema),
+    hero: z.object({
+      brand: z.string().trim().min(1),
+      tagline: z.string().trim().min(1),
+      pitch: z.string().trim().min(1),
+    }),
+    heroMetric: heroMetricSchema,
+    socialLinks: z.array(socialLinkSchema),
+    nap: z.object({
+      company: z.string().trim().min(1),
+      status: z.string().trim().min(1),
+      address: z.string().trim().min(1),
+      phone: z.string().trim().min(1),
+      wap: z.boolean(),
+    }),
+    homeSections: z.array(homeSectionSchema(image)),
+    footer: z.object({
+      sourceUrl: z.string().trim().min(1),
+    }),
+  })
+
+export type SiteContent = z.infer<ReturnType<typeof siteSchema>>

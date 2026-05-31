@@ -1,12 +1,17 @@
-import { getEntry } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content'
 
 import type { SiteContent } from './site-schema'
 
 export async function getSiteData(): Promise<SiteContent> {
-  const entry = await getEntry('site', 'default')
-  if (!entry) {
-    throw new Error('Missing site content entry "default" in src/content/site.json')
+  const entries = await getCollection('site')
+  if (entries.length > 0) {
+    return entries[0].data
   }
 
-  return entry.data
+  const fallbackEntry = (await getEntry('site', 'default')) ?? (await getEntry('site', 'site'))
+  if (fallbackEntry) {
+    return fallbackEntry.data
+  }
+
+  throw new Error('Missing site content in src/content/site.json')
 }

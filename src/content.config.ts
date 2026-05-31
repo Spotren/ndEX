@@ -36,7 +36,7 @@ const posts = defineCollection({
 
 const site = defineCollection({
   loader: file('src/content/site.json'),
-  schema: siteSchema,
+  schema: ({ image }) => siteSchema(image),
 })
 
 export const collections = { posts, site }

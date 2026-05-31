@@ -1,12 +1,15 @@
 {
   "default": {
     "site": {
-      "title": "Litos",
+      "title": "Northwind Dental Studio",
       "description": "Litos is a modern blogging theme built on Astro.js, designed for developers who want a fast, content-focused publishing experience.",
       "website": "https://litos.vercel.app/",
       "lang": "en",
-      "author": "Dnzzk2",
-      "ogImage": "/og-image.webp"
+      "author": "ndEX",
+      "city": "Portland",
+      "ogImage": "/og-image.webp",
+      "icon": "../assets/site/icon.png",
+      "logo": "../assets/site/logo.png"
     },
     "headerLinks": [
       {
@@ -16,7 +19,7 @@
     ],
     "footerLinks": [
       {
-        "name": "Readme",
+        "name": "Home",
         "url": "/"
       },
       {
@@ -29,9 +32,9 @@
       }
     ],
     "hero": {
-      "title": "Litos",
-      "eyebrow": "A Simple & Modern Blog Theme for Astro",
-      "description": "Litos is a clean and modern Astro blog theme focused on content presentation, local business storytelling, and a polished reading experience."
+      "brand": "Northwind",
+      "tagline": "Dental Studio",
+      "pitch": "Litos is a clean and modern Astro blog theme focused on content presentation, local business storytelling, and a polished reading experience."
     },
     "heroMetric": {
       "icon": "icon-[mdi--star]",
@@ -54,39 +57,114 @@
       {
         "name": "linkedin",
         "url": "https://linkedin.com/company/yourcompany",
-        "icon": "icon-[ri--linkedin-fill]"
+        "icon": "icon-[ri--linkedin-line]"
       }
     ],
     "nap": {
       "company": "Northwind Dental Studio",
       "status": "Open now",
       "address": "1284 Market Street, Suite 300, Portland, OR 97205",
-      "phone": "(503) 555-0147"
+      "phone": "(503) 555-0147",
+      "wap": true
     },
     "homeSections": [
       {
         "key": "location",
         "title": "Location",
-        "description": "A dedicated section for location details will be added here."
+        "description": "",
+        "latitude": 45.5231,
+        "longitude": -122.6765,
+        "map_url": "../assets/site/location-map.svg"
       },
       {
         "key": "reviews",
         "title": "Reviews",
-        "description": "A dedicated section for reviews will be added here."
+        "description": "What patients say after visiting our studio.",
+        "items": [
+          {
+            "name": "Emily Carter",
+            "role": "Cosmetic Dentistry Patient",
+            "rating": 5,
+            "quote": "The entire team made me feel calm and informed from the first appointment. The results were precise, natural, and exactly what I hoped for."
+          },
+          {
+            "name": "Jason Miller",
+            "role": "Family Dentistry Patient",
+            "rating": 5,
+            "quote": "Scheduling was easy, the clinic was spotless, and every step was explained clearly. It felt thoughtful instead of rushed."
+          },
+          {
+            "name": "Sophia Nguyen",
+            "role": "Teeth Whitening Patient",
+            "rating": 5,
+            "quote": "A genuinely polished experience. Friendly staff, modern space, and visible results after a single treatment plan."
+          }
+        ]
       },
       {
         "key": "products",
         "title": "Products",
-        "description": "A dedicated section for products will be added here."
+        "description": "Take-home essentials curated for comfort and daily care.",
+        "products": [
+          {
+            "image": "../assets/site/product-whitening.svg",
+            "name": "Whitening Strips",
+            "category": "At-home whitening",
+            "price": "R$ 48",
+            "description": "A simple brightening routine for touch-ups between studio appointments.",
+            "url": "https://example.com/products/whitening-strips"
+          },
+          {
+            "image": "../assets/site/product-kit.svg",
+            "name": "Travel Oral Care Kit",
+            "category": "Everyday essentials",
+            "price": "R$ 26",
+            "description": "Compact daily care with floss, toothpaste, and a soft-bristle travel brush.",
+            "url": "https://example.com/products/travel-oral-care-kit"
+          },
+          {
+            "image": "../assets/site/product-serum.svg",
+            "name": "Enamel Care Serum",
+            "category": "Sensitive teeth support",
+            "price": "R$ 34",
+            "description": "A lightweight serum designed to support comfort and enamel protection.",
+            "url": "https://example.com/products/enamel-care-serum"
+          }
+        ]
       },
       {
         "key": "services",
         "title": "Services",
-        "description": "A dedicated section for services will be added here."
+        "description": "Popular treatments and everyday care options.",
+        "services": [
+          {
+            "name": "Dental Cleaning",
+            "type": "Starting at",
+            "price": "$120"
+          },
+          {
+            "name": "Teeth Whitening",
+            "type": "Starting at",
+            "price": "$280"
+          },
+          {
+            "name": "Porcelain Veneers",
+            "type": "Fixed",
+            "price": "$950"
+          },
+          {
+            "name": "Emergency Exam",
+            "type": "Free"
+          },
+          {
+            "name": "Custom Treatment Plan",
+            "type": "No price"
+          }
+        ]
       }
     ],
     "footer": {
-      "sourceUrl": "https://github.com/Dnzzk2/Litos"
+      "sourceUrl": "https://github.com/ndEX/Litos"
     }
   }
 }
