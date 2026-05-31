@@ -19,6 +19,8 @@
     "@nanostores/react": "^0.8.4",
     "astro": "^6.1.4",
     "clsx": "^2.1.1",
+    "embla-carousel-fade": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "medium-zoom": "^1.1.0",
     "motion": "^12.38.0",
     "nanostores": "^0.11.4",

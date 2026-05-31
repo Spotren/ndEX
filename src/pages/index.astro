@@ -1,6 +1,10 @@
 ---
 import { POSTS_CONFIG } from '~/config.ts'
+import FloatingContactCard from '~/components/base/FloatingContactCard.astro'
 import HeroMetric from '~/components/base/HeroMetric.astro'
+import ProductsSlider from '~/components/base/ProductsSlider'
+import ReviewsSection from '~/components/base/ReviewsSection'
+import ServicesList from '~/components/base/ServicesList.astro'
 import Layout from '~/layouts/Layout.astro'
 import SectionDivider from '~/components/base/SectionDivider.astro'
 import SocialLink from '~/components/base/SocialLink.astro'
@@ -11,6 +15,9 @@ import { truncateText } from '~/lib/utils'
 
 const { size, type } = POSTS_CONFIG.homePageConfig
 const siteData = await getSiteData()
+const uberClientId = import.meta.env.PUBLIC_UBER_CLIENT_ID
+const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
+const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
 
 let showPosts = []
 const pinnedPosts = await getPinnedPosts()
@@ -22,19 +29,19 @@ if (hasPinnedPosts) {
 }
 ---
 
-<Layout title="Readme" description={siteData.site.description}>
+<Layout title="Home" description={siteData.site.description}>
   <div class="relative z-[1]">
     <div class="py-8 pb-10 px-6 sm:px-8">
       <h1 class="flex flex-col gap-2">
-        <span class="text-4xl sm:text-5xl tracking-tight">{siteData.hero.title}</span>
+        <span class="text-4xl sm:text-5xl tracking-tight">{siteData.hero.brand}</span>
         <span class="text-muted-foreground font-light text-xl sm:text-2xl block tracking-wide text-balance">
-          {siteData.hero.eyebrow}
+          {siteData.hero.tagline}
         </span>
       </h1>
       <div class="pro text-muted-foreground text-pretty">
-        <p>{truncateText(siteData.hero.description, 150)}</p>
+        <p>{truncateText(siteData.hero.pitch, 150)}</p>
       </div>
-      <div class="mt-6 grid gap-4 md:grid-cols-[1fr_1.2fr_0.8fr]">
+      <div class="mt-6 grid gap-6 md:grid-cols-[0.95fr_1.15fr_0.9fr]">
         <div class="flex items-start gap-3">
           <span class="icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
           <div>
@@ -47,8 +54,18 @@ if (hasPinnedPosts) {
           <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
         </div>
         <div class="flex items-start gap-3">
-          <span class="icon-[mdi--phone] block size-6 shrink-0 text-primary"></span>
-          <p class="text-sm text-muted-foreground">{siteData.nap.phone}</p>
+          <a
+            href={phoneHref}
+            target={siteData.nap.wap ? '_blank' : undefined}
+            rel={siteData.nap.wap ? 'noreferrer' : undefined}
+            class="inline-flex items-start gap-3 text-left transition hover:text-primary"
+          >
+            <span class:list={[siteData.nap.wap ? 'icon-[ri--whatsapp-fill]' : 'icon-[mdi--phone]', 'mt-0.5 size-6 shrink-0 text-foreground']}></span>
+            <div>
+              <p class="text-xs tracking-wide text-muted-foreground/80">Contact us</p>
+              <p class="text-sm font-medium text-muted-foreground">{siteData.nap.phone}</p>
+            </div>
+          </a>
         </div>
       </div>
       <div class="mt-6 flex gap-6">
@@ -71,8 +88,71 @@ if (hasPinnedPosts) {
         <>
           <SectionDivider />
           <div class="py-8 pb-10 px-6 sm:px-8">
-            <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
-            <p class="text-muted-foreground mb-6 mt-1">{section.description}</p>
+            {
+              section.key === 'reviews' && section.items ? (
+                <ReviewsSection title={section.title} description={section.description} reviews={section.items} metric={siteData.heroMetric} client:load />
+              ) : section.key === 'products' && section.products ? (
+                <>
+                  <ProductsSlider
+                    title={section.title}
+                    description={section.description}
+                    products={section.products.map((product) => ({
+                      imageSrc: product.image.src,
+                      name: product.name,
+                      category: product.category,
+                      price: product.price,
+                      url: product.url,
+                    }))}
+                    client:visible
+                  />
+                </>
+              ) : section.key === 'services' && section.services ? (
+                <>
+                  <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
+                  <p class="text-muted-foreground mb-6 mt-1">{section.description}</p>
+                  <ServicesList services={section.services} />
+                </>
+              ) : (
+                <>
+                  <div class:list={['mb-6', section.key === 'location' && 'grid gap-6 md:grid-cols-[1fr_auto] md:items-start']}>
+                    <div>
+                      <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
+                      <p class="text-muted-foreground mt-1">
+                        {section.key === 'location' ? `Where we are in ${siteData.site.city}` : section.description}
+                      </p>
+                    </div>
+                    {
+                      section.key === 'location' && uberClientId && section.latitude !== undefined && section.longitude !== undefined && (
+                        <a
+                          href={`https://m.uber.com/ul/?client_id=${encodeURIComponent(uberClientId)}&action=setPickup&pickup=my_location&dropoff[latitude]=${section.latitude}&dropoff[longitude]=${section.longitude}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          class="flex min-w-[220px] items-start gap-4 rounded-2xl border border-border/60 bg-card/40 p-4 transition hover:bg-accent/40"
+                        >
+                          <span class="icon-[mdi--car] mt-0.5 size-6 shrink-0 text-foreground"></span>
+                          <div>
+                            <p class="font-medium text-foreground">Call Uber</p>
+                            <p class="text-muted-foreground text-sm">Open Uber with this destination.</p>
+                          </div>
+                        </a>
+                      )
+                    }
+                  </div>
+                  {
+                    section.key === 'location' && section.map_url && (
+                      <img
+                        src={section.map_url.src}
+                        alt={`${section.title} map`}
+                        width="702"
+                        height="351"
+                        loading="lazy"
+                        class="w-full overflow-hidden rounded-2xl border border-border/50 object-cover aspect-[702/351]"
+                      />
+                    )
+                  }
+                </>
+              )
+            }
           </div>
         </>
       ))
@@ -87,4 +167,5 @@ if (hasPinnedPosts) {
       <List posts={showPosts} {type} coverLayout={POSTS_CONFIG.homePageConfig?.coverLayout} />
     </div>
   </div>
+  <FloatingContactCard phone={siteData.nap.phone} wap={siteData.nap.wap} />
 </Layout>
