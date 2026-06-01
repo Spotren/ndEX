@@ -1,5 +1,5 @@
 ---
-import { ANALYTICS_CONFIG, THEME_CONFIG } from '~/config'
+import { THEME_CONFIG } from '~/config'
 import { getSiteData } from '~/lib/site-data'
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 
 const { title, description, image }: Props = Astro.props
 const siteData = await getSiteData()
+const googleAnalyticsId = siteData.site.googleAnalyticsId
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
@@ -71,28 +72,11 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImage} />
-
-
 {
-  ANALYTICS_CONFIG.umami?.enabled && (
-    <script
-      is:inline
-      defer
-      src={ANALYTICS_CONFIG.umami.serverUrl}
-      data-website-id={ANALYTICS_CONFIG.umami.websiteId}
-    ></script>
-  )
-}
-{
-  ANALYTICS_CONFIG.vercount?.enabled && (
-    <script is:inline defer src="https://events.vercount.one/js" data-astro-rerun></script>
-  )
-}
-{
-  ANALYTICS_CONFIG.google?.enabled && (
+  googleAnalyticsId && (
     <>
-      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_CONFIG.google.id}`}></script>
-      <script is:inline define:vars={{ id: ANALYTICS_CONFIG.google.id }}>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}></script>
+      <script is:inline define:vars={{ id: googleAnalyticsId }}>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());

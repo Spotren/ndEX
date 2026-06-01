@@ -1,8 +1,4 @@
-import type {
-  AnalyticsConfig,
-  PostConfig,
-  TagsConfig,
-} from '~/types'
+import type { PostConfig, TagsConfig } from '~/types'
 
 export const THEME_CONFIG = {
   base: '/',
@@ -47,15 +43,4 @@ export const TAGS_CONFIG: TagsConfig = {
   title: 'Tags',
   description: 'All tags of Posts',
   introduce: 'All the tags for posts are here, you can click to filter them.',
-}
-
-export const ANALYTICS_CONFIG: AnalyticsConfig = {
-  vercount: {
-    enabled: true,
-  },
-  umami: {
-    enabled: false,
-    websiteId: 'Your websiteId in umami',
-    serverUrl: 'https://cloud.umami.is/script.js',
-  },
 }

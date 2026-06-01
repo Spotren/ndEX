@@ -1,6 +1,6 @@
 ---
 import { formatDate } from '~/lib/utils'
-import { ANALYTICS_CONFIG, POSTS_CONFIG } from '~/config'
+import { POSTS_CONFIG } from '~/config'
 import Prose from '~/components/posts/base/Prose.astro'
 import Badge from '~/components/posts/base/Badge.astro'
 
@@ -54,14 +54,6 @@ const recommendText = POSTS_CONFIG.recommendText
                 <div class="flex items-center gap-1.5">
                   <span class="icon-[ph--pencil-simple-line] w-4 h-4 opacity-85" />
                   <span>{wordCount} words</span>
-                </div>
-              )
-            }
-            {
-              ANALYTICS_CONFIG.vercount?.enabled && (
-                <div class="flex items-center gap-1.5">
-                  <span class="icon-[ph--eye] w-4 h-4 opacity-85" />
-                  <span id="vercount_value_page_pv">Loading</span> views
                 </div>
               )
             }

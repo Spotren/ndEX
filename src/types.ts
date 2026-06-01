@@ -135,18 +135,3 @@ export type HeroMetric = {
   secondaryValue?: number | string
   secondaryLabel?: string
 }
-
-export interface AnalyticsConfig {
-  vercount?: {
-    enabled: boolean
-  }
-  umami?: {
-    enabled: boolean
-    websiteId: string
-    serverUrl: string
-  }
-  google?: {
-    enabled: boolean
-    id: string
-  }
-}
