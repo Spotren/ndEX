@@ -1,14 +1,18 @@
 import { atom } from 'nanostores'
 
-export type Theme = 'light' | 'dark' | 'system'
+export type Theme = 'light' | 'dark'
 
 const getInitialTheme = (): Theme => {
   if (typeof window === 'undefined') {
-    return 'system'
+    return 'light'
   }
 
   const storedTheme = window.localStorage.getItem('theme')
-  return storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system' ? storedTheme : 'system'
+  if (storedTheme === 'light' || storedTheme === 'dark') {
+    return storedTheme
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 export const themeStore = atom<Theme>(getInitialTheme())

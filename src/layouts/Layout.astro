@@ -1,9 +1,5 @@
 ---
 import '~/styles/global.css'
-import '~/styles/markdown.css'
-import '~/styles/lqip.css'
-import '~/styles/github-card.css'
-import { THEME_CONFIG } from '~/config'
 import { getSiteData } from '~/lib/site-data'
 import Head from '~/components/base/Head.astro'
 import Header from './Header.astro'
@@ -13,17 +9,16 @@ type Props = {
   title: string
   description: string
   image?: string
-  disableViewTransition?: boolean
   useTitleAsIs?: boolean
 }
 
-const { title, description, image, disableViewTransition, useTitleAsIs = false }: Props = Astro.props
+const { title, description, image, useTitleAsIs = false }: Props = Astro.props
 const siteData = await getSiteData()
 const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.site.title}`
 ---
 
 <!doctype html>
-<html lang={siteData.site.lang} transition:name="root" transition:animate={THEME_CONFIG.transition && !disableViewTransition ? 'fade' : 'none'}>
+<html lang={siteData.site.lang}>
   <head>
     <Head title={documentTitle} {description} {image} />
   </head>

@@ -8,11 +8,11 @@
 
   function getStoredTheme() {
     const theme = localStorage.getItem(STORAGE_KEY)
-    return theme === 'light' || theme === 'dark' || theme === 'system' ? theme : 'system'
+    return theme === 'light' || theme === 'dark' ? theme : null
   }
 
   function resolveIsDark(theme) {
-    return theme === 'dark' || (theme === 'system' && prefersDark.matches)
+    return theme === 'dark' || (theme == null && prefersDark.matches)
   }
 
   function setThemeColor(targetDocument, isDark) {
@@ -89,8 +89,8 @@
   applyTheme(getStoredTheme())
 
   prefersDark.addEventListener('change', () => {
-    if (getStoredTheme() === 'system') {
-      applyTheme('system')
+    if (getStoredTheme() == null) {
+      applyTheme(null)
     }
   })
 

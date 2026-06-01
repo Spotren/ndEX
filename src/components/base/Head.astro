@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions'
 import { ANALYTICS_CONFIG, THEME_CONFIG } from '~/config'
 import { getSiteData } from '~/lib/site-data'
 
@@ -103,5 +102,3 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
     </>
   )
 }
-
-<ClientRouter fallback="swap" />
