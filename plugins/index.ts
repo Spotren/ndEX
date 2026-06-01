@@ -3,7 +3,6 @@ import remarkSmartypants from 'remark-smartypants'
 import remarkDirective from 'remark-directive'
 import remarkDirectiveSugar from 'remark-directive-sugar'
 import remarkImgAttr from 'remark-imgattr'
-import remarkMath from 'remark-math'
 import remarkReadingTime from './remark-reading-time'
 import remarkLQIP from './remark-lqip.js'
 import remarkGithubCard from './remark-github-card'
@@ -13,7 +12,6 @@ import rehypeUnwrapImages from 'rehype-unwrap-images'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCallouts from 'rehype-callouts'
 import rehypeExternalLinks from 'rehype-external-links'
-import rehypeKatex from 'rehype-katex'
 
 import type { RemarkPlugin, RehypePlugin } from '@astrojs/markdown-remark'
 import { type PropertiesFromTextDirective } from 'remark-directive-sugar'
@@ -52,7 +50,6 @@ export const remarkPlugins = [
     },
   ],
   remarkImgAttr,
-  remarkMath,
   remarkReadingTime,
   remarkLQIP,
   remarkGithubCard,
@@ -93,5 +90,4 @@ export const rehypePlugins = [
       rel: ['noopener', 'noreferrer'],
     },
   ],
-  rehypeKatex,
 ] as RehypePlugin[]

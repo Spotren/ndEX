@@ -1,6 +1,5 @@
 @import 'medium-zoom/dist/style.css';
 @import 'rehype-callouts/theme/vitepress';
-@import url('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css');
 
 /* ===== CSS自定义属性 (现代化设计) ===== */
 :root {
@@ -710,25 +709,6 @@ image-figure-polaroid {
 
 .dark .img-dark {
   display: block;
-}
-
-/* ===== KaTeX 数学公式适配 ===== */
-.markdown .katex-display {
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-inline-size: 100%;
-  padding-block: 0.5em;
-
-  & > .katex {
-    max-inline-size: 100%;
-
-    & > .katex-html {
-      max-inline-size: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding-inline: 0.25em;
-    }
-  }
 }
 
 /* ===== 外部链接样式 ===== */
