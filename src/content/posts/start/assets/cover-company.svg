@@ -1,0 +1,35 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F5F9FF"/>
+  <rect x="44" y="44" width="1112" height="542" rx="36" fill="url(#bg)"/>
+  <circle cx="992" cy="138" r="104" fill="#DCEEFF"/>
+  <circle cx="1086" cy="228" r="52" fill="#EAF4FF"/>
+  <circle cx="202" cy="506" r="86" fill="#E7F5EC"/>
+  <rect x="118" y="118" width="430" height="394" rx="28" fill="#FFFFFF" fill-opacity="0.96"/>
+  <rect x="152" y="160" width="128" height="128" rx="24" fill="#1D4ED8"/>
+  <path d="M216 190C188.386 190 166 212.386 166 240C166 282.105 216 330 216 330C216 330 266 282.105 266 240C266 212.386 243.614 190 216 190ZM216 262C203.85 262 194 252.15 194 240C194 227.85 203.85 218 216 218C228.15 218 238 227.85 238 240C238 252.15 228.15 262 216 262Z" fill="white"/>
+  <rect x="310" y="176" width="192" height="18" rx="9" fill="#BFDBFE"/>
+  <rect x="310" y="210" width="148" height="14" rx="7" fill="#DBEAFE"/>
+  <rect x="152" y="330" width="330" height="16" rx="8" fill="#D9E7FB"/>
+  <rect x="152" y="362" width="286" height="16" rx="8" fill="#D9E7FB"/>
+  <rect x="152" y="394" width="304" height="16" rx="8" fill="#D9E7FB"/>
+  <rect x="152" y="444" width="178" height="40" rx="20" fill="#16A34A"/>
+  <path d="M647 176H991" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M647 214H900" stroke="#1D4ED8" stroke-width="14" stroke-linecap="round"/>
+  <path d="M647 252H860" stroke="#60A5FA" stroke-width="14" stroke-linecap="round"/>
+  <path d="M647 308H1042" stroke="#BFDBFE" stroke-width="18" stroke-linecap="round"/>
+  <path d="M647 348H1006" stroke="#BFDBFE" stroke-width="18" stroke-linecap="round"/>
+  <rect x="647" y="402" width="402" height="112" rx="28" fill="#FFFFFF" fill-opacity="0.86"/>
+  <path d="M724 438C724 414.804 742.804 396 766 396C789.196 396 808 414.804 808 438C808 457.64 792.901 485.137 779.962 504.653C773.49 514.416 758.51 514.416 752.038 504.653C739.099 485.137 724 457.64 724 438Z" fill="#16A34A"/>
+  <circle cx="766" cy="438" r="13" fill="white"/>
+  <rect x="834" y="424" width="168" height="16" rx="8" fill="#C7DDF8"/>
+  <rect x="834" y="454" width="138" height="16" rx="8" fill="#DCEAFE"/>
+  <text x="647" y="120" fill="#0F172A" font-family="Lexend, Arial, sans-serif" font-size="28" font-weight="700">Northwind Dental Studio</text>
+  <text x="647" y="160" fill="#475569" font-family="Lexend, Arial, sans-serif" font-size="56" font-weight="700">Start with a polished local site</text>
+  <text x="152" y="470" fill="white" font-family="Lexend, Arial, sans-serif" font-size="18" font-weight="700">Location, services, reviews</text>
+  <defs>
+    <linearGradient id="bg" x1="44" y1="44" x2="1156" y2="586" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDF6FF"/>
+      <stop offset="1" stop-color="#F8FFFC"/>
+    </linearGradient>
+  </defs>
+</svg>
