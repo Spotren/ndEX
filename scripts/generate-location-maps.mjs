@@ -17,53 +17,64 @@ loadLocalEnv('.env.local')
 await generateLocationMaps()
 
 async function generateLocationMaps() {
-  const staticMapURL = readRequiredEnv('PUBLIC_SPOTREN_STATIC_MAP_URL')
-  const buildOrigin = readRequiredEnv('PUBLIC_SPOTREN_BUILD_ORIGIN')
-  const allowInsecureTLS = shouldAllowInsecureTLS(staticMapURL)
-  if (allowInsecureTLS) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-  }
-  const siteContent = JSON.parse(await readFile(siteContentPath, 'utf8'))
-  const locationSection = siteContent?.default?.homeSections?.find?.((section) => section?.key === 'location')
+  try {
+    const staticMapURL = process.env.PUBLIC_SPOTREN_STATIC_MAP_URL?.trim()
+    const buildOrigin = process.env.PUBLIC_SPOTREN_BUILD_ORIGIN?.trim()
 
-  if (!locationSection || typeof locationSection !== 'object') {
-    throw new Error('Missing `homeSections.location` entry in src/content/site.json.')
-  }
-
-  const latitude = parseRequiredCoordinate(locationSection.latitude, 'latitude')
-  const longitude = parseRequiredCoordinate(locationSection.longitude, 'longitude')
-
-  await mkdir(outputDirectory, { recursive: true })
-
-  for (const theme of ['light', 'dark']) {
-    const mapURL = new URL(staticMapURL)
-    mapURL.searchParams.set('latitude', String(latitude))
-    mapURL.searchParams.set('longitude', String(longitude))
-    mapURL.searchParams.set('theme', theme)
-    mapURL.searchParams.set('width', '700')
-    mapURL.searchParams.set('height', '350')
-
-    const response = await fetch(mapURL, {
-      method: 'GET',
-      headers: {
-        Origin: buildOrigin,
-        Referer: `${buildOrigin.replace(/\/$/, '')}/`,
-      },
-      cache: 'no-store',
-    })
-
-    if (!response.ok) {
-      const body = await response.text().catch(() => '')
-      throw new Error(`Static map request failed for theme=${theme} with status ${response.status}.${body ? ` Response: ${body}` : ''}`)
+    if (!staticMapURL || !buildOrigin) {
+      console.warn('Skipping static location map generation because PUBLIC_SPOTREN_STATIC_MAP_URL or PUBLIC_SPOTREN_BUILD_ORIGIN is not configured.')
+      return
     }
 
-    const contentType = response.headers.get('content-type')?.trim().toLowerCase() ?? ''
-    if (!contentType.startsWith('image/')) {
-      throw new Error(`Static map request for theme=${theme} returned unexpected content-type: ${contentType || 'unknown'}.`)
+    const allowInsecureTLS = shouldAllowInsecureTLS(staticMapURL)
+    if (allowInsecureTLS) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    }
+    const siteContent = JSON.parse(await readFile(siteContentPath, 'utf8'))
+    const locationSection = siteContent?.default?.homeSections?.find?.((section) => section?.key === 'location')
+
+    if (!locationSection || typeof locationSection !== 'object') {
+      throw new Error('Missing `homeSections.location` entry in src/content/site.json.')
     }
 
-    const bytes = Buffer.from(await response.arrayBuffer())
-    await writeFile(outputFiles[theme], bytes)
+    const latitude = parseRequiredCoordinate(locationSection.latitude, 'latitude')
+    const longitude = parseRequiredCoordinate(locationSection.longitude, 'longitude')
+
+    await mkdir(outputDirectory, { recursive: true })
+
+    for (const theme of ['light', 'dark']) {
+      const mapURL = new URL(staticMapURL)
+      mapURL.searchParams.set('latitude', String(latitude))
+      mapURL.searchParams.set('longitude', String(longitude))
+      mapURL.searchParams.set('theme', theme)
+      mapURL.searchParams.set('width', '700')
+      mapURL.searchParams.set('height', '350')
+
+      const response = await fetch(mapURL, {
+        method: 'GET',
+        headers: {
+          Origin: buildOrigin,
+          Referer: `${buildOrigin.replace(/\/$/, '')}/`,
+        },
+        cache: 'no-store',
+      })
+
+      if (!response.ok) {
+        const body = await response.text().catch(() => '')
+        throw new Error(`Static map request failed for theme=${theme} with status ${response.status}.${body ? ` Response: ${body}` : ''}`)
+      }
+
+      const contentType = response.headers.get('content-type')?.trim().toLowerCase() ?? ''
+      if (!contentType.startsWith('image/')) {
+        throw new Error(`Static map request for theme=${theme} returned unexpected content-type: ${contentType || 'unknown'}.`)
+      }
+
+      const bytes = Buffer.from(await response.arrayBuffer())
+      await writeFile(outputFiles[theme], bytes)
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    console.warn(`Skipping static location map generation and falling back to local map asset. ${message}`)
   }
 }
 
@@ -80,14 +91,6 @@ function loadLocalEnv(relativePath) {
       throw error
     }
   }
-}
-
-function readRequiredEnv(key) {
-  const value = process.env[key]?.trim()
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${key}`)
-  }
-  return value
 }
 
 function parseRequiredCoordinate(value, key) {

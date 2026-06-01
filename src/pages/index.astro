@@ -1,4 +1,7 @@
 ---
+import { existsSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { POSTS_CONFIG } from '~/config.ts'
 import FloatingContactCard from '~/components/base/FloatingContactCard.astro'
 import FaqSection from '~/components/base/FaqSection'
@@ -21,6 +24,10 @@ const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
 const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
 const generatedLocationMapLightURL = '/generated/location-map-light.png'
 const generatedLocationMapDarkURL = '/generated/location-map-dark.png'
+const pageDirectory = path.dirname(fileURLToPath(import.meta.url))
+const generatedLocationMapLightPath = path.resolve(pageDirectory, '../../public/generated/location-map-light.png')
+const generatedLocationMapDarkPath = path.resolve(pageDirectory, '../../public/generated/location-map-dark.png')
+const shouldUseGeneratedLocationMaps = existsSync(generatedLocationMapLightPath) && existsSync(generatedLocationMapDarkPath)
 const locationDescription = siteData.homeLabels.locationDescriptionTemplate.replace('{city}', siteData.site.city)
 
 let showPosts = []
@@ -147,7 +154,7 @@ if (hasPinnedPosts) {
                     }
                   </div>
                   {
-                    section.key === 'location' && section.latitude !== undefined && section.longitude !== undefined ? (
+                    section.key === 'location' && shouldUseGeneratedLocationMaps && section.latitude !== undefined && section.longitude !== undefined ? (
                       <a
                         href={section.gmn_url ?? '#'}
                         target="_blank"

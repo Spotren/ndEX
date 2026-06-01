@@ -87,6 +87,7 @@
         "description": "",
         "latitude": 45.5231,
         "longitude": -122.6765,
+        "map_url": "../assets/site/location-map.svg",
         "mapAlt": "Map showing the location of Northwind Dental Studio in Portland",
         "gmn_url": "https://www.google.com/maps/place/?q=place_id:ChIJJ3SpfQsVlVQRkYXR9ua5Nhw"
       },
