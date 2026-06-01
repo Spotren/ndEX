@@ -17,18 +17,9 @@
     "postbuild": "pagefind --site dist"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.3",
-    "@floating-ui/react": "^0.27.19",
-    "@nanostores/react": "^0.8.4",
     "astro": "^6.1.4",
     "clsx": "^2.1.1",
-    "embla-carousel-fade": "^8.6.0",
-    "embla-carousel-react": "^8.6.0",
     "medium-zoom": "^1.1.0",
-    "motion": "^12.38.0",
-    "nanostores": "^0.11.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
     "sanitize-html": "^2.17.2",
     "tailwind-merge": "^3.5.0"
   },
@@ -47,8 +38,6 @@
     "@tailwindcss/vite": "4.2.2",
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.19.17",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
     "@types/sanitize-html": "^2.16.1",
     "astro-expressive-code": "^0.41.7",
     "astro-robots-txt": "^1.0.0",
@@ -74,8 +63,5 @@
     "tailwindcss": "4.2.2",
     "tsx": "^4.21.0",
     "unist-util-visit": "^5.1.0"
-  },
-  "overrides": {
-    "@vitejs/plugin-react": "5.1.0"
   }
 }

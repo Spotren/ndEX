@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
-import react from '@astrojs/react'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
@@ -12,10 +11,7 @@ import siteContent from './src/content/site.json'
 export default defineConfig({
   site: siteContent.default.site.website,
   base: THEME_CONFIG.base,
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport',
-  },
+  prefetch: false,
   vite: {
     // Work around duplicated Vite type trees pulled by Astro and @tailwindcss/vite.
     plugins: [tailwindcss()] as any,
@@ -28,5 +24,5 @@ export default defineConfig({
     remarkPlugins,
     rehypePlugins,
   },
-  integrations: [expressiveCode(), mdx(), react(), sitemap(), robotsTxt()],
+  integrations: [expressiveCode(), mdx(), sitemap(), robotsTxt()],
 })
