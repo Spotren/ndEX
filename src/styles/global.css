@@ -44,14 +44,14 @@
   /* 标题字体 */
   @font-face {
     font-family: 'Lexend';
-    src: url('/fonts/Lexend-VariableFont_wght.woff2') format('woff2');
+    src: url('/fonts/lexend-v26-latin-500.woff2') format('woff2');
     font-display: swap;
   }
 
   /* 等宽字体 */
   @font-face {
     font-family: 'GeistMono';
-    src: url('/fonts/GeistMono.woff2') format('woff2');
+    src: url('/fonts/geist-mono-v5-latin-regular.woff2') format('woff2');
     font-display: swap;
   }
 }
@@ -165,10 +165,6 @@
     @apply underline-offset-4;
   }
 
-  /* 工具类 */
-  .pro {
-    @apply prose prose-zinc dark:prose-invert;
-  }
 }
 
 /* ===== 动画效果 ===== */

@@ -6,13 +6,13 @@
 
 @font-face {
   font-family: 'Lexend';
-  src: url('/fonts/Lexend-VariableFont_wght.woff2') format('woff2');
+  src: url('/fonts/lexend-v26-latin-500.woff2') format('woff2');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'GeistMono';
-  src: url('/fonts/GeistMono.woff2') format('woff2');
+  src: url('/fonts/geist-mono-v5-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
