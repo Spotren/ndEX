@@ -14,16 +14,18 @@ type Props = {
   description: string
   image?: string
   disableViewTransition?: boolean
+  useTitleAsIs?: boolean
 }
 
-const { title, description, image, disableViewTransition }: Props = Astro.props
+const { title, description, image, disableViewTransition, useTitleAsIs = false }: Props = Astro.props
 const siteData = await getSiteData()
+const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.site.title}`
 ---
 
 <!doctype html>
 <html lang={siteData.site.lang} transition:name="root" transition:animate={THEME_CONFIG.transition && !disableViewTransition ? 'fade' : 'none'}>
   <head>
-    <Head title={`${title} | ${siteData.site.title}`} {description} {image} />
+    <Head title={documentTitle} {description} {image} />
   </head>
   <body class="flex flex-col">
     <Header />

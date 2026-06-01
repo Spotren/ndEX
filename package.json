@@ -4,8 +4,11 @@
   "version": "1.0.3",
   "license": "MIT",
   "scripts": {
+    "generate:location-maps": "node ./scripts/generate-location-maps.mjs",
     "dev": "astro dev",
+    "prebuild": "npm run generate:location-maps",
     "build": "astro check && astro build",
+    "precheck": "npm run generate:location-maps",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",

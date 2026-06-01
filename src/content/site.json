@@ -2,7 +2,8 @@
   "default": {
     "site": {
       "title": "Northwind Dental Studio",
-      "description": "Litos is a modern blogging theme built on Astro.js, designed for developers who want a fast, content-focused publishing experience.",
+      "seo_title": "Northwind Dental Studio in Portland",
+      "description": "Northwind Dental Studio offers modern dental care with a calm clinical experience, transparent guidance, and treatments designed for long-term oral health.",
       "website": "https://litos.vercel.app/",
       "lang": "en",
       "author": "ndEX",
@@ -34,7 +35,7 @@
     "hero": {
       "brand": "Northwind",
       "tagline": "Dental Studio",
-      "pitch": "Litos is a clean and modern Astro blog theme focused on content presentation, local business storytelling, and a polished reading experience."
+      "pitch": "Northwind Dental Studio offers preventive, cosmetic, and restorative dental care with calm visits, clear plans, and patient-first comfort every visit."
     },
     "heroMetric": {
       "icon": "icon-[mdi--star]",
@@ -42,6 +43,18 @@
       "primaryLabel": "/",
       "secondaryValue": 50,
       "secondaryLabel": "reviews"
+    },
+    "homeLabels": {
+      "contactUs": "Contact us",
+      "socialLinkAriaLabelPrefix": "Link of",
+      "locationDescriptionTemplate": "Where we are in {city}",
+      "openMapTitle": "Open Map",
+      "uberCtaTitle": "Call Uber",
+      "uberCtaDescription": "Open Uber with this destination.",
+      "postsTitle": "Posts",
+      "pinnedLabel": "Pinned",
+      "recentLabel": "Recent",
+      "postsSummarySuffix": "posts, worth a look."
     },
     "socialLinks": [
       {
@@ -74,7 +87,8 @@
         "description": "",
         "latitude": 45.5231,
         "longitude": -122.6765,
-        "map_url": "../assets/site/location-map.svg"
+        "mapAlt": "Map showing the location of Northwind Dental Studio in Portland",
+        "gmn_url": "https://www.google.com/maps/place/?q=place_id:ChIJJ3SpfQsVlVQRkYXR9ua5Nhw"
       },
       {
         "key": "reviews",
@@ -159,6 +173,58 @@
           {
             "name": "Custom Treatment Plan",
             "type": "No price"
+          }
+        ]
+      },
+      {
+        "key": "faq",
+        "title": "FAQ",
+        "description": "Answers to common questions before your visit.",
+        "faqs": [
+          {
+            "category": "New Patients",
+            "question": "Do you accept new patients?",
+            "answer": "Yes. We welcome new patients and offer flexible scheduling for first visits."
+          },
+          {
+            "category": "Appointments",
+            "question": "Do you provide emergency appointments?",
+            "answer": "Yes. We keep limited same-day availability for urgent dental needs."
+          },
+          {
+            "category": "Treatments",
+            "question": "Do you offer whitening treatments?",
+            "answer": "Yes. We provide both in-studio whitening and take-home options depending on your goals."
+          },
+          {
+            "category": "New Patients",
+            "question": "What should I bring to my first appointment?",
+            "answer": "Bring a photo ID, your insurance information if applicable, and any recent dental records you would like our team to review."
+          },
+          {
+            "category": "New Patients",
+            "question": "Do you help patients who feel nervous about dental visits?",
+            "answer": "Yes. We focus on a calm, supportive experience and explain each step clearly so new patients feel more comfortable from the start."
+          },
+          {
+            "category": "Appointments",
+            "question": "How early should I arrive for a scheduled visit?",
+            "answer": "We recommend arriving 10 to 15 minutes early so you can check in comfortably and complete any needed forms."
+          },
+          {
+            "category": "Appointments",
+            "question": "Can I request a follow-up appointment before leaving the office?",
+            "answer": "Yes. Our front desk can help you schedule your next cleaning, review, or treatment visit before you leave."
+          },
+          {
+            "category": "Treatments",
+            "question": "Do you create treatment plans for cosmetic and restorative care?",
+            "answer": "Yes. We build personalized treatment plans that explain timing, options, and priorities before any major work begins."
+          },
+          {
+            "category": "Treatments",
+            "question": "Do you offer preventive care as well as cosmetic services?",
+            "answer": "Yes. We provide routine preventive care alongside whitening, restorative treatments, and personalized recommendations for long-term oral health."
           }
         ]
       }

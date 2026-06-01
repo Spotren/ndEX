@@ -1,6 +1,7 @@
 ---
 import { POSTS_CONFIG } from '~/config.ts'
 import FloatingContactCard from '~/components/base/FloatingContactCard.astro'
+import FaqSection from '~/components/base/FaqSection'
 import HeroMetric from '~/components/base/HeroMetric.astro'
 import ProductsSlider from '~/components/base/ProductsSlider'
 import ReviewsSection from '~/components/base/ReviewsSection'
@@ -18,6 +19,9 @@ const siteData = await getSiteData()
 const uberClientId = import.meta.env.PUBLIC_UBER_CLIENT_ID
 const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
 const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
+const generatedLocationMapLightURL = '/generated/location-map-light.png'
+const generatedLocationMapDarkURL = '/generated/location-map-dark.png'
+const locationDescription = siteData.homeLabels.locationDescriptionTemplate.replace('{city}', siteData.site.city)
 
 let showPosts = []
 const pinnedPosts = await getPinnedPosts()
@@ -29,7 +33,7 @@ if (hasPinnedPosts) {
 }
 ---
 
-<Layout title="Home" description={siteData.site.description}>
+<Layout title={siteData.site.seo_title} description={siteData.site.description} useTitleAsIs>
   <div class="relative z-[1]">
     <div class="py-8 pb-10 px-6 sm:px-8">
       <h1 class="flex flex-col gap-2">
@@ -62,7 +66,7 @@ if (hasPinnedPosts) {
           >
             <span class:list={[siteData.nap.wap ? 'icon-[ri--whatsapp-fill]' : 'icon-[mdi--phone]', 'mt-0.5 size-6 shrink-0 text-foreground']}></span>
             <div>
-              <p class="text-xs tracking-wide text-muted-foreground/80">Contact us</p>
+              <p class="text-xs tracking-wide text-muted-foreground/80">{siteData.homeLabels.contactUs}</p>
               <p class="text-sm font-medium text-muted-foreground">{siteData.nap.phone}</p>
             </div>
           </a>
@@ -78,7 +82,7 @@ if (hasPinnedPosts) {
         />
         {
           siteData.socialLinks.map((item) => {
-            return <SocialLink href={item.url} icon={item.icon} aria-label={`Link of ${item.name}`} count={item.count} label={item.label} />
+            return <SocialLink href={item.url} icon={item.icon} aria-label={`${siteData.homeLabels.socialLinkAriaLabelPrefix} ${item.name}`} count={item.count} label={item.label} />
           })
         }
       </div>
@@ -112,13 +116,17 @@ if (hasPinnedPosts) {
                   <p class="text-muted-foreground mb-6 mt-1">{section.description}</p>
                   <ServicesList services={section.services} />
                 </>
+              ) : section.key === 'faq' && section.faqs ? (
+                <>
+                  <FaqSection title={section.title} description={section.description} faqs={section.faqs} client:load />
+                </>
               ) : (
                 <>
                   <div class:list={['mb-6', section.key === 'location' && 'grid gap-6 md:grid-cols-[1fr_auto] md:items-start']}>
                     <div>
                       <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
                       <p class="text-muted-foreground mt-1">
-                        {section.key === 'location' ? `Where we are in ${siteData.site.city}` : section.description}
+                        {section.key === 'location' ? locationDescription : section.description}
                       </p>
                     </div>
                     {
@@ -131,23 +139,56 @@ if (hasPinnedPosts) {
                         >
                           <span class="icon-[mdi--car] mt-0.5 size-6 shrink-0 text-foreground"></span>
                           <div>
-                            <p class="font-medium text-foreground">Call Uber</p>
-                            <p class="text-muted-foreground text-sm">Open Uber with this destination.</p>
+                            <p class="font-medium text-foreground">{siteData.homeLabels.uberCtaTitle}</p>
+                            <p class="text-muted-foreground text-sm">{siteData.homeLabels.uberCtaDescription}</p>
                           </div>
                         </a>
                       )
                     }
                   </div>
                   {
-                    section.key === 'location' && section.map_url && (
-                      <img
-                        src={section.map_url.src}
-                        alt={`${section.title} map`}
-                        width="702"
-                        height="351"
-                        loading="lazy"
-                        class="w-full overflow-hidden rounded-2xl border border-border/50 object-cover aspect-[702/351]"
-                      />
+                    section.key === 'location' && section.latitude !== undefined && section.longitude !== undefined ? (
+                      <a
+                        href={section.gmn_url ?? '#'}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={siteData.homeLabels.openMapTitle}
+                        class="block overflow-hidden border border-border/50 rounded-t-2xl rounded-bl-2xl rounded-br-[3px]"
+                      >
+                        <img
+                          src={generatedLocationMapLightURL}
+                          alt={section.mapAlt ?? `${section.title} map`}
+                          width="700"
+                          height="350"
+                          loading="lazy"
+                          class="img-light w-full object-cover aspect-[700/350]"
+                        />
+                        <img
+                          src={generatedLocationMapDarkURL}
+                          alt={section.mapAlt ?? `${section.title} map`}
+                          width="700"
+                          height="350"
+                          loading="lazy"
+                          class="img-dark w-full object-cover aspect-[700/350]"
+                        />
+                      </a>
+                    ) : section.key === 'location' && section.map_url && (
+                      <a
+                        href={section.gmn_url ?? '#'}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={siteData.homeLabels.openMapTitle}
+                        class="block overflow-hidden border border-border/50 rounded-t-2xl rounded-bl-2xl rounded-br-[3px]"
+                      >
+                        <img
+                          src={section.map_url.src}
+                          alt={section.mapAlt ?? `${section.title} map`}
+                          width="702"
+                          height="351"
+                          loading="lazy"
+                          class="w-full object-cover aspect-[702/351]"
+                        />
+                      </a>
                     )
                   }
                 </>
@@ -159,10 +200,10 @@ if (hasPinnedPosts) {
     }
     <SectionDivider />
     <div class="py-8 pb-10 px-6 sm:px-8">
-      <h2 class="text-2xl sm:text-3xl tracking-tight">Posts</h2>
+      <h2 class="text-2xl sm:text-3xl tracking-tight">{siteData.homeLabels.postsTitle}</h2>
       <p class="text-muted-foreground mb-6 mt-1">
-        {hasPinnedPosts ? `Pinned` : 'Recent'}
-        {showPosts.length} posts, worth a look.
+        {hasPinnedPosts ? siteData.homeLabels.pinnedLabel : siteData.homeLabels.recentLabel}
+        {showPosts.length} {siteData.homeLabels.postsSummarySuffix}
       </p>
       <List posts={showPosts} {type} coverLayout={POSTS_CONFIG.homePageConfig?.coverLayout} />
     </div>

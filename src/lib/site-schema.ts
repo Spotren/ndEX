@@ -28,6 +28,8 @@ const homeSectionSchema = (image: () => any) =>
     description: z.string(),
     latitude: z.number().optional(),
     longitude: z.number().optional(),
+    mapAlt: z.string().trim().min(1).optional(),
+    gmn_url: z.string().trim().min(1).optional(),
     map_url: image().optional(),
     items: z
       .array(
@@ -60,12 +62,22 @@ const homeSectionSchema = (image: () => any) =>
         })
       )
       .optional(),
+    faqs: z
+      .array(
+        z.object({
+          category: z.string().trim().min(1),
+          question: z.string().trim().min(1),
+          answer: z.string().trim().min(1),
+        })
+      )
+      .optional(),
   })
 
 export const siteSchema = (image: () => any) =>
   z.object({
     site: z.object({
       title: z.string().trim().min(1).max(255),
+      seo_title: z.string().trim().min(1).max(255),
       description: z.string().trim().min(1),
       website: z.string().trim().min(1),
       lang: z.string().trim().min(1),
@@ -83,6 +95,18 @@ export const siteSchema = (image: () => any) =>
       pitch: z.string().trim().min(1),
     }),
     heroMetric: heroMetricSchema,
+    homeLabels: z.object({
+      contactUs: z.string().trim().min(1),
+      socialLinkAriaLabelPrefix: z.string().trim().min(1),
+      locationDescriptionTemplate: z.string().trim().min(1),
+      openMapTitle: z.string().trim().min(1),
+      uberCtaTitle: z.string().trim().min(1),
+      uberCtaDescription: z.string().trim().min(1),
+      postsTitle: z.string().trim().min(1),
+      pinnedLabel: z.string().trim().min(1),
+      recentLabel: z.string().trim().min(1),
+      postsSummarySuffix: z.string().trim().min(1),
+    }),
     socialLinks: z.array(socialLinkSchema),
     nap: z.object({
       company: z.string().trim().min(1),
