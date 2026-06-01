@@ -1,7 +1,6 @@
 ---
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { POSTS_CONFIG } from '~/config.ts'
 import FloatingContactCard from '~/components/base/FloatingContactCard.astro'
 import FaqSection from '~/components/base/FaqSection.astro'
@@ -24,9 +23,8 @@ const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
 const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
 const generatedLocationMapLightURL = '/generated/location-map-light.png'
 const generatedLocationMapDarkURL = '/generated/location-map-dark.png'
-const pageDirectory = path.dirname(fileURLToPath(import.meta.url))
-const generatedLocationMapLightPath = path.resolve(pageDirectory, '../../public/generated/location-map-light.png')
-const generatedLocationMapDarkPath = path.resolve(pageDirectory, '../../public/generated/location-map-dark.png')
+const generatedLocationMapLightPath = path.resolve(process.cwd(), 'public/generated/location-map-light.png')
+const generatedLocationMapDarkPath = path.resolve(process.cwd(), 'public/generated/location-map-dark.png')
 const shouldUseGeneratedLocationMaps = existsSync(generatedLocationMapLightPath) && existsSync(generatedLocationMapDarkPath)
 const locationDescription = siteData.homeLabels.locationDescriptionTemplate.replace('{city}', siteData.site.city)
 
@@ -167,7 +165,7 @@ if (hasPinnedPosts) {
                           width="700"
                           height="350"
                           loading="lazy"
-                          class="img-light w-full object-cover aspect-[700/350]"
+                          class="block dark:hidden w-full object-cover aspect-[700/350]"
                         />
                         <img
                           src={generatedLocationMapDarkURL}
@@ -175,7 +173,7 @@ if (hasPinnedPosts) {
                           width="700"
                           height="350"
                           loading="lazy"
-                          class="img-dark w-full object-cover aspect-[700/350]"
+                          class="hidden dark:block w-full object-cover aspect-[700/350]"
                         />
                       </a>
                     ) : section.key === 'location' && section.map_url && (
