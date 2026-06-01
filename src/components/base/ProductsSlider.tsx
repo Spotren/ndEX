@@ -91,7 +91,7 @@ function ProductsSlider({ title, description, products }: Props) {
                 className="block min-w-0 shrink-0 basis-[80%] overflow-hidden rounded-3xl border border-border/50 bg-card/40 transition hover:bg-accent/20 sm:basis-[calc((100%-1.5rem)/2.5)]"
               >
                 <div className="border-b border-border/40 bg-muted/20">
-                  <img src={product.imageSrc} alt={product.name} className="aspect-[3/2] w-full object-cover" draggable="false" />
+                  <img src={product.imageSrc} alt={product.name} loading="lazy" className="aspect-[3/2] w-full object-cover" draggable="false" />
                 </div>
                 <div className="space-y-2 p-5">
                   <p className="text-sm text-muted-foreground">{product.category}</p>
