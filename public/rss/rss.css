@@ -1,6 +1,14 @@
 @font-face {
   font-family: 'Geist';
-  src: url('/fonts/GeistVF.woff2') format('woff2');
+  src: url('/fonts/geist-v5-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist-v5-latin-500.woff2') format('woff2');
+  font-weight: 500;
   font-display: swap;
 }
 
@@ -26,9 +34,9 @@
 }
 
 :root {
-  --font-lexend: 'Lexend', 'Geist', 'ShangguSansSC-VF', sans-serif;
-  --font-sans: 'Geist', 'ShangguSansSC-VF', sans-serif;
-  --font-geist-mono: 'GeistMono', 'Input Mono', 'Fira Code', 'ShangguSansSC-VF', monospace;
+  --font-lexend: 'Lexend', 'Geist', sans-serif;
+  --font-sans: 'Geist', sans-serif;
+  --font-geist-mono: 'GeistMono', 'Input Mono', 'Fira Code', monospace;
   --background: 255 100% 100%;
   --foreground: 225 15% 12%;
   --scrollbar: 220 20% 80%;

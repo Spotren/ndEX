@@ -35,11 +35,10 @@
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="preload" href="/fonts/GeistVF.woff2" as="font" type="font/woff2" />
+        <link rel="preload" href="/fonts/geist-v5-latin-regular.woff2" as="font" type="font/woff2" />
+        <link rel="preload" href="/fonts/geist-v5-latin-500.woff2" as="font" type="font/woff2" />
         <link rel="preload" href="/fonts/lexend-v26-latin-500.woff2" as="font" type="font/woff2" />
-        <link rel="preload" href="/fonts/ZhudouSansVF-subset.woff2" as="font" type="font/woff2" />
         <link rel="preload" href="/fonts/geist-mono-v5-latin-regular.woff2" as="font" type="font/woff2" />
-        <!-- <link rel="stylesheet" href="/fonts/ShangguSansSC-VF/result.css" /> -->
         <link rel="stylesheet" href="/rss/rss.css" />
         <script src="/js/theme.js"></script>
       </head>
