@@ -153,7 +153,7 @@ if (hasPinnedPosts) {
                     }
                   </div>
                   {
-                    section.key === 'location' && shouldUseGeneratedLocationMaps && section.latitude !== undefined && section.longitude !== undefined ? (
+                    section.key === 'location' && shouldUseGeneratedLocationMaps ? (
                       <a
                         href={section.gmn_url ?? '#'}
                         target="_blank"
