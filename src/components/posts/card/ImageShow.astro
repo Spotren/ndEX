@@ -18,7 +18,6 @@ const isReverse = imagePosition === 'right'
 const recommendText = POSTS_CONFIG.recommendText
 const postHref = `/posts/${post.id}`
 const coverLinkAriaLabel = `Open post: ${post.data.title}`
-const readMoreLabel = `${POSTS_CONFIG.readMoreText}: ${post.data.title}`
 ---
 
 <article class:list={[`group flex flex-col sm:flex-row gap-6 sm:gap-10 ${isReverse ? 'sm:flex-row-reverse' : ''}`, className]} {style}>
@@ -40,14 +39,6 @@ const readMoreLabel = `${POSTS_CONFIG.readMoreText}: ${post.data.title}`
           )
         }
       </div>
-    </a>
-    <a
-      href={postHref}
-      aria-label={readMoreLabel}
-      class="hidden sm:inline-flex mt-2 items-center gap-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors group/read"
-    >
-      {POSTS_CONFIG.readMoreText}
-      <span class="icon-[ph--arrow-right] size-4 transition-transform group-hover/read:translate-x-1"></span>
     </a>
   </div>
 

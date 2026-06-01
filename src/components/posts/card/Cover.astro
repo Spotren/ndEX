@@ -9,7 +9,6 @@ interface Props extends CardProps {}
 const { post, class: className, style }: Props = Astro.props
 const recommendText = POSTS_CONFIG.recommendText
 const postHref = `/posts/${post.id}`
-const readMoreLabel = `${POSTS_CONFIG.readMoreText}: ${post.data.title}`
 ---
 
 <article class:list={['group relative flex flex-col justify-center bg-background', className]} {style}>
@@ -42,15 +41,6 @@ const readMoreLabel = `${POSTS_CONFIG.readMoreText}: ${post.data.title}`
     <div class="flex flex-wrap items-center gap-2">
       {post.data.recommend && <Badge type="recommend" content={recommendText} />}
       {post.data.tags?.map((tag) => <Badge type="tag" content={tag} />)}
-
-      <a
-        href={postHref}
-        aria-label={readMoreLabel}
-        class="ml-auto hidden items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-primary sm:inline-flex"
-      >
-        {POSTS_CONFIG.readMoreText}
-        <span class="icon-[ph--arrow-right] size-4"></span>
-      </a>
     </div>
   </div>
 
