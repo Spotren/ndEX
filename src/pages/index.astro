@@ -101,7 +101,7 @@ if (hasPinnedPosts) {
           <div class="py-8 pb-10 px-6 sm:px-8">
             {
               section.key === 'reviews' && section.items ? (
-                <ReviewsSection title={section.title} description={section.description} reviews={section.items} metric={siteData.heroMetric} client:load />
+                <ReviewsSection title={section.title} description={section.description} reviews={section.items} metric={siteData.heroMetric} client:visible />
               ) : section.key === 'products' && section.products ? (
                 <>
                   <ProductsSlider
@@ -125,7 +125,7 @@ if (hasPinnedPosts) {
                 </>
               ) : section.key === 'faq' && section.faqs ? (
                 <>
-                  <FaqSection title={section.title} description={section.description} faqs={section.faqs} client:load />
+                  <FaqSection title={section.title} description={section.description} faqs={section.faqs} client:visible />
                 </>
               ) : (
                 <>

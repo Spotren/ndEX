@@ -47,6 +47,8 @@
   // 精确模式状态（持久化）
   let exactMode = false
   try { exactMode = localStorage.getItem('search-exact') === '1' } catch {}
+  let pagefindReady: Promise<any> | null = null
+  const pagefindScriptUrl = '/pagefind/pagefind.js'
   const updateExactUI = () => {
     if (!exactToggle) return
     exactToggle.setAttribute('aria-pressed', exactMode ? 'true' : 'false')
@@ -67,15 +69,37 @@
     searchInput?.dispatchEvent(new Event('input'))
   })
 
-  // 声明 pagefind 类型
-  declare const pagefind: any
+  const ensurePagefind = async () => {
+    if (!import.meta.env.PROD) return null
+    if ((window as any).pagefind) return (window as any).pagefind
+    if (!pagefindReady) {
+      pagefindReady = import(/* @vite-ignore */ pagefindScriptUrl).then(async (pagefindModule: any) => {
+        const loadedPagefind = pagefindModule.default ?? pagefindModule
+        await loadedPagefind.options({
+          'excerptLength': 20,
+          'showSubResults': true,
+        })
+        loadedPagefind.init()
+        ;(window as any).pagefind = loadedPagefind
+        return loadedPagefind
+      })
+    }
+    return pagefindReady
+  }
 
   // 打开搜索面板
-  const openSearch = () => {
+  const openSearch = async () => {
     searchMask?.classList.remove('hidden')
     searchMask?.offsetHeight
     searchMask?.classList.remove('opacity-0')
     searchInput?.focus()
+    if (import.meta.env.PROD) {
+      try {
+        await ensurePagefind()
+      } catch (error) {
+        console.error('Failed to load Pagefind.', error)
+      }
+    }
     // 移除了 document.body.style.overflow = 'hidden'
   }
 
@@ -140,6 +164,8 @@
       return
     }
     if (import.meta.env.PROD) {
+      const pagefind = await ensurePagefind()
+      if (!pagefind) return
       const pagefindQuery = exactMode ? `"${q}"` : q
       const search = await pagefind.debouncedSearch(pagefindQuery)
 
@@ -211,21 +237,3 @@
 
   searchInput?.addEventListener('input', handleInput)
 </script>
-
-{import.meta.env.PROD &&
-  <script is:inline define:vars={{scriptUrl: ('/pagefind/pagefind.js')}}>
-    async function loadPagefind() {
-      const pagefind = await import(scriptUrl)
-
-      await pagefind.options({
-        'excerptLength': 20,
-        'showSubResults': true,
-      })
-
-      pagefind.init()
-      window.pagefind = pagefind
-      pagefind.search('')
-    }
-
-    if (!window.pagefind) loadPagefind()
-  </script>}
