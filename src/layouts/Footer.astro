@@ -1,6 +1,6 @@
 ---
 import SectionDivider from '~/components/base/SectionDivider.astro'
-import ThemeToggle from '~/components/theme/ThemeToggle'
+import ThemeToggle from '~/components/theme/ThemeToggle.astro'
 import FooterLink from '~/components/base/FooterLink.astro'
 import { getSiteData } from '~/lib/site-data'
 
@@ -33,7 +33,7 @@ const siteData = await getSiteData()
             >
               <span class="icon-[mdi--github] size-5"></span>
             </a>
-            <ThemeToggle client:idle />
+            <ThemeToggle />
           </div>
         </div>
       </div>

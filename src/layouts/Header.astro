@@ -1,5 +1,5 @@
 ---
-import ThemeToggle from '~/components/theme/ThemeToggle'
+import ThemeToggle from '~/components/theme/ThemeToggle.astro'
 import HeaderGradient from '~/components/theme/HeaderGradient.astro'
 import SectionDivider from '~/components/base/SectionDivider.astro'
 import HeaderLink from '~/components/base/HeaderLink.astro'
@@ -29,7 +29,7 @@ const siteData = await getSiteData()
     </div>
     <div class="flex gap-2 items-center" transition:persist="header-theme-toggle">
       <SearchSwitch />
-      <ThemeToggle client:idle />
+      <ThemeToggle />
     </div>
   </div>
   <div class="relative global-layout-width mx-auto pointer-events-none">

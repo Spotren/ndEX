@@ -1,0 +1,191 @@
+---
+type ReviewItem = {
+  name: string
+  role?: string
+  rating: number
+  quote: string
+}
+
+type ReviewMetric = {
+  icon: string
+  primaryValue: number | string
+  primaryLabel?: string
+  secondaryValue?: number | string
+  secondaryLabel?: string
+}
+
+type Props = {
+  title: string
+  description: string
+  reviews: ReviewItem[]
+  metric: ReviewMetric
+}
+
+const { title, description, reviews, metric }: Props = Astro.props
+---
+
+<div class="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start" data-reviews-section>
+  <div class="flex flex-col gap-6">
+    <div>
+      <h2 class="text-2xl sm:text-3xl tracking-tight">{title}</h2>
+      <p class="text-muted-foreground mt-1">{description}</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class:list={[metric.icon, 'h-6 w-6 text-muted-foreground']}></span>
+      <span class="text-muted-foreground text-sm">
+        {metric.primaryValue}
+        {metric.primaryLabel ? ` ${metric.primaryLabel}` : ''}
+        {
+          metric.secondaryValue !== undefined && (
+            <>
+              {' '}
+              {typeof metric.secondaryValue === 'number' ? Intl.NumberFormat('en-US').format(metric.secondaryValue) : metric.secondaryValue}
+              {metric.secondaryLabel ? ` ${metric.secondaryLabel}` : ''}
+            </>
+          )
+        }
+      </span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        data-reviews-prev
+        aria-label="Previous review"
+        class="inline-flex size-11 items-center justify-center rounded-full border border-border/60 text-foreground transition hover:bg-accent"
+      >
+        <span class="icon-[mdi--arrow-left] size-5"></span>
+      </button>
+      <button
+        type="button"
+        data-reviews-next
+        aria-label="Next review"
+        class="inline-flex size-11 items-center justify-center rounded-full border border-border/60 text-foreground transition hover:bg-accent"
+      >
+        <span class="icon-[mdi--arrow-right] size-5"></span>
+      </button>
+    </div>
+  </div>
+  <div class="relative overflow-hidden pr-px transition-[height] duration-200 ease-out" data-reviews-panels>
+    {
+      reviews.map((review, index) => (
+        <div
+          data-review-panel
+          data-review-index={index}
+          class:list={[
+            'min-w-0 transition-opacity duration-200 ease-out',
+            index === 0 ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute inset-0',
+          ]}
+        >
+          <div class="rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8">
+            <div class="mb-5 flex items-center gap-1 text-amber-500">
+              {Array.from({ length: review.rating }).map(() => <span class="icon-[mdi--star] size-5"></span>)}
+            </div>
+            <blockquote class="text-lg leading-relaxed text-foreground sm:text-xl">"{review.quote}"</blockquote>
+            <div class="mt-6">
+              <p class="font-medium text-foreground">{review.name}</p>
+              {review.role && <p class="text-muted-foreground text-sm">{review.role}</p>}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const reviewSections = new WeakMap<
+    HTMLElement,
+    {
+      cleanup: () => void
+    }
+  >()
+
+  const setReviewActiveIndex = (root: HTMLElement, activeIndex: number) => {
+    const panels = Array.from(root.querySelectorAll('[data-review-panel]')) as HTMLElement[]
+    const panelsContainer = root.querySelector('[data-reviews-panels]') as HTMLElement | null
+
+    panels.forEach((panel, index) => {
+      const isActive = index === activeIndex
+      if (isActive) {
+        panel.classList.remove('absolute', 'inset-0', 'pointer-events-none')
+        panel.classList.add('relative')
+        requestAnimationFrame(() => {
+          panel.classList.remove('opacity-0')
+          panel.classList.add('opacity-100')
+          if (panelsContainer) {
+            panelsContainer.style.height = `${panel.offsetHeight}px`
+          }
+        })
+        return
+      }
+
+      panel.classList.remove('relative')
+      panel.classList.add('absolute', 'inset-0', 'pointer-events-none')
+      panel.classList.remove('opacity-100')
+      panel.classList.add('opacity-0')
+    })
+
+    root.dataset.reviewActiveIndex = String(activeIndex)
+  }
+
+  const setupReviewsSection = (root: HTMLElement) => {
+    if (reviewSections.has(root)) return
+
+    const prevButton = root.querySelector('[data-reviews-prev]') as HTMLButtonElement | null
+    const nextButton = root.querySelector('[data-reviews-next]') as HTMLButtonElement | null
+    const panels = Array.from(root.querySelectorAll('[data-review-panel]')) as HTMLElement[]
+
+    if (!prevButton || !nextButton || panels.length === 0) return
+
+    const abortController = new AbortController()
+    const { signal } = abortController
+
+    const getActiveIndex = () => Number(root.dataset.reviewActiveIndex || '0')
+
+    prevButton.addEventListener(
+      'click',
+      () => {
+        const nextIndex = (getActiveIndex() - 1 + panels.length) % panels.length
+        setReviewActiveIndex(root, nextIndex)
+      },
+      { signal }
+    )
+
+    nextButton.addEventListener(
+      'click',
+      () => {
+        const nextIndex = (getActiveIndex() + 1) % panels.length
+        setReviewActiveIndex(root, nextIndex)
+      },
+      { signal }
+    )
+
+    setReviewActiveIndex(root, 0)
+    window.addEventListener(
+      'resize',
+      () => {
+        const activePanel = root.querySelector('[data-review-panel].opacity-100') as HTMLElement | null
+        const panelsContainer = root.querySelector('[data-reviews-panels]') as HTMLElement | null
+        if (activePanel && panelsContainer) {
+          panelsContainer.style.height = `${activePanel.offsetHeight}px`
+        }
+      },
+      { signal, passive: true }
+    )
+
+    reviewSections.set(root, {
+      cleanup: () => abortController.abort(),
+    })
+  }
+
+  const initReviewSections = () => {
+    document.querySelectorAll('[data-reviews-section]').forEach((section) => {
+      if (section instanceof HTMLElement) {
+        setupReviewsSection(section)
+      }
+    })
+  }
+
+  document.addEventListener('astro:page-load', initReviewSections)
+  initReviewSections()
+</script>

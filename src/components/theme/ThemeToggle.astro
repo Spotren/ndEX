@@ -1,0 +1,82 @@
+---
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="relative size-5 flex items-center justify-center cursor-pointer transition-transform hover:scale-105 active:scale-95"
+  aria-label="Switch theme"
+  title="Switch theme"
+>
+  <span data-theme-toggle-icon class="icon-[tabler--sun-filled] size-5"></span>
+</button>
+
+<script>
+  declare global {
+    interface Window {
+      __theme?: {
+        setTheme: (theme: 'light' | 'dark', options?: { disableTransition?: boolean }) => void
+      }
+    }
+  }
+
+  const themeToggles = new WeakMap<
+    HTMLElement,
+    {
+      cleanup: () => void
+    }
+  >()
+
+  const syncThemeToggle = (button: HTMLElement, isDark: boolean) => {
+    const icon = button.querySelector('[data-theme-toggle-icon]')
+    if (!(icon instanceof HTMLElement)) return
+
+    icon.className = `${isDark ? 'icon-[tabler--moon-filled]' : 'icon-[tabler--sun-filled]'} size-5`
+  }
+
+  const syncAllThemeToggles = () => {
+    const isDark = document.documentElement.classList.contains('dark')
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      if (button instanceof HTMLElement) {
+        syncThemeToggle(button, isDark)
+      }
+    })
+  }
+
+  const setupThemeToggle = (button: HTMLElement) => {
+    if (themeToggles.has(button)) return
+
+    const abortController = new AbortController()
+    const { signal } = abortController
+
+    button.addEventListener(
+      'click',
+      () => {
+        const isDark = document.documentElement.classList.contains('dark')
+        const nextTheme = isDark ? 'light' : 'dark'
+        window.__theme?.setTheme(nextTheme)
+        syncAllThemeToggles()
+      },
+      { signal }
+    )
+
+    syncThemeToggle(button, document.documentElement.classList.contains('dark'))
+
+    themeToggles.set(button, {
+      cleanup: () => abortController.abort(),
+    })
+  }
+
+  const initThemeToggles = () => {
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      if (button instanceof HTMLElement) {
+        setupThemeToggle(button)
+      }
+    })
+    syncAllThemeToggles()
+  }
+
+  document.addEventListener('theme:change', syncAllThemeToggles)
+  document.addEventListener('astro:page-load', initThemeToggles)
+  initThemeToggles()
+</script>

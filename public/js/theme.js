@@ -6,6 +6,10 @@
   const isMobileViewport = window.matchMedia('(max-width: 767px)')
   const root = document.documentElement
 
+  function notifyThemeChange(theme, isDark) {
+    document.dispatchEvent(new CustomEvent('theme:change', { detail: { theme, isDark } }))
+  }
+
   function getStoredTheme() {
     const theme = localStorage.getItem(STORAGE_KEY)
     return theme === 'light' || theme === 'dark' ? theme : null
@@ -27,6 +31,7 @@
 
     root.classList.toggle('dark', isDark)
     setThemeColor(document, isDark)
+    notifyThemeChange(theme, isDark)
   }
 
   function applyThemeWithoutTransition(theme, options) {
