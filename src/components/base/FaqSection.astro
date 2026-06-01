@@ -60,15 +60,27 @@ const groups = categories.map((category) => ({
           data-faq-panel
           data-faq-index={index}
           class:list={[
-            'grid gap-3 transition-opacity duration-200 ease-out',
+            'grid transition-opacity duration-200 ease-out',
             index === 0 ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute inset-0',
           ]}
         >
           {
             group.items.map((item, itemIndex) => (
-              <details open={itemIndex === 0} class="rounded-2xl border border-border/60 bg-card/30 px-5 py-4">
-                <summary class="cursor-pointer list-none pr-8 font-medium text-foreground">
-                  {item.question}
+              <details
+                open={itemIndex === 0}
+                class:list={[
+                  'group border border-border/60 bg-card/30 px-5 py-4',
+                  itemIndex === 0 ? 'rounded-t-2xl rounded-b-none' : '',
+                  itemIndex > 0 ? '-mt-px rounded-none' : '',
+                  itemIndex === group.items.length - 1 ? 'rounded-b-2xl' : '',
+                ]}
+              >
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-medium text-foreground">
+                  <span>{item.question}</span>
+                  <span class="relative mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45">
+                    <span class="absolute left-1/2 top-1/2 h-0.5 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current"></span>
+                    <span class="absolute left-1/2 top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current transition-opacity duration-200 group-open:opacity-0"></span>
+                  </span>
                 </summary>
                 <p class="mt-3 text-sm leading-6 text-muted-foreground">{item.answer}</p>
               </details>
@@ -93,6 +105,12 @@ const groups = categories.map((category) => ({
     const tabs = Array.from(root.querySelectorAll('[data-faq-tab]')) as HTMLButtonElement[]
     const panels = Array.from(root.querySelectorAll('[data-faq-panel]')) as HTMLElement[]
     const panelsContainer = root.querySelector('[data-faq-panels]') as HTMLElement | null
+    const syncPanelsHeight = () => {
+      const activePanel = panels[activeIndex]
+      if (activePanel && panelsContainer) {
+        panelsContainer.style.height = `${activePanel.scrollHeight}px`
+      }
+    }
 
     tabs.forEach((tab, index) => {
       const isActive = index === activeIndex
@@ -116,9 +134,7 @@ const groups = categories.map((category) => ({
         requestAnimationFrame(() => {
           panel.classList.remove('opacity-0')
           panel.classList.add('opacity-100')
-          if (panelsContainer) {
-            panelsContainer.style.height = `${panel.offsetHeight}px`
-          }
+          syncPanelsHeight()
         })
         return
       }
@@ -128,6 +144,8 @@ const groups = categories.map((category) => ({
       panel.classList.remove('opacity-100')
       panel.classList.add('opacity-0')
     })
+
+    requestAnimationFrame(syncPanelsHeight)
   }
 
   const setupFaqSection = (root: HTMLElement) => {
@@ -149,13 +167,36 @@ const groups = categories.map((category) => ({
     })
 
     setFaqActiveIndex(root, 0)
+    root.querySelectorAll('details').forEach((detail) => {
+      detail.addEventListener(
+        'toggle',
+        () => {
+          if (detail.open) {
+            const parentPanel = detail.closest('[data-faq-panel]') as HTMLElement | null
+            parentPanel?.querySelectorAll('details').forEach((otherDetail) => {
+              if (otherDetail !== detail) {
+                ;(otherDetail as HTMLDetailsElement).open = false
+              }
+            })
+          }
+          const activePanel = root.querySelector('[data-faq-panel].opacity-100') as HTMLElement | null
+          const panelsContainer = root.querySelector('[data-faq-panels]') as HTMLElement | null
+          if (activePanel && panelsContainer) {
+            requestAnimationFrame(() => {
+              panelsContainer.style.height = `${activePanel.scrollHeight}px`
+            })
+          }
+        },
+        { signal }
+      )
+    })
     window.addEventListener(
       'resize',
       () => {
         const activePanel = root.querySelector('[data-faq-panel].opacity-100') as HTMLElement | null
         const panelsContainer = root.querySelector('[data-faq-panels]') as HTMLElement | null
         if (activePanel && panelsContainer) {
-          panelsContainer.style.height = `${activePanel.offsetHeight}px`
+          panelsContainer.style.height = `${activePanel.scrollHeight}px`
         }
       },
       { signal, passive: true }
