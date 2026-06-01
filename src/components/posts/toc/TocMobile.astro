@@ -433,12 +433,12 @@ const getRelativeIndentClass = (depth: number) => {
 
       // 重置样式
       headingLinks.forEach((link) => {
-        link.classList.remove('text-primary', 'font-semibold')
+        link.classList.remove('text-primary', 'font-medium')
         link.classList.add('text-foreground/70')
       })
 
       headingNumbers.forEach((number) => {
-        number.classList.remove('text-primary', 'font-semibold')
+        number.classList.remove('text-primary', 'font-medium')
         number.classList.add('text-primary/40')
       })
 
@@ -450,7 +450,7 @@ const getRelativeIndentClass = (depth: number) => {
 
         if (activeItem) {
           activeItem.classList.remove('text-foreground/70')
-          activeItem.classList.add('text-primary', 'font-semibold')
+          activeItem.classList.add('text-primary', 'font-medium')
           textToShow = activeItem.dataset.headingText || textToShow
 
           // 查找对应的数字标记（通过父元素查找）
@@ -459,7 +459,7 @@ const getRelativeIndentClass = (depth: number) => {
 
           if (activeNumber) {
             activeNumber.classList.remove('text-primary/40')
-            activeNumber.classList.add('text-primary', 'font-semibold')
+            activeNumber.classList.add('text-primary', 'font-medium')
           }
         }
 
