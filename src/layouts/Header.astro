@@ -7,6 +7,11 @@ import SearchSwitch from '~/components/base/SearchSwitch.astro'
 import { getSiteData } from '~/lib/site-data'
 import { Image } from 'astro:assets'
 
+type Props = {
+  showSearch?: boolean
+}
+
+const { showSearch = true }: Props = Astro.props
 const siteData = await getSiteData()
 ---
 
@@ -28,7 +33,7 @@ const siteData = await getSiteData()
       </div>
     </div>
     <div class="flex gap-2 items-center" transition:persist="header-theme-toggle">
-      <SearchSwitch />
+      {showSearch && <SearchSwitch />}
       <ThemeToggle />
     </div>
   </div>

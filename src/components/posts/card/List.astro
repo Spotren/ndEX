@@ -13,6 +13,7 @@ export type CardProps = {
   index: number
   coverLayout?: CoverLayout
   useHomeThumbs?: boolean
+  animate?: boolean
   class?: string
   style?: string
 }
@@ -39,13 +40,14 @@ type Props = {
   customSpacing?: string
   coverLayout?: CoverLayout
   useHomeThumbs?: boolean
+  animate?: boolean
 }
 
-const { posts, type, customSpacing, coverLayout, useHomeThumbs = false } = Astro.props
+const { posts, type, customSpacing, coverLayout, useHomeThumbs = false, animate = true } = Astro.props
 const spacingClass = customSpacing || POST_CARD_SPACING_CLASSES[type]
 const PostCardElement = POST_CARD_COMPONENTS[type]
 ---
 
 <div class={cn(spacingClass, 'content-visibility: auto')}>
-  {posts.map((post, index) => <PostCardElement {post} {index} {coverLayout} {useHomeThumbs} class="fade-up" style={`animation-delay: ${index * 100}ms`} />)}
+  {posts.map((post, index) => <PostCardElement {post} {index} {coverLayout} {useHomeThumbs} class={animate ? 'fade-up' : ''} style={animate ? `animation-delay: ${index * 100}ms` : undefined} />)}
 </div>

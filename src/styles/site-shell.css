@@ -1,0 +1,20 @@
+@layer base {
+  html.disable-transition *:not(html) {
+    transition: none !important;
+  }
+
+  @supports (-webkit-hyphens: none) {
+    .safari-hidden {
+      display: none;
+    }
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

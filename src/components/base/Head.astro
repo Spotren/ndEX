@@ -1,7 +1,6 @@
 ---
 import path from 'node:path'
 import { readFileSync } from 'node:fs'
-import { THEME_CONFIG } from '~/config'
 import { getSiteData } from '~/lib/site-data'
 
 type Props = {
@@ -20,11 +19,6 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 ---
 
 <meta charset="UTF-8" />
-
-<!-- 传递主题动画配置到全局 -->
-<script is:inline define:vars={{ themeAnimation: THEME_CONFIG.themeAnimation }}>
-  window.__themeAnimation = themeAnimation
-</script>
 <script is:inline set:html={themeScript}></script>
 
 <!-- 页面内SEO  On-Page SEO -->

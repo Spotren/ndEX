@@ -1,0 +1,146 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "@iconify/tailwind4";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: var(--font-lexend);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-tag-bg: hsl(var(--tag-bg));
+  --color-tag-bg-hover: hsl(var(--tag-bg-hover));
+  --color-tag-border: hsl(var(--tag-border));
+  --color-tag-text: hsl(var(--tag-text));
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Geist';
+    src: url('/fonts/geist-v5-latin-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Geist';
+    src: url('/fonts/geist-v5-latin-500.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Lexend';
+    src: url('/fonts/lexend-v26-latin-500.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'GeistMono';
+    src: url('/fonts/geist-mono-v5-latin-regular.woff2') format('woff2');
+    font-display: swap;
+  }
+}
+
+@layer base {
+  :root {
+    --font-lexend: 'Lexend', 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-geist-mono: 'GeistMono', 'Input Mono', 'Fira Code', monospace;
+
+    --background: 255 100% 100%;
+    --foreground: 225 15% 12%;
+
+    --accent: 220 25% 94%;
+    --accent-foreground: 225 15% 12%;
+
+    --primary: 225 15% 12%;
+    --primary-foreground: 220 30% 98%;
+
+    --muted: 220 25% 92%;
+    --muted-foreground: 225 10% 40%;
+    --border: 220 20% 90%;
+    --ring: 225 15% 12%;
+
+    --tag-bg: 220 25% 96%;
+    --tag-bg-hover: 220 25% 85%;
+    --tag-border: 220 25% 90%;
+    --tag-text: 225 15% 35%;
+
+    --layout-width: 48rem;
+    --layout-half-width: calc(var(--layout-width) / 2);
+    --layout-change-width: 136rem;
+  }
+
+  @media (min-width: 136rem) {
+    :root {
+      --layout-width: 56rem;
+    }
+  }
+
+  .global-layout-width {
+    max-width: var(--layout-width);
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --border: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --tag-bg: 240 20% 13%;
+    --tag-bg-hover: 240 20% 25%;
+    --tag-border: 240 20% 20%;
+    --tag-text: 240 15% 85%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: light;
+    background-color: var(--color-background);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+
+    @variant dark {
+      color-scheme: dark;
+    }
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-medium;
+  }
+
+  a {
+    @apply underline-offset-4;
+  }
+}
