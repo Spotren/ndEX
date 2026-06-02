@@ -21,11 +21,19 @@ const siteData = await getSiteData()
 const uberClientId = siteData.site.uberClientId ?? import.meta.env.PUBLIC_UBER_CLIENT_ID
 const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
 const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
-const generatedLocationMapLightURL = '/generated/location-map-light.png'
-const generatedLocationMapDarkURL = '/generated/location-map-dark.png'
-const generatedLocationMapLightPath = path.resolve(process.cwd(), 'public/generated/location-map-light.png')
-const generatedLocationMapDarkPath = path.resolve(process.cwd(), 'public/generated/location-map-dark.png')
-const shouldUseGeneratedLocationMaps = existsSync(generatedLocationMapLightPath) && existsSync(generatedLocationMapDarkPath)
+const generatedLocationMapLightURL = '/generated/location-map-light.avif'
+const generatedLocationMapDarkURL = '/generated/location-map-dark.avif'
+const generatedLocationMapLightMobileURL = '/generated/location-map-light-mobile.avif'
+const generatedLocationMapDarkMobileURL = '/generated/location-map-dark-mobile.avif'
+const generatedLocationMapLightPath = path.resolve(process.cwd(), 'public/generated/location-map-light.avif')
+const generatedLocationMapDarkPath = path.resolve(process.cwd(), 'public/generated/location-map-dark.avif')
+const generatedLocationMapLightMobilePath = path.resolve(process.cwd(), 'public/generated/location-map-light-mobile.avif')
+const generatedLocationMapDarkMobilePath = path.resolve(process.cwd(), 'public/generated/location-map-dark-mobile.avif')
+const shouldUseGeneratedLocationMaps =
+  existsSync(generatedLocationMapLightPath) &&
+  existsSync(generatedLocationMapDarkPath) &&
+  existsSync(generatedLocationMapLightMobilePath) &&
+  existsSync(generatedLocationMapDarkMobilePath)
 const locationDescription = siteData.homeLabels.locationDescriptionTemplate.replace('{city}', siteData.site.city)
 
 let showPosts = []
@@ -157,24 +165,40 @@ if (hasPinnedPosts) {
                         target="_blank"
                         rel="noreferrer"
                         title={siteData.homeLabels.openMapTitle}
-                        class="block overflow-hidden border border-border/50 rounded-t-2xl rounded-bl-2xl rounded-br-[3px]"
+                        class="block overflow-hidden border border-border/50"
                       >
-                        <img
-                          src={generatedLocationMapLightURL}
-                          alt={section.mapAlt ?? `${section.title} map`}
-                          width="700"
-                          height="350"
-                          loading="lazy"
-                          class="block dark:hidden w-full object-cover aspect-[700/350]"
-                        />
-                        <img
-                          src={generatedLocationMapDarkURL}
-                          alt={section.mapAlt ?? `${section.title} map`}
-                          width="700"
-                          height="350"
-                          loading="lazy"
-                          class="hidden dark:block w-full object-cover aspect-[700/350]"
-                        />
+                        <picture class="block dark:hidden">
+                          <source
+                            media="(max-width: 767px)"
+                            srcset={generatedLocationMapLightMobileURL}
+                            width="378"
+                            height="378"
+                          />
+                          <img
+                            src={generatedLocationMapLightURL}
+                            alt={section.mapAlt ?? `${section.title} map`}
+                            width="700"
+                            height="350"
+                            loading="lazy"
+                            class="w-full object-cover aspect-[700/350] md:aspect-[700/350] max-md:aspect-square"
+                          />
+                        </picture>
+                        <picture class="hidden dark:block">
+                          <source
+                            media="(max-width: 767px)"
+                            srcset={generatedLocationMapDarkMobileURL}
+                            width="378"
+                            height="378"
+                          />
+                          <img
+                            src={generatedLocationMapDarkURL}
+                            alt={section.mapAlt ?? `${section.title} map`}
+                            width="700"
+                            height="350"
+                            loading="lazy"
+                            class="w-full object-cover aspect-[700/350] md:aspect-[700/350] max-md:aspect-square"
+                          />
+                        </picture>
                       </a>
                     ) : section.key === 'location' && section.map_url && (
                       <a
@@ -182,7 +206,7 @@ if (hasPinnedPosts) {
                         target="_blank"
                         rel="noreferrer"
                         title={siteData.homeLabels.openMapTitle}
-                        class="block overflow-hidden border border-border/50 rounded-t-2xl rounded-bl-2xl rounded-br-[3px]"
+                        class="block overflow-hidden border border-border/50"
                       >
                         <img
                           src={section.map_url.src}
