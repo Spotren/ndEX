@@ -18,7 +18,7 @@ import { truncateText } from '~/lib/utils'
 
 const { size, type } = POSTS_CONFIG.homePageConfig
 const siteData = await getSiteData()
-const uberClientId = import.meta.env.PUBLIC_UBER_CLIENT_ID
+const uberClientId = siteData.site.uberClientId ?? import.meta.env.PUBLIC_UBER_CLIENT_ID
 const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
 const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
 const generatedLocationMapLightURL = '/generated/location-map-light.png'

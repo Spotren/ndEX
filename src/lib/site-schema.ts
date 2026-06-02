@@ -81,6 +81,7 @@ export const siteSchema = (image: () => any) =>
       description: z.string().trim().min(1),
       website: z.string().trim().min(1),
       googleAnalyticsId: z.string().trim().min(1).nullable().optional(),
+      uberClientId: z.string().trim().min(1).nullable().optional(),
       lang: z.string().trim().min(1),
       author: z.string().trim().min(1),
       city: z.string().trim().min(1),
