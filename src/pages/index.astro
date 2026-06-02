@@ -48,19 +48,19 @@ if (hasPinnedPosts) {
 
 <HomeLayout title={siteData.site.seo_title} description={siteData.site.description} useTitleAsIs>
   <div class="relative z-[1]">
-    <div class="home-hero py-8 pb-10 px-6 sm:px-8">
-      <h1 class="flex flex-col gap-2">
-        <span class="text-muted-foreground font-light text-base sm:text-lg block tracking-wide text-balance">
+    <div class="home-hero">
+      <h1>
+        <span class="text-balance">
           {siteData.hero.eyebrow}
         </span>
-        <span class="text-4xl sm:text-5xl tracking-tight">{siteData.hero.brand}</span>
+        <span>{siteData.hero.brand}</span>
       </h1>
-      <div class="home-hero-copy mt-4 text-base leading-7 text-muted-foreground text-pretty">
+      <div class="home-hero-copy text-pretty">
         <p>{truncateText(siteData.hero.tagline, 150)}</p>
       </div>
-      <div class="home-nap mt-6 grid gap-6 md:flex md:items-start md:gap-x-5">
-        <div class="home-nap-item flex items-start gap-3 md:min-w-0 md:flex-1">
-          <span class="home-nap-icon icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
+      <div class="home-nap">
+        <div class="home-nap-item">
+          <span class="home-nap-icon icon-[mdi--office-building] text-primary"></span>
           <div>
             <p class="text-sm font-medium text-muted-foreground">{siteData.nap.company}</p>
             <p class="text-sm text-[#007a4d] dark:text-[#18d38a]">{siteData.nap.status}</p>
@@ -70,15 +70,15 @@ if (hasPinnedPosts) {
           aria-hidden="true"
           class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
         ></div>
-        <div class="home-nap-item flex items-start gap-3 md:min-w-0 md:flex-1">
-          <span class="home-nap-icon icon-[mdi--map-marker] block size-6 shrink-0 text-primary"></span>
+        <div class="home-nap-item">
+          <span class="home-nap-icon icon-[mdi--map-marker] text-primary"></span>
           <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
         </div>
         <div
           aria-hidden="true"
           class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
         ></div>
-        <div class="home-nap-item flex items-start gap-3 md:min-w-0 md:flex-1">
+        <div class="home-nap-item">
           <a
             href={phoneHref}
             target={siteData.nap.wap ? '_blank' : undefined}
@@ -93,7 +93,7 @@ if (hasPinnedPosts) {
           </a>
         </div>
       </div>
-      <div class="mt-6 flex gap-6">
+      <div class="home-social-row">
         <HeroMetric
           icon={siteData.heroMetric.icon}
           primaryValue={siteData.heroMetric.primaryValue}
@@ -112,7 +112,7 @@ if (hasPinnedPosts) {
       siteData.homeSections.map((section) => (
         <>
           <SectionDivider />
-          <div class="py-8 pb-10 px-6 sm:px-8">
+          <div class="home-section-shell">
             {
               section.key === 'reviews' && section.items ? (
                 <ReviewsSection title={section.title} description={section.description} reviews={section.items} metric={siteData.heroMetric} />
@@ -144,8 +144,8 @@ if (hasPinnedPosts) {
                 <>
                   <div class:list={['mb-6', section.key === 'location' && 'grid gap-6 md:grid-cols-[1fr_auto] md:items-start']}>
                     <div>
-                      <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
-                      <p class="text-muted-foreground mt-1">
+                      <h2>{section.title}</h2>
+                      <p class="home-section-copy">
                         {section.key === 'location' ? locationDescription : section.description}
                       </p>
                     </div>
@@ -255,9 +255,9 @@ if (hasPinnedPosts) {
       ))
     }
     <SectionDivider />
-    <div class="py-8 pb-10 px-6 sm:px-8">
-      <h2 class="text-2xl sm:text-3xl tracking-tight">{siteData.homeLabels.postsTitle}</h2>
-      <p class="text-muted-foreground mb-6 mt-1">
+    <div class="home-section-shell">
+      <h2>{siteData.homeLabels.postsTitle}</h2>
+      <p class="home-section-copy mb-6">
         {hasPinnedPosts ? siteData.homeLabels.pinnedLabel : siteData.homeLabels.recentLabel}
         {showPosts.length} {siteData.homeLabels.postsSummarySuffix}
       </p>

@@ -1,3 +1,23 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist-v5-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist-v5-latin-500.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('/fonts/lexend-v26-latin-500.woff2') format('woff2');
+  font-display: swap;
+}
+
 :root {
   --background: 255 100% 100%;
   --foreground: 225 15% 12%;
@@ -24,7 +44,7 @@
 html {
   color-scheme: light;
   background: hsl(var(--background));
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
 }
 
 html.dark {
@@ -65,6 +85,22 @@ body.home-page {
   gap: 0.75rem;
 }
 
+.home-page .home-header-brand-links {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.home-page .home-header-brand-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
 .home-page .home-header-brand img {
   width: 2rem;
   height: 2rem;
@@ -81,6 +117,60 @@ body.home-page {
   border-top: 1px solid hsl(var(--border) / 0.5);
 }
 
+.home-page .home-header-gradient {
+  position: fixed;
+  inset: 0;
+  margin-inline: 0;
+  max-width: none;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.home-page.dark .home-header-gradient {
+  opacity: 1;
+}
+
+.home-page .home-header-gradient-shell {
+  position: absolute;
+  left: 50%;
+  top: -14.5px;
+  margin-left: -41.5rem;
+  width: 80rem;
+  height: 25rem;
+}
+
+.home-page.dark .home-header-gradient-shell {
+  mask-image: linear-gradient(white, transparent);
+}
+
+.home-page .home-header-gradient-fill {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background-image: linear-gradient(to right, rgb(96 165 250 / 0.25), rgb(30 64 175 / 0.25));
+  mask-image: radial-gradient(farthest-side at top, white, transparent);
+}
+
+.home-page.dark .home-header-gradient-fill {
+  opacity: 1;
+  background-image: linear-gradient(to right, rgb(59 130 246 / 0.3), rgb(30 64 175 / 0.3));
+}
+
+.home-page .home-header-gradient-blur {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -19rem;
+  width: 69.5625rem;
+  fill: hsl(var(--background));
+  filter: blur(26px);
+}
+
+.home-page.dark .home-header-gradient-blur {
+  fill: rgb(9 9 11);
+}
+
 .home-page .home-hero {
   padding: 2rem 1.5rem 2.5rem;
 }
@@ -90,6 +180,8 @@ body.home-page {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  font-family: 'Lexend', 'Geist', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
 }
 
 .home-page .home-hero h1 > span:first-child {
@@ -132,13 +224,58 @@ body.home-page {
   flex-shrink: 0;
 }
 
+.home-page .home-social-row {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.home-page .home-social-row a,
+.home-page .home-social-row > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-page .home-social-row .home-social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.home-page .home-section-shell {
+  padding: 2rem 1.5rem 2.5rem;
+}
+
+.home-page .home-section-shell h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: -0.025em;
+  font-family: 'Lexend', 'Geist', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+}
+
+.home-page .home-section-copy {
+  margin-top: 0.25rem;
+  color: hsl(var(--muted-foreground));
+}
+
 @media (min-width: 40rem) {
+  .home-page .home-header-gradient {
+    display: block;
+  }
+
   .home-page .home-header-row {
     padding-inline: 2rem;
   }
 
   .home-page .home-hero {
     padding-inline: 2rem;
+  }
+
+  .home-page .home-header-brand-links a {
+    padding-inline: 1rem;
   }
 
   .home-page .home-hero h1 > span:first-child {
@@ -149,6 +286,15 @@ body.home-page {
   .home-page .home-hero h1 > span:last-child {
     font-size: 3rem;
     line-height: 1;
+  }
+
+  .home-page .home-section-shell {
+    padding-inline: 2rem;
+  }
+
+  .home-page .home-section-shell h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }
 
