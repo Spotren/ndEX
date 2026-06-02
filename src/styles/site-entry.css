@@ -1,0 +1,11 @@
+@import 'tailwindcss' source(none);
+@plugin "@tailwindcss/typography";
+@plugin "@iconify/tailwind4";
+
+@source "../**/*.astro";
+@source "../**/*.mdx";
+@source "../**/*.ts";
+@source "../content/site.json";
+
+@import "./base.css";
+@import "./site-shell.css";

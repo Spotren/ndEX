@@ -1,0 +1,29 @@
+@import 'tailwindcss' source(none);
+@plugin "@tailwindcss/typography";
+@plugin "@iconify/tailwind4";
+
+@source "../pages/index.astro";
+@source "../layouts/HomeLayout.astro";
+@source "../layouts/Header.astro";
+@source "../layouts/Footer.astro";
+@source "../content/site.json";
+@source "../components/base/FloatingContactCard.astro";
+@source "../components/base/FaqSection.astro";
+@source "../components/base/FooterLink.astro";
+@source "../components/base/HeaderLink.astro";
+@source "../components/base/HeroMetric.astro";
+@source "../components/base/LqipImage.astro";
+@source "../components/base/ProductsSlider.astro";
+@source "../components/base/ReviewsSection.astro";
+@source "../components/base/SectionDivider.astro";
+@source "../components/base/ServicesList.astro";
+@source "../components/base/SocialLink.astro";
+@source "../components/posts/base/Badge.astro";
+@source "../components/posts/card/*.astro";
+@source "../components/theme/*.astro";
+@source not "../components/base/SearchSwitch.astro";
+@source not "../components/posts/toc/*.astro";
+
+@import "./base.css";
+@import "./site-shell.css";
+@import "./home.css";
