@@ -93,8 +93,8 @@ export const siteSchema = (image: () => any) =>
     footerLinks: z.array(linkSchema),
     hero: z.object({
       brand: z.string().trim().min(1),
+      eyebrow: z.string().trim().min(1),
       tagline: z.string().trim().min(1),
-      pitch: z.string().trim().min(1),
     }),
     heroMetric: heroMetricSchema,
     homeLabels: z.object({

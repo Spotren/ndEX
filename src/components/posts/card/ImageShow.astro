@@ -1,4 +1,6 @@
 ---
+import { existsSync } from 'node:fs'
+import path from 'node:path'
 import LqipImage from '~/components/base/LqipImage.astro'
 import { formatDate } from '~/lib/utils'
 import { POSTS_CONFIG } from '~/config'
@@ -7,7 +9,7 @@ import type { CardProps } from './List.astro'
 
 interface Props extends CardProps {}
 
-const { post, index, coverLayout, class: className, style }: Props = Astro.props
+const { post, index, coverLayout, useHomeThumbs = false, class: className, style }: Props = Astro.props
 
 // 固定图片尺寸为 1200*630，宽高比约为 1.9:1
 const IMAGE_WIDTH = 1200
@@ -18,14 +20,26 @@ const isReverse = imagePosition === 'right'
 const recommendText = POSTS_CONFIG.recommendText
 const postHref = `/posts/${post.id}`
 const coverLinkAriaLabel = `Open post: ${post.data.title}`
+const homeThumbPath = path.resolve(process.cwd(), `public/generated/post-thumbs/${post.id}.avif`)
+const homeThumbSrc = useHomeThumbs && existsSync(homeThumbPath) ? `/generated/post-thumbs/${post.id}.avif` : null
 ---
 
 <article class:list={[`group flex flex-col sm:flex-row gap-6 sm:gap-10 ${isReverse ? 'sm:flex-row-reverse' : ''}`, className]} {style}>
-  <div class="sm:w-2/6 min-[var(--layout-change-width)]:w-2/8 flex flex-col overflow-hidden">
+  <div class="sm:w-[min(38%,380px)] sm:max-w-[380px] sm:shrink-0 flex flex-col overflow-hidden">
     <a href={postHref} aria-label={coverLinkAriaLabel} title={coverLinkAriaLabel} class="block relative">
       <div class="aspect-[1200/630] overflow-hidden bg-muted/30 relative">
         {
-          post.data.cover && (
+          homeThumbSrc ? (
+            <img
+              src={homeThumbSrc}
+              alt={post.data.title}
+              width="380"
+              height="200"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover"
+            />
+          ) : post.data.cover && (
             <LqipImage
               src={post.data.cover}
               alt=""
@@ -42,7 +56,7 @@ const coverLinkAriaLabel = `Open post: ${post.data.title}`
     </a>
   </div>
 
-  <div class="w-full sm:w-4/6 min-[var(--layout-change-width)]:w-6/8 flex flex-col justify-start">
+  <div class="w-full min-w-0 flex flex-col justify-start">
     <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground/90 mb-2">
       <time class="flex items-center gap-2">
         <span class="icon-[ph--calendar-blank] size-4"></span>
@@ -60,10 +74,10 @@ const coverLinkAriaLabel = `Open post: ${post.data.title}`
     </div>
 
     <a href={postHref} class="group/title">
-      <div class="text-base font-medium transition-colors group-hover/title:text-primary line-clamp-2 leading-5 mb-1">
+      <h3 class="text-base font-medium transition-colors group-hover/title:text-primary line-clamp-2 leading-5 mb-1">
         {post.data.title}
-      </div>
-      {post.data.description && <p class="text-sm text-muted-foreground line-clamp-3 leading-5 mb-3">{post.data.description}</p>}
+      </h3>
+      {post.data.description && <p class="text-sm text-muted-foreground line-clamp-2 leading-5 mb-3">{post.data.description}</p>}
     </a>
 
     <div class="flex flex-wrap items-center gap-2 mb-3">

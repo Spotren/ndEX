@@ -36,8 +36,8 @@
     ],
     "hero": {
       "brand": "Northwind",
-      "tagline": "Dental Studio",
-      "pitch": "Northwind Dental Studio offers preventive, cosmetic, and restorative dental care with calm visits, clear plans, and patient-first comfort every visit."
+      "eyebrow": "Dental Studio",
+      "tagline": "Northwind Dental Studio offers preventive, cosmetic, and restorative dental care with calm visits, clear plans, and patient-first comfort every visit."
     },
     "heroMetric": {
       "icon": "icon-[mdi--star]",

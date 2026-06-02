@@ -43,7 +43,7 @@ const { title, description, products }: Props = Astro.props
   </div>
 
   <div
-    class="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory"
+    class="mr-[-1.5rem] overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory sm:mr-[-2rem]"
     data-products-track
   >
     <div class="flex gap-6">
@@ -54,7 +54,7 @@ const { title, description, products }: Props = Astro.props
           return (
             <Tag
               href={product.url}
-              class="block min-w-0 shrink-0 basis-[80%] snap-start overflow-hidden border border-border/50 rounded-b-3xl bg-card transition hover:bg-accent/20 sm:basis-[calc((100%-1.5rem)/2.5)]"
+              class="block min-w-0 shrink-0 basis-[80%] snap-start overflow-hidden border border-border/50 rounded-b-3xl bg-accent/20 transition hover:bg-muted/35 sm:basis-[calc((100%-1.5rem)/2.5)]"
             >
               <div class="border-b border-border/40 bg-muted/20">
                 <img src={product.imageSrc} alt={product.name} loading="lazy" class="aspect-video w-full object-cover" draggable="false" />

@@ -50,15 +50,15 @@ if (hasPinnedPosts) {
   <div class="relative z-[1]">
     <div class="py-8 pb-10 px-6 sm:px-8">
       <h1 class="flex flex-col gap-2">
-        <span class="text-4xl sm:text-5xl tracking-tight">{siteData.hero.brand}</span>
-        <span class="text-muted-foreground font-light text-xl sm:text-2xl block tracking-wide text-balance">
-          {siteData.hero.tagline}
+        <span class="text-muted-foreground font-light text-base sm:text-lg block tracking-wide text-balance">
+          {siteData.hero.eyebrow}
         </span>
+        <span class="text-4xl sm:text-5xl tracking-tight">{siteData.hero.brand}</span>
       </h1>
       <div class="mt-4 max-w-2xl text-base leading-7 text-muted-foreground text-pretty">
-        <p>{truncateText(siteData.hero.pitch, 150)}</p>
+        <p>{truncateText(siteData.hero.tagline, 150)}</p>
       </div>
-      <div class="mt-6 grid gap-6 md:grid-cols-[0.95fr_1.15fr_0.9fr]">
+      <div class="mt-6 grid gap-6 md:gap-x-5 md:grid-cols-[1fr_1px_1.2fr_1px_0.8fr] md:items-start">
         <div class="flex items-start gap-3">
           <span class="icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
           <div>
@@ -66,10 +66,18 @@ if (hasPinnedPosts) {
             <p class="text-sm text-green-700">{siteData.nap.status}</p>
           </div>
         </div>
+        <div
+          aria-hidden="true"
+          class="hidden md:block self-stretch w-px bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.18)_0%,hsl(var(--foreground)/0.08)_28%,transparent_72%)]"
+        ></div>
         <div class="flex items-start gap-3">
           <span class="icon-[mdi--map-marker] block size-6 shrink-0 text-primary"></span>
           <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
         </div>
+        <div
+          aria-hidden="true"
+          class="hidden md:block self-stretch w-px bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.18)_0%,hsl(var(--foreground)/0.08)_28%,transparent_72%)]"
+        ></div>
         <div class="flex items-start gap-3">
           <a
             href={phoneHref}
@@ -233,7 +241,7 @@ if (hasPinnedPosts) {
         {hasPinnedPosts ? siteData.homeLabels.pinnedLabel : siteData.homeLabels.recentLabel}
         {showPosts.length} {siteData.homeLabels.postsSummarySuffix}
       </p>
-      <List posts={showPosts} {type} coverLayout={POSTS_CONFIG.homePageConfig?.coverLayout} />
+      <List posts={showPosts} {type} coverLayout={POSTS_CONFIG.homePageConfig?.coverLayout} useHomeThumbs />
     </div>
   </div>
   <FloatingContactCard phone={siteData.nap.phone} wap={siteData.nap.wap} />
