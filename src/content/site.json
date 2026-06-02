@@ -52,7 +52,7 @@
       "locationDescriptionTemplate": "Where we are in {city}",
       "openMapTitle": "Open Map",
       "uberCtaTitle": "Call Uber",
-      "uberCtaDescription": "Open Uber with this destination.",
+      "uberCtaDescription": "with this destination",
       "postsTitle": "Posts",
       "pinnedLabel": "Pinned",
       "recentLabel": "Recent",
