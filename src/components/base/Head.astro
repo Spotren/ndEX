@@ -21,7 +21,6 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 <meta charset="UTF-8" />
 <script is:inline set:html={themeScript}></script>
 
-<!-- 页面内SEO  On-Page SEO -->
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <meta name="google" content="notranslate" />
@@ -31,11 +30,9 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 <meta name="description" content={description} />
 <meta name="author" content={siteData.site.author} />
 
-<!-- color -->
 <meta name="theme-color" content="" />
 <meta name="color-scheme" content="light dark" />
 
-<!-- icon -->
 <link rel="icon" href={siteData.site.icon.src} sizes="180x180" />
 <link rel="apple-touch-icon" href={siteData.site.icon.src} />
 
@@ -44,19 +41,15 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
-<!-- 预加载 -->
 <link rel="preload" href="/fonts/geist-v5-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link rel="preload" href="/fonts/geist-v5-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link rel="preload" href="/fonts/lexend-v26-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 <link rel="preload" href="/fonts/geist-mono-v5-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 
-<!-- 标准链接  Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<!-- Open Graph & Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
@@ -64,7 +57,6 @@ const ogImage = new URL(image || siteData.site.ogImage, Astro.url)
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
 
-<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />

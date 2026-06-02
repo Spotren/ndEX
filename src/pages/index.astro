@@ -48,7 +48,7 @@ if (hasPinnedPosts) {
 
 <HomeLayout title={siteData.site.seo_title} description={siteData.site.description} useTitleAsIs>
   <div class="relative z-[1]">
-    <div class="py-8 pb-10 px-6 sm:px-8">
+    <div class="home-hero py-8 pb-10 px-6 sm:px-8">
       <h1 class="flex flex-col gap-2">
         <span class="text-muted-foreground font-light text-base sm:text-lg block tracking-wide text-balance">
           {siteData.hero.eyebrow}
@@ -58,9 +58,9 @@ if (hasPinnedPosts) {
       <div class="home-hero-copy mt-4 text-base leading-7 text-muted-foreground text-pretty">
         <p>{truncateText(siteData.hero.tagline, 150)}</p>
       </div>
-      <div class="mt-6 grid gap-6 md:flex md:items-start md:gap-x-5">
-        <div class="flex items-start gap-3 md:min-w-0 md:flex-1">
-          <span class="icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
+      <div class="home-nap mt-6 grid gap-6 md:flex md:items-start md:gap-x-5">
+        <div class="home-nap-item flex items-start gap-3 md:min-w-0 md:flex-1">
+          <span class="home-nap-icon icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
           <div>
             <p class="text-sm font-medium text-muted-foreground">{siteData.nap.company}</p>
             <p class="text-sm text-green-700">{siteData.nap.status}</p>
@@ -70,15 +70,15 @@ if (hasPinnedPosts) {
           aria-hidden="true"
           class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
         ></div>
-        <div class="flex items-start gap-3 md:min-w-0 md:flex-1">
-          <span class="icon-[mdi--map-marker] block size-6 shrink-0 text-primary"></span>
+        <div class="home-nap-item flex items-start gap-3 md:min-w-0 md:flex-1">
+          <span class="home-nap-icon icon-[mdi--map-marker] block size-6 shrink-0 text-primary"></span>
           <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
         </div>
         <div
           aria-hidden="true"
           class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
         ></div>
-        <div class="flex items-start gap-3 md:min-w-0 md:flex-1">
+        <div class="home-nap-item flex items-start gap-3 md:min-w-0 md:flex-1">
           <a
             href={phoneHref}
             target={siteData.nap.wap ? '_blank' : undefined}

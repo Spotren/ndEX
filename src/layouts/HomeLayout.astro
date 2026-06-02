@@ -1,5 +1,6 @@
 ---
-import '~/styles/home-entry.css'
+import homeStylesheetUrl from '~/styles/home-entry.css?url'
+import homeCriticalCss from '~/styles/home-critical.css?raw'
 import { getSiteData } from '~/lib/site-data'
 import Head from '~/components/base/Head.astro'
 import Header from './Header.astro'
@@ -15,17 +16,42 @@ type Props = {
 const { title, description, image, useTitleAsIs = false }: Props = Astro.props
 const siteData = await getSiteData()
 const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.site.title}`
+const minifiedHomeCriticalCss = homeCriticalCss
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/\s+/g, ' ')
+  .replace(/\s*([{}:;,])\s*/g, '$1')
+  .replace(/;}/g, '}')
+  .trim()
 ---
 
 <!doctype html>
 <html lang={siteData.site.lang}>
   <head>
     <Head title={documentTitle} {description} {image} />
+    <style is:inline set:html={minifiedHomeCriticalCss}></style>
+    <link id="home-styles-preload" rel="preload" as="style" href={homeStylesheetUrl} />
+    <script is:inline>
+      (() => {
+        const stylesheetLink = document.getElementById('home-styles-preload')
+        if (!(stylesheetLink instanceof HTMLLinkElement)) return
+
+        const activateStylesheet = () => {
+          if (stylesheetLink.rel === 'stylesheet') return
+          stylesheetLink.rel = 'stylesheet'
+          stylesheetLink.removeAttribute('as')
+        }
+
+        stylesheetLink.addEventListener('load', activateStylesheet, { once: true })
+      })()
+    </script>
+    <noscript>
+      <link rel="stylesheet" href={homeStylesheetUrl} />
+    </noscript>
   </head>
-  <body class="flex flex-col">
+  <body class="home-page flex flex-col">
     <Header showSearch={false} />
     <div class="grow flex">
-      <main class="relative border-x border-border/50 global-layout-width mx-auto grow min-w-0">
+      <main class="home-main home-shell-width grow min-w-0">
         <slot />
       </main>
     </div>

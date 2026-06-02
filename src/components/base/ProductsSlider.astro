@@ -89,7 +89,10 @@ const { title, description, products }: Props = Astro.props
 
     if (!track || !prevButton || !nextButton) return
 
+    let frame = 0
+
     const updateControls = () => {
+      frame = 0
       const maxScrollLeft = track.scrollWidth - track.clientWidth
       const canScrollLeft = track.scrollLeft > 2
       const canScrollRight = track.scrollLeft < maxScrollLeft - 2
@@ -102,16 +105,13 @@ const { title, description, products }: Props = Astro.props
       nextButton.classList.toggle('opacity-100', canScrollRight)
     }
 
+    const scheduleControlsUpdate = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(updateControls)
+    }
+
     const getStep = () => {
-      const row = track.firstElementChild as HTMLElement | null
-      const firstCard = row?.firstElementChild as HTMLElement | null
-      const gapValue = row ? parseFloat(getComputedStyle(row).columnGap || getComputedStyle(row).gap || '0') : 0
-
-      if (!firstCard) {
-        return track.clientWidth * 0.8
-      }
-
-      return firstCard.getBoundingClientRect().width + gapValue
+      return track.clientWidth * (window.matchMedia('(min-width: 40rem)').matches ? 0.46 : 0.82)
     }
 
     const scrollByStep = (direction: 1 | -1) => {
@@ -126,13 +126,18 @@ const { title, description, products }: Props = Astro.props
 
     prevButton.addEventListener('click', () => scrollByStep(-1), { signal })
     nextButton.addEventListener('click', () => scrollByStep(1), { signal })
-    track.addEventListener('scroll', updateControls, { signal, passive: true })
-    window.addEventListener('resize', updateControls, { signal, passive: true })
+    track.addEventListener('scroll', scheduleControlsUpdate, { signal, passive: true })
+    window.addEventListener('resize', scheduleControlsUpdate, { signal, passive: true })
 
-    updateControls()
+    scheduleControlsUpdate()
 
     sliders.set(root, {
-      cleanup: () => abortController.abort(),
+      cleanup: () => {
+        if (frame) {
+          window.cancelAnimationFrame(frame)
+        }
+        abortController.abort()
+      },
     })
   }
 

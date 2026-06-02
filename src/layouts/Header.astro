@@ -17,8 +17,8 @@ const siteData = await getSiteData()
 
 <HeaderGradient />
 <header>
-  <div class="mx-auto global-layout-width flex justify-between px-6 sm:px-8 py-4 lg:px-8">
-    <div class="flex gap-3 sm:gap-6 items-center flex-shrink-0">
+  <div class="home-shell-width home-header-row mx-auto global-layout-width flex justify-between px-6 sm:px-8 py-4 lg:px-8">
+    <div class="home-header-brand flex gap-3 sm:gap-6 items-center flex-shrink-0">
       <a href="/" class="pointer-events-auto select-none" transition:persist>
         <Image src={siteData.site.logo} alt={`${siteData.site.title} logo`} class="w-8 h-8 object-contain dark:invert" densities={[1, 2]} loading="eager" />
       </a>
@@ -32,7 +32,7 @@ const siteData = await getSiteData()
         }
       </div>
     </div>
-    <div class="flex gap-2 items-center" transition:persist="header-theme-toggle">
+    <div class="home-header-actions flex gap-2 items-center" transition:persist="header-theme-toggle">
       {showSearch && <SearchSwitch />}
       <ThemeToggle />
     </div>
@@ -45,4 +45,4 @@ const siteData = await getSiteData()
   </div>
 </header>
 
-<SectionDivider className="border-t-border dark:border-t-border/50" />
+<SectionDivider className="home-divider border-t-border dark:border-t-border/50" />
