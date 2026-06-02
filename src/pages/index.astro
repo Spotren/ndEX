@@ -58,8 +58,8 @@ if (hasPinnedPosts) {
       <div class="mt-4 max-w-2xl text-base leading-7 text-muted-foreground text-pretty">
         <p>{truncateText(siteData.hero.tagline, 150)}</p>
       </div>
-      <div class="mt-6 grid gap-6 md:gap-x-5 md:grid-cols-[1fr_1px_1.2fr_1px_0.8fr] md:items-start">
-        <div class="flex items-start gap-3">
+      <div class="mt-6 grid gap-6 md:flex md:items-start md:gap-x-5">
+        <div class="flex items-start gap-3 md:min-w-0 md:flex-1">
           <span class="icon-[mdi--office-building] block size-6 shrink-0 text-primary"></span>
           <div>
             <p class="text-sm font-medium text-muted-foreground">{siteData.nap.company}</p>
@@ -68,17 +68,17 @@ if (hasPinnedPosts) {
         </div>
         <div
           aria-hidden="true"
-          class="hidden md:block self-stretch w-px bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.18)_0%,hsl(var(--foreground)/0.08)_28%,transparent_72%)]"
+          class="hidden md:block self-stretch w-px shrink-0 bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.18)_0%,hsl(var(--foreground)/0.08)_28%,transparent_72%)]"
         ></div>
-        <div class="flex items-start gap-3">
+        <div class="flex items-start gap-3 md:min-w-0 md:flex-1">
           <span class="icon-[mdi--map-marker] block size-6 shrink-0 text-primary"></span>
           <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
         </div>
         <div
           aria-hidden="true"
-          class="hidden md:block self-stretch w-px bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.18)_0%,hsl(var(--foreground)/0.08)_28%,transparent_72%)]"
+          class="hidden md:block self-stretch w-px shrink-0 bg-[radial-gradient(circle_at_center,hsl(var(--foreground)/0.18)_0%,hsl(var(--foreground)/0.08)_28%,transparent_72%)]"
         ></div>
-        <div class="flex items-start gap-3">
+        <div class="flex items-start gap-3 md:min-w-0 md:flex-1">
           <a
             href={phoneHref}
             target={siteData.nap.wap ? '_blank' : undefined}
