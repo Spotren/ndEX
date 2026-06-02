@@ -53,7 +53,7 @@ const groups = categories.map((category) => ({
     </div>
   </div>
   <div class="pl-px pr-px">
-    <div class="relative transition-[height] duration-200 ease-out" data-faq-panels>
+    <div class="relative" data-faq-panels>
     {
       groups.map((group, index) => (
         <div
@@ -104,13 +104,6 @@ const groups = categories.map((category) => ({
   const setFaqActiveIndex = (root: HTMLElement, activeIndex: number) => {
     const tabs = Array.from(root.querySelectorAll('[data-faq-tab]')) as HTMLButtonElement[]
     const panels = Array.from(root.querySelectorAll('[data-faq-panel]')) as HTMLElement[]
-    const panelsContainer = root.querySelector('[data-faq-panels]') as HTMLElement | null
-    const syncPanelsHeight = () => {
-      const activePanel = panels[activeIndex]
-      if (activePanel && panelsContainer) {
-        panelsContainer.style.height = `${activePanel.scrollHeight}px`
-      }
-    }
 
     tabs.forEach((tab, index) => {
       const isActive = index === activeIndex
@@ -134,7 +127,6 @@ const groups = categories.map((category) => ({
         requestAnimationFrame(() => {
           panel.classList.remove('opacity-0')
           panel.classList.add('opacity-100')
-          syncPanelsHeight()
         })
         return
       }
@@ -144,8 +136,6 @@ const groups = categories.map((category) => ({
       panel.classList.remove('opacity-100')
       panel.classList.add('opacity-0')
     })
-
-    requestAnimationFrame(syncPanelsHeight)
   }
 
   const setupFaqSection = (root: HTMLElement) => {
@@ -179,28 +169,10 @@ const groups = categories.map((category) => ({
               }
             })
           }
-          const activePanel = root.querySelector('[data-faq-panel].opacity-100') as HTMLElement | null
-          const panelsContainer = root.querySelector('[data-faq-panels]') as HTMLElement | null
-          if (activePanel && panelsContainer) {
-            requestAnimationFrame(() => {
-              panelsContainer.style.height = `${activePanel.scrollHeight}px`
-            })
-          }
         },
         { signal }
       )
     })
-    window.addEventListener(
-      'resize',
-      () => {
-        const activePanel = root.querySelector('[data-faq-panel].opacity-100') as HTMLElement | null
-        const panelsContainer = root.querySelector('[data-faq-panels]') as HTMLElement | null
-        if (activePanel && panelsContainer) {
-          panelsContainer.style.height = `${activePanel.scrollHeight}px`
-        }
-      },
-      { signal, passive: true }
-    )
 
     faqSections.set(root, {
       cleanup: () => abortController.abort(),

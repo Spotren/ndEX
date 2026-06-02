@@ -65,7 +65,7 @@ const { title, description, reviews, metric }: Props = Astro.props
       </button>
     </div>
   </div>
-  <div class="relative overflow-hidden pr-px transition-[height] duration-200 ease-out" data-reviews-panels>
+  <div class="relative overflow-hidden pr-px" data-reviews-panels>
     {
       reviews.map((review, index) => (
         <div
@@ -102,7 +102,6 @@ const { title, description, reviews, metric }: Props = Astro.props
 
   const setReviewActiveIndex = (root: HTMLElement, activeIndex: number) => {
     const panels = Array.from(root.querySelectorAll('[data-review-panel]')) as HTMLElement[]
-    const panelsContainer = root.querySelector('[data-reviews-panels]') as HTMLElement | null
 
     panels.forEach((panel, index) => {
       const isActive = index === activeIndex
@@ -112,9 +111,6 @@ const { title, description, reviews, metric }: Props = Astro.props
         requestAnimationFrame(() => {
           panel.classList.remove('opacity-0')
           panel.classList.add('opacity-100')
-          if (panelsContainer) {
-            panelsContainer.style.height = `${panel.offsetHeight}px`
-          }
         })
         return
       }
@@ -161,17 +157,6 @@ const { title, description, reviews, metric }: Props = Astro.props
     )
 
     setReviewActiveIndex(root, 0)
-    window.addEventListener(
-      'resize',
-      () => {
-        const activePanel = root.querySelector('[data-review-panel].opacity-100') as HTMLElement | null
-        const panelsContainer = root.querySelector('[data-reviews-panels]') as HTMLElement | null
-        if (activePanel && panelsContainer) {
-          panelsContainer.style.height = `${activePanel.offsetHeight}px`
-        }
-      },
-      { signal, passive: true }
-    )
 
     reviewSections.set(root, {
       cleanup: () => abortController.abort(),
