@@ -9,7 +9,7 @@ import { THEME_CONFIG } from './src/config'
 import siteContent from './src/content/site.json'
 
 export default defineConfig({
-  site: siteContent.default.site.website,
+  site: siteContent.head.website,
   base: THEME_CONFIG.base,
   prefetch: false,
   vite: {

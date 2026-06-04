@@ -209,7 +209,7 @@ body.home-page {
 .home-page .home-nap {
   margin-top: 1.5rem;
   display: grid;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .home-page .home-nap-item {
@@ -300,13 +300,13 @@ body.home-page {
 
 @media (min-width: 48rem) {
   .home-page .home-nap {
-    display: flex;
-    align-items: flex-start;
-    column-gap: 1.25rem;
+    display: grid;
+    grid-template-columns: max-content 1px minmax(0, 1fr) 1px max-content;
+    align-items: start;
+    column-gap: 1.75rem;
   }
 
   .home-page .home-nap-item {
     min-width: 0;
-    flex: 1 1 0;
   }
 }

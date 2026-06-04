@@ -6,6 +6,74 @@ export const THEME_CONFIG = {
   themeAnimation: true,
 }
 
+export const SITE_CONFIG = {
+  author: 'ndEX',
+}
+
+export const NAVIGATION_CONFIG = {
+  headerLinks: [
+    {
+      name: 'Posts',
+      url: '/posts',
+    },
+  ],
+  footerLinks: [
+    {
+      name: 'Home',
+      url: '/',
+    },
+    {
+      name: 'Posts',
+      url: '/posts',
+    },
+    {
+      name: 'Tags',
+      url: '/tags',
+    },
+  ],
+}
+
+export const HOME_LABELS = {
+  contactUs: 'Contato',
+  socialLinkAriaLabelPrefix: 'Link do',
+  locationDescriptionTemplate: 'Onde estamos em {city}',
+  openMapTitle: 'Abrir Mapa',
+  uberCtaTitle: 'Chamar Uber',
+  uberCtaDescription: 'para este destino 📍',
+  postsTitle: 'Posts',
+  pinnedLabel: 'Pinned',
+  recentLabel: 'Recente',
+  postsSummarySuffix: 'posts para explorar',
+  startingAtLabel: 'A partir de',
+  fixedPriceLabel: 'Fixed',
+  freePriceLabel: 'Free',
+  noPriceLabel: 'Sem preço',
+}
+
+export const HERO_METRIC_CONFIG = {
+  icon: 'icon-[mdi--star]',
+  primaryLabel: '/',
+  secondaryLabel: 'avaliações',
+}
+
+export const SOCIAL_ICON_MAP: Record<string, string> = {
+  instagram: 'icon-[ri--instagram-line]',
+  facebook: 'icon-[ri--facebook-line]',
+  linkedin: 'icon-[ri--linkedin-line]',
+  tiktok: 'icon-[ri--tiktok-line]',
+  youtube: 'icon-[ri--youtube-line]',
+  x: 'icon-[ri--twitter-x-line]',
+  threads: 'icon-[ri--threads-line]',
+}
+
+export const CONTACT_CONFIG = {
+  wap: true,
+}
+
+export const FOOTER_CONFIG = {
+  sourceUrl: 'https://github.com/Spotren',
+}
+
 //--- Posts Page Config ---
 export const POSTS_CONFIG: PostConfig = {
   title: 'Posts',

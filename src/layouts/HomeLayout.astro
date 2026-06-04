@@ -11,11 +11,15 @@ type Props = {
   description: string
   image?: string
   useTitleAsIs?: boolean
+  schemaGraph?: Record<string, unknown>
 }
 
-const { title, description, image, useTitleAsIs = false }: Props = Astro.props
+const { title, description, image, useTitleAsIs = false, schemaGraph }: Props = Astro.props
 const siteData = await getSiteData()
-const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.site.title}`
+const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.head.title}`
+const schemaGraphJSON = schemaGraph
+  ? JSON.stringify(schemaGraph).replace(/<\/script/gi, '<\\/script')
+  : ''
 const minifiedHomeCriticalCss = homeCriticalCss
   .replace(/\/\*[\s\S]*?\*\//g, '')
   .replace(/\s+/g, ' ')
@@ -25,9 +29,10 @@ const minifiedHomeCriticalCss = homeCriticalCss
 ---
 
 <!doctype html>
-<html lang={siteData.site.lang}>
+<html lang={siteData.head.lang}>
   <head>
     <Head title={documentTitle} {description} {image} />
+    {schemaGraphJSON && <script type="application/ld+json" is:inline set:html={schemaGraphJSON}></script>}
     <style is:inline set:html={minifiedHomeCriticalCss}></style>
     <link id="home-styles-preload" rel="preload" as="style" href={homeStylesheetUrl} />
     <script is:inline>

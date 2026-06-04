@@ -1,7 +1,7 @@
 ---
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import { POSTS_CONFIG } from '~/config.ts'
+import { CONTACT_CONFIG, HERO_METRIC_CONFIG, HOME_LABELS, POSTS_CONFIG, SOCIAL_ICON_MAP } from '~/config.ts'
 import FloatingContactCard from '~/components/base/FloatingContactCard.astro'
 import FaqSection from '~/components/base/FaqSection.astro'
 import HeroMetric from '~/components/base/HeroMetric.astro'
@@ -14,13 +14,24 @@ import SocialLink from '~/components/base/SocialLink.astro'
 import List from '~/components/posts/card/List.astro'
 import { getNumPosts, getPinnedPosts } from '~/lib/data'
 import { getSiteData } from '~/lib/site-data'
-import { truncateText } from '~/lib/utils'
+import { formatBrazilianPhoneDisplay, truncateText } from '~/lib/utils'
 
 const { size, type } = POSTS_CONFIG.homePageConfig
 const siteData = await getSiteData()
-const uberClientId = siteData.site.uberClientId ?? import.meta.env.PUBLIC_UBER_CLIENT_ID
-const phoneDigits = siteData.nap.phone.replace(/\D/g, '')
-const phoneHref = siteData.nap.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
+const sections = siteData.body.sections ?? []
+const siteBrand = siteData.body.brand || siteData.head.title
+const siteCategory = siteData.body.category || ''
+const siteTagline = siteData.body.tagline || ''
+const siteRating = siteData.body.rating
+const siteReviewCount = siteData.body.reviewCount
+const sitePhone = siteData.body.phone || ''
+const sitePhoneDisplay = formatBrazilianPhoneDisplay(sitePhone)
+const siteAddress = siteData.body.address || ''
+const siteOpenStatus = siteData.body.openStatus
+const siteCity = siteData.body.city || ''
+const phoneDigits = sitePhone.replace(/\D/g, '')
+const phoneHref = CONTACT_CONFIG.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
+const uberClientId = import.meta.env.PUBLIC_UBER_CLIENT_ID
 const generatedLocationMapLightURL = '/generated/location-map-light.avif'
 const generatedLocationMapDarkURL = '/generated/location-map-dark.avif'
 const generatedLocationMapLightMobileURL = '/generated/location-map-light-mobile.avif'
@@ -34,7 +45,33 @@ const shouldUseGeneratedLocationMaps =
   existsSync(generatedLocationMapDarkPath) &&
   existsSync(generatedLocationMapLightMobilePath) &&
   existsSync(generatedLocationMapDarkMobilePath)
-const locationDescription = siteData.homeLabels.locationDescriptionTemplate.replace('{city}', siteData.site.city)
+const locationDescription = HOME_LABELS.locationDescriptionTemplate.replace('{city}', siteCity)
+const shouldShowHeroMetric = siteRating !== undefined || siteReviewCount !== undefined
+
+const formatCatalogPrice = (priceType?: string, price?: string) => {
+  const resolvedPrice = price?.trim() ?? ''
+
+  if (priceType === 'free') {
+    return HOME_LABELS.freePriceLabel
+  }
+
+  if (priceType === 'none') {
+    return HOME_LABELS.noPriceLabel
+  }
+
+  if (!resolvedPrice) {
+    return priceType === 'fixed' ? HOME_LABELS.fixedPriceLabel : HOME_LABELS.startingAtLabel
+  }
+
+  return priceType === 'fixed' ? resolvedPrice : `${HOME_LABELS.startingAtLabel} ${resolvedPrice}`
+}
+
+const formatServiceType = (priceType?: string) => {
+  if (priceType === 'fixed') return HOME_LABELS.fixedPriceLabel
+  if (priceType === 'free') return HOME_LABELS.freePriceLabel
+  if (priceType === 'none') return HOME_LABELS.noPriceLabel
+  return HOME_LABELS.startingAtLabel
+}
 
 let showPosts = []
 const pinnedPosts = await getPinnedPosts()
@@ -46,86 +83,118 @@ if (hasPinnedPosts) {
 }
 ---
 
-<HomeLayout title={siteData.site.seo_title} description={siteData.site.description} useTitleAsIs>
+<HomeLayout
+  title={siteData.head.title}
+  description={siteData.head.description}
+  schemaGraph={siteData.schemaGraph}
+  useTitleAsIs
+>
   <div class="relative z-[1]">
     <div class="home-hero">
       <h1>
-        <span class="text-balance">
-          {siteData.hero.eyebrow}
-        </span>
-        <span>{siteData.hero.brand}</span>
+        <span class="text-balance">{siteCategory}</span>
+        <span>{siteBrand}</span>
       </h1>
       <div class="home-hero-copy text-pretty">
-        <p>{truncateText(siteData.hero.tagline, 150)}</p>
+        <p>{truncateText(siteTagline, 150)}</p>
       </div>
       <div class="home-nap">
-        <div class="home-nap-item">
+            <div class="home-nap-item home-nap-item--business pr-1">
           <span class="home-nap-icon icon-[mdi--office-building] text-primary"></span>
           <div>
-            <p class="text-sm font-medium text-muted-foreground">{siteData.nap.company}</p>
-            <p class="text-sm text-[#007a4d] dark:text-[#18d38a]">{siteData.nap.status}</p>
+            <p class="text-sm font-medium text-muted-foreground">{siteBrand}</p>
+            {siteOpenStatus && <p class="text-sm text-[#007a4d] dark:text-[#18d38a]">{siteOpenStatus}</p>}
           </div>
         </div>
-        <div
-          aria-hidden="true"
-          class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
-        ></div>
-        <div class="home-nap-item">
-          <span class="home-nap-icon icon-[mdi--map-marker] text-primary"></span>
-          <p class="text-sm text-muted-foreground">{siteData.nap.address}</p>
-        </div>
-        <div
-          aria-hidden="true"
-          class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
-        ></div>
-        <div class="home-nap-item">
-          <a
-            href={phoneHref}
-            target={siteData.nap.wap ? '_blank' : undefined}
-            rel={siteData.nap.wap ? 'noreferrer' : undefined}
-            class="inline-flex items-start gap-3 text-left transition hover:text-primary"
-          >
-            <span class:list={[siteData.nap.wap ? 'icon-[ri--whatsapp-fill]' : 'icon-[mdi--phone]', 'mt-0.5 size-6 shrink-0 text-foreground']}></span>
-            <div>
-              <p class="text-xs tracking-wide text-muted-foreground">{siteData.homeLabels.contactUs}</p>
-              <p class="text-sm font-medium text-muted-foreground">{siteData.nap.phone}</p>
-            </div>
-          </a>
-        </div>
+        {
+          siteAddress && (
+            <>
+              <div
+                aria-hidden="true"
+                class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
+              ></div>
+              <div class="home-nap-item home-nap-item--address">
+                <span class="home-nap-icon icon-[mdi--map-marker] text-primary"></span>
+                <p class="text-sm text-muted-foreground">{siteAddress}</p>
+              </div>
+            </>
+          )
+        }
+        {
+          phoneDigits && (
+            <>
+              <div
+                aria-hidden="true"
+                class="home-nap-divider hidden md:block self-stretch w-px shrink-0"
+              ></div>
+              <div class="home-nap-item home-nap-item--contact">
+                <a
+                  href={phoneHref}
+                  target={CONTACT_CONFIG.wap ? '_blank' : undefined}
+                  rel={CONTACT_CONFIG.wap ? 'noreferrer' : undefined}
+                  class="inline-flex items-start gap-3 text-left transition hover:text-primary"
+                >
+                  <span class:list={[CONTACT_CONFIG.wap ? 'icon-[ri--whatsapp-fill]' : 'icon-[mdi--phone]', 'mt-0.5 size-6 shrink-0 text-foreground']}></span>
+                  <div>
+                    <p class="text-xs tracking-wide text-muted-foreground">{HOME_LABELS.contactUs}</p>
+                    <p class="font-mono text-sm font-medium text-muted-foreground">{sitePhoneDisplay || sitePhone}</p>
+                  </div>
+                </a>
+              </div>
+            </>
+          )
+        }
       </div>
       <div class="home-social-row">
-        <HeroMetric
-          icon={siteData.heroMetric.icon}
-          primaryValue={siteData.heroMetric.primaryValue}
-          primaryLabel={siteData.heroMetric.primaryLabel}
-          secondaryValue={siteData.heroMetric.secondaryValue}
-          secondaryLabel={siteData.heroMetric.secondaryLabel}
-        />
+        {
+          shouldShowHeroMetric && (
+            <HeroMetric
+              icon={HERO_METRIC_CONFIG.icon}
+              primaryValue={siteRating ?? ''}
+              primaryLabel={HERO_METRIC_CONFIG.primaryLabel}
+              secondaryValue={siteReviewCount}
+              secondaryLabel={HERO_METRIC_CONFIG.secondaryLabel}
+            />
+          )
+        }
         {
           siteData.socialLinks.map((item) => {
-            return <SocialLink href={item.url} icon={item.icon} aria-label={`${siteData.homeLabels.socialLinkAriaLabelPrefix} ${item.name}`} count={item.count} label={item.label} />
+            const icon = item.icon || SOCIAL_ICON_MAP[item.name] || ''
+            if (!icon) return null
+            return <SocialLink href={item.url} icon={icon} aria-label={`${HOME_LABELS.socialLinkAriaLabelPrefix} ${item.name}`} count={item.count} label={item.label} />
           })
         }
       </div>
     </div>
     {
-      siteData.homeSections.map((section) => (
+      sections.map((section) => (
         <>
           <SectionDivider />
           <div class="home-section-shell">
             {
               section.key === 'reviews' && section.items ? (
-                <ReviewsSection title={section.title} description={section.description} reviews={section.items} metric={siteData.heroMetric} />
+                <ReviewsSection
+                  title={section.title}
+                  description={section.description}
+                  reviews={section.items}
+                  metric={{
+                    icon: HERO_METRIC_CONFIG.icon,
+                    primaryValue: siteRating ?? '',
+                    primaryLabel: HERO_METRIC_CONFIG.primaryLabel,
+                    secondaryValue: siteReviewCount,
+                    secondaryLabel: HERO_METRIC_CONFIG.secondaryLabel,
+                  }}
+                />
               ) : section.key === 'products' && section.products ? (
                 <>
                   <ProductsSlider
                     title={section.title}
                     description={section.description}
                     products={section.products.map((product) => ({
-                      imageSrc: product.image.src,
-                      name: product.name,
+                      imageSrc: product.imageUrl,
+                      name: product.title,
                       category: product.category,
-                      price: product.price,
+                      price: formatCatalogPrice(product.priceType, product.price),
                       url: product.url,
                     }))}
                   />
@@ -134,9 +203,18 @@ if (hasPinnedPosts) {
                 <>
                   <h2 class="text-2xl sm:text-3xl tracking-tight">{section.title}</h2>
                   <p class="text-muted-foreground mb-6 mt-1">{section.description}</p>
-                  <ServicesList services={section.services} />
+                  <ServicesList
+                    services={section.services.map((service) => ({
+                      name: service.title,
+                      type: formatServiceType(service.priceType),
+                      price:
+                        service.priceType === 'fixed' || service.priceType === 'starting_at'
+                          ? service.price || undefined
+                          : undefined,
+                    }))}
+                  />
                 </>
-              ) : section.key === 'faq' && section.faqs ? (
+              ) : section.key === 'faqs' && section.faqs ? (
                 <>
                   <FaqSection title={section.title} description={section.description} faqs={section.faqs} />
                 </>
@@ -159,8 +237,8 @@ if (hasPinnedPosts) {
                         >
                           <span class="icon-[mdi--car] mt-0.5 size-6 shrink-0 text-foreground"></span>
                           <div>
-                            <p class="font-medium text-foreground">{siteData.homeLabels.uberCtaTitle}</p>
-                            <p class="text-muted-foreground text-sm">{siteData.homeLabels.uberCtaDescription}</p>
+                            <p class="text-[0.92rem] font-medium text-foreground">{HOME_LABELS.uberCtaTitle}</p>
+                            <p class="text-muted-foreground text-sm">{HOME_LABELS.uberCtaDescription}</p>
                           </div>
                         </a>
                       )
@@ -170,10 +248,10 @@ if (hasPinnedPosts) {
                     section.key === 'location' && shouldUseGeneratedLocationMaps ? (
                       <>
                         <a
-                          href={section.gmn_url ?? '#'}
+                          href={section.googleMapsUri || '#'}
                           target="_blank"
                           rel="noreferrer"
-                          title={siteData.homeLabels.openMapTitle}
+                          title={HOME_LABELS.openMapTitle}
                           class="block overflow-hidden border border-border/50"
                         >
                           <picture data-location-map>
@@ -187,7 +265,7 @@ if (hasPinnedPosts) {
                             <img
                               data-light-src={generatedLocationMapLightURL}
                               data-dark-src={generatedLocationMapDarkURL}
-                              alt={section.mapAlt ?? `${section.title} map`}
+                              alt={`${section.title} map`}
                               width="700"
                               height="350"
                               loading="eager"
@@ -227,23 +305,20 @@ if (hasPinnedPosts) {
                           })()
                         </script>
                       </>
-                    ) : section.key === 'location' && section.map_url && (
+                    ) : section.key === 'location' && section.googleMapsUri && (
                       <a
-                        href={section.gmn_url ?? '#'}
+                        href={section.googleMapsUri}
                         target="_blank"
                         rel="noreferrer"
-                        title={siteData.homeLabels.openMapTitle}
+                        title={HOME_LABELS.openMapTitle}
                         class="block overflow-hidden border border-border/50"
                       >
-                        <img
-                          src={section.map_url.src}
-                          alt={section.mapAlt ?? `${section.title} map`}
-                          width="702"
-                          height="351"
-                          loading="eager"
-                          fetchpriority="high"
-                          class="home-location-map w-full object-cover"
-                        />
+                        <div class="flex min-h-[18rem] items-center justify-center bg-accent/20 text-center text-muted-foreground">
+                          <div>
+                            <span class="icon-[mdi--map-outline] mx-auto mb-3 block size-10"></span>
+                            <p>{HOME_LABELS.openMapTitle}</p>
+                          </div>
+                        </div>
                       </a>
                     )
                   }
@@ -256,13 +331,13 @@ if (hasPinnedPosts) {
     }
     <SectionDivider />
     <div class="home-section-shell">
-      <h2>{siteData.homeLabels.postsTitle}</h2>
+      <h2>{HOME_LABELS.postsTitle}</h2>
       <p class="home-section-copy mb-6">
-        {hasPinnedPosts ? siteData.homeLabels.pinnedLabel : siteData.homeLabels.recentLabel}
-        {showPosts.length} {siteData.homeLabels.postsSummarySuffix}
+        {hasPinnedPosts ? HOME_LABELS.pinnedLabel : HOME_LABELS.recentLabel}
+        {showPosts.length} {HOME_LABELS.postsSummarySuffix}
       </p>
       <List posts={showPosts} {type} coverLayout={POSTS_CONFIG.homePageConfig?.coverLayout} useHomeThumbs animate={false} />
     </div>
   </div>
-  <FloatingContactCard phone={siteData.nap.phone} wap={siteData.nap.wap} />
+  <FloatingContactCard phone={sitePhone} wap={CONTACT_CONFIG.wap} />
 </HomeLayout>

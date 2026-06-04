@@ -2,7 +2,7 @@
 type ReviewItem = {
   name: string
   role?: string
-  rating: number
+  rating?: number | null
   quote: string
 }
 
@@ -77,9 +77,13 @@ const { title, description, reviews, metric }: Props = Astro.props
           ]}
         >
           <div class="rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8">
-            <div class="mb-5 flex items-center gap-1 text-amber-500">
-              {Array.from({ length: review.rating }).map(() => <span class="icon-[mdi--star] size-5"></span>)}
-            </div>
+            {
+              typeof review.rating === 'number' && review.rating > 0 && (
+                <div class="mb-5 flex items-center gap-1 text-amber-500">
+                  {Array.from({ length: review.rating }).map(() => <span class="icon-[mdi--star] size-5"></span>)}
+                </div>
+              )
+            }
             <blockquote class="text-lg leading-relaxed text-foreground sm:text-xl">"{review.quote}"</blockquote>
             <div class="mt-6">
               <p class="font-medium text-foreground">{review.name}</p>

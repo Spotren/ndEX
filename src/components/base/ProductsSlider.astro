@@ -1,6 +1,6 @@
 ---
 type ProductItem = {
-  imageSrc: string
+  imageSrc?: string
   name: string
   category: string
   price?: string
@@ -57,7 +57,15 @@ const { title, description, products }: Props = Astro.props
               class="block min-w-0 shrink-0 basis-[80%] snap-start overflow-hidden border border-border/50 rounded-b-3xl bg-accent/20 transition hover:bg-muted/35 sm:basis-[calc((100%-1.5rem)/2.5)]"
             >
               <div class="border-b border-border/40 bg-muted/20">
-                <img src={product.imageSrc} alt={product.name} loading="lazy" class="aspect-video w-full object-cover" draggable="false" />
+                {
+                  product.imageSrc ? (
+                    <img src={product.imageSrc} alt={product.name} loading="lazy" class="aspect-video w-full object-cover" draggable="false" />
+                  ) : (
+                    <div class="flex aspect-video w-full items-center justify-center bg-muted/40 text-muted-foreground">
+                      <span class="icon-[mdi--image-outline] size-10"></span>
+                    </div>
+                  )
+                }
               </div>
               <div class="space-y-2 p-5">
                 <p class="text-sm text-muted-foreground">{product.category}</p>

@@ -5,6 +5,7 @@ import { createMarkdownProcessor } from '@astrojs/markdown-remark'
 import { remarkPlugins, rehypePlugins } from '../../plugins'
 import { getImage } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
+import { SITE_CONFIG } from '~/config'
 import { getSiteData } from './site-data'
 
 interface RSSConfig {
@@ -19,11 +20,11 @@ interface RSSConfig {
 // 站点配置
 const siteData = await getSiteData()
 const config: RSSConfig = {
-  siteUrl: siteData.site.website,
-  title: siteData.site.title,
-  description: siteData.site.description,
-  author: siteData.site.author,
-  lang: siteData.site.lang,
+  siteUrl: siteData.head.website,
+  title: siteData.head.title,
+  description: siteData.head.description,
+  author: SITE_CONFIG.author,
+  lang: siteData.head.lang,
   posts: await getAllPosts(),
 }
 

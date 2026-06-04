@@ -1,239 +1,125 @@
 {
-  "default": {
-    "site": {
-      "title": "Northwind Dental Studio",
-      "seo_title": "Northwind Dental Studio in Portland",
-      "description": "Northwind Dental Studio offers modern dental care with a calm clinical experience, transparent guidance, and treatments designed for long-term oral health.",
-      "website": "https://litos.vercel.app/",
-      "googleAnalyticsId": null,
-      "uberClientId": "3kR45ct67BC3LYS-6nLat_-8LVbTN-zt",
-      "lang": "en",
-      "author": "ndEX",
-      "city": "Portland",
-      "ogImage": "/og-image.webp",
-      "icon": "../assets/site/icon.png",
-      "logo": "../assets/site/logo.png"
+  "head": {
+    "title": "Spotren™ - Empresa de Software em São José do Rio Preto",
+    "description": "Empresa de Software para Negócios Locais",
+    "website": "https://spotren-teste-1f7acf96.vercel.app",
+    "lang": "pt-BR",
+    "icon": {
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/favicon/1780519723644233231-spotren-favicon-wp.ico",
+      "contentType": "image/x-icon"
     },
-    "headerLinks": [
-      {
-        "name": "Posts",
-        "url": "/posts"
-      }
-    ],
-    "footerLinks": [
-      {
-        "name": "Home",
-        "url": "/"
-      },
-      {
-        "name": "Posts",
-        "url": "/posts"
-      },
-      {
-        "name": "Tags",
-        "url": "/tags"
-      }
-    ],
-    "hero": {
-      "brand": "Northwind",
-      "eyebrow": "Dental Studio",
-      "tagline": "Northwind Dental Studio offers preventive, cosmetic, and restorative dental care with calm visits, clear plans, and patient-first comfort every visit."
+    "ogImage": {
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/og-image/1780544469762236160-og-image.webp",
+      "contentType": "image/webp"
+    }
+  },
+  "socialLinks": [
+    {
+      "name": "linkedin",
+      "url": "https://www.linkedin.com/company/spotren"
+    }
+  ],
+  "body": {
+    "logo": {
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/logo/1780519724542035663-spotren-favicon-wp-optmz.png",
+      "alt": "Logo Spotren™ Empresa de Software São José do Rio Preto"
     },
-    "heroMetric": {
-      "icon": "icon-[mdi--star]",
-      "primaryValue": "4.9",
-      "primaryLabel": "/",
-      "secondaryValue": 50,
-      "secondaryLabel": "reviews"
-    },
-    "homeLabels": {
-      "contactUs": "Contact us",
-      "socialLinkAriaLabelPrefix": "Link of",
-      "locationDescriptionTemplate": "Where we are in {city}",
-      "openMapTitle": "Open Map",
-      "uberCtaTitle": "Call Uber",
-      "uberCtaDescription": "with this destination",
-      "postsTitle": "Posts",
-      "pinnedLabel": "Pinned",
-      "recentLabel": "Recent",
-      "postsSummarySuffix": "posts, worth a look."
-    },
-    "socialLinks": [
-      {
-        "name": "facebook",
-        "url": "https://facebook.com/yourpage",
-        "icon": "icon-[ri--facebook-line]"
-      },
-      {
-        "name": "instagram",
-        "url": "https://instagram.com/yourprofile",
-        "icon": "icon-[ri--instagram-line]"
-      },
-      {
-        "name": "linkedin",
-        "url": "https://linkedin.com/company/yourcompany",
-        "icon": "icon-[ri--linkedin-line]"
-      }
-    ],
-    "nap": {
-      "company": "Northwind Dental Studio",
-      "status": "Open now",
-      "address": "1284 Market Street, Suite 300, Portland, OR 97205",
-      "phone": "(503) 555-0147",
-      "wap": true
-    },
-    "homeSections": [
+    "brand": "Spotren™",
+    "tagline": "Empresa de Software especializada em Sistemas, Sites e Plataformas para Comércios Locais e Profissionais Liberais / Autônomos de São José do Rio Preto",
+    "category": "Empresa de Software",
+    "city": "São José do Rio Preto",
+    "rating": 5,
+    "reviewCount": 9,
+    "phone": "(17) 99650-2614",
+    "address": "R. XV de Novembro, 3057 - Centro, São José do Rio Preto - SP, 15015-110",
+    "openStatus": "Aberto agora",
+    "sections": [
       {
         "key": "location",
         "title": "Location",
         "description": "",
-        "latitude": 45.5231,
-        "longitude": -122.6765,
-        "map_url": "../assets/site/location-map.svg",
-        "mapAlt": "Map showing the location of Northwind Dental Studio in Portland",
-        "gmn_url": "https://www.google.com/maps/place/?q=place_id:ChIJJ3SpfQsVlVQRkYXR9ua5Nhw"
+        "latitude": -20.813157699999998,
+        "longitude": -49.3796621,
+        "googleMapsUri": "https://maps.google.com/?cid=18394367288973268008&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
       },
       {
         "key": "reviews",
         "title": "Reviews",
-        "description": "What patients say after visiting our studio.",
+        "description": "",
         "items": [
           {
-            "name": "Emily Carter",
-            "role": "Cosmetic Dentistry Patient",
+            "name": "Daiana Braga",
             "rating": 5,
-            "quote": "The entire team made me feel calm and informed from the first appointment. The results were precise, natural, and exactly what I hoped for."
+            "quote": "Sou profissional de educação e durante a pandemia engajei na criação de um blog para dar continuidade ao meu trabalho e a partir desse blog comecei a empreender com EAD. A Analisa Site foi parceira importante na divulgação da minha plataforma digital, permitindo que clientes encotrassem meu trabalho com maior facilidade. Além disso, a AS é uma empresa com excelentes profissionais que têm me atendido muito bem. Recomendo!"
           },
           {
-            "name": "Jason Miller",
-            "role": "Family Dentistry Patient",
+            "name": "Ariane",
             "rating": 5,
-            "quote": "Scheduling was easy, the clinic was spotless, and every step was explained clearly. It felt thoughtful instead of rushed."
+            "quote": "Trabalho sério, comprometimento e muito atento às demandas do mercado. Um portfólio excelente, com entregas muito profissionais e eficientes, ótima experiência!"
           },
           {
-            "name": "Sophia Nguyen",
-            "role": "Teeth Whitening Patient",
+            "name": "fefe",
             "rating": 5,
-            "quote": "A genuinely polished experience. Friendly staff, modern space, and visible results after a single treatment plan."
+            "quote": "muito bom, trabalho rápido e eficiente 👏🏻👏🏻👏🏻"
           }
         ]
       },
       {
         "key": "products",
         "title": "Products",
-        "description": "Take-home essentials curated for comfort and daily care.",
+        "description": "",
         "products": [
           {
-            "image": "../assets/site/product-whitening.svg",
-            "name": "Whitening Strips",
-            "category": "At-home whitening",
-            "price": "R$ 48",
-            "description": "A simple brightening routine for touch-ups between studio appointments.",
-            "url": "https://example.com/products/whitening-strips"
-          },
-          {
-            "image": "../assets/site/product-kit.svg",
-            "name": "Travel Oral Care Kit",
-            "category": "Everyday essentials",
-            "price": "R$ 26",
-            "description": "Compact daily care with floss, toothpaste, and a soft-bristle travel brush.",
-            "url": "https://example.com/products/travel-oral-care-kit"
-          },
-          {
-            "image": "../assets/site/product-serum.svg",
-            "name": "Enamel Care Serum",
-            "category": "Sensitive teeth support",
-            "price": "R$ 34",
-            "description": "A lightweight serum designed to support comfort and enamel protection.",
-            "url": "https://example.com/products/enamel-care-serum"
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/catalog/1780546697059604096-teste-thumbs-spotren-ndex.png",
+            "title": "ndEX",
+            "category": "Sites",
+            "priceType": "fixed",
+            "price": "R$ 70 /mês",
+            "content": "Site otimizado para Negócios Locais. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.",
+            "ctaText": "Assinar",
+            "url": "https://google.com"
           }
         ]
       },
       {
         "key": "services",
         "title": "Services",
-        "description": "Popular treatments and everyday care options.",
+        "description": "",
         "services": [
           {
-            "name": "Dental Cleaning",
-            "type": "Starting at",
-            "price": "$120"
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/catalog/1780590890073670819-teste-thumbs-spotren-ndex.png",
+            "title": "Software / Plataforma SaaS Personalizada",
+            "category": "Software / SaaS",
+            "priceType": "starting_at",
+            "price": "R$ 1.500",
+            "content": "Desenvolvemos soluções Web personalizadas para empresas em Rio Preto, transformando suas ideias em plataformas digitais eficientes e inovadoras.",
+            "ctaText": "Entrar e contato",
+            "url": "https://wa.me/17996502614"
           },
           {
-            "name": "Teeth Whitening",
-            "type": "Starting at",
-            "price": "$280"
-          },
-          {
-            "name": "Porcelain Veneers",
-            "type": "Fixed",
-            "price": "$950"
-          },
-          {
-            "name": "Emergency Exam",
-            "type": "Free"
-          },
-          {
-            "name": "Custom Treatment Plan",
-            "type": "No price"
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/catalog/1780590942231493151-teste-thumbs-spotren-ndex.avif",
+            "title": "Site para Advogado",
+            "category": "Sites",
+            "priceType": "starting_at",
+            "price": "R$ 600",
+            "content": "Você tem um novo boleto emitido por Fatura Cartão C6, no valor de R$ 128,07 que vence em 10/06/2026.",
+            "ctaText": "",
+            "url": ""
           }
         ]
       },
       {
-        "key": "faq",
-        "title": "FAQ",
-        "description": "Answers to common questions before your visit.",
+        "key": "faqs",
+        "title": "FAQs",
+        "description": "",
         "faqs": [
           {
-            "category": "New Patients",
-            "question": "Do you accept new patients?",
-            "answer": "Yes. We welcome new patients and offer flexible scheduling for first visits."
-          },
-          {
-            "category": "Appointments",
-            "question": "Do you provide emergency appointments?",
-            "answer": "Yes. We keep limited same-day availability for urgent dental needs."
-          },
-          {
-            "category": "Treatments",
-            "question": "Do you offer whitening treatments?",
-            "answer": "Yes. We provide both in-studio whitening and take-home options depending on your goals."
-          },
-          {
-            "category": "New Patients",
-            "question": "What should I bring to my first appointment?",
-            "answer": "Bring a photo ID, your insurance information if applicable, and any recent dental records you would like our team to review."
-          },
-          {
-            "category": "New Patients",
-            "question": "Do you help patients who feel nervous about dental visits?",
-            "answer": "Yes. We focus on a calm, supportive experience and explain each step clearly so new patients feel more comfortable from the start."
-          },
-          {
-            "category": "Appointments",
-            "question": "How early should I arrive for a scheduled visit?",
-            "answer": "We recommend arriving 10 to 15 minutes early so you can check in comfortably and complete any needed forms."
-          },
-          {
-            "category": "Appointments",
-            "question": "Can I request a follow-up appointment before leaving the office?",
-            "answer": "Yes. Our front desk can help you schedule your next cleaning, review, or treatment visit before you leave."
-          },
-          {
-            "category": "Treatments",
-            "question": "Do you create treatment plans for cosmetic and restorative care?",
-            "answer": "Yes. We build personalized treatment plans that explain timing, options, and priorities before any major work begins."
-          },
-          {
-            "category": "Treatments",
-            "question": "Do you offer preventive care as well as cosmetic services?",
-            "answer": "Yes. We provide routine preventive care alongside whitening, restorative treatments, and personalized recommendations for long-term oral health."
+            "category": "Sites",
+            "question": "Como criar um site?",
+            "answer": "Assim"
           }
         ]
       }
-    ],
-    "footer": {
-      "sourceUrl": "https://github.com/Spotren"
-    }
+    ]
   }
 }

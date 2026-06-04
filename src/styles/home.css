@@ -16,6 +16,17 @@
 }
 
 @media (min-width: 768px) {
+  .home-page .home-nap {
+    display: grid;
+    grid-template-columns: max-content 1px minmax(0, 1fr) 1px max-content;
+    align-items: start;
+    column-gap: 1.75rem;
+  }
+
+  .home-page .home-nap-item {
+    min-width: 0;
+  }
+
   .home-location-map {
     aspect-ratio: 700 / 350;
   }

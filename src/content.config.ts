@@ -1,5 +1,6 @@
-import { file, glob } from 'astro/loaders'
+import { glob } from 'astro/loaders'
 import { defineCollection } from 'astro:content'
+import { readFile } from 'node:fs/promises'
 import { z } from 'astro/zod'
 import { POSTS_CONFIG } from '~/config'
 import { siteSchema } from '~/lib/site-schema'
@@ -35,7 +36,10 @@ const posts = defineCollection({
 })
 
 const site = defineCollection({
-  loader: file('src/content/site.json'),
+  loader: async () => {
+    const raw = await readFile(new URL('./content/site.json', import.meta.url), 'utf8')
+    return [{ id: 'site', ...JSON.parse(raw) }]
+  },
   schema: ({ image }) => siteSchema(image),
 })
 

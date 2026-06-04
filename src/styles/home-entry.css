@@ -3,6 +3,7 @@
 @plugin "@iconify/tailwind4";
 
 @source "../pages/index.astro";
+@source "../config.ts";
 @source "../layouts/HomeLayout.astro";
 @source "../layouts/Header.astro";
 @source "../layouts/Footer.astro";

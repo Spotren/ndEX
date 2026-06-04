@@ -48,7 +48,7 @@ const siteData = await getSiteData()
 <Layout
   title={frontmatter.title}
   description={frontmatter.description || frontmatter.title}
-  image={frontmatter.ogImage?.src ? `${siteData.site.website}${frontmatter.ogImage.src}` : siteData.site.ogImage}
+  image={frontmatter.ogImage?.src ? `${siteData.head.website}${frontmatter.ogImage.src}` : siteData.head.ogImage?.url}
 >
   <div class="relative flex flex-col justify-between h-fit z-[1]">
     <TocMobile {post} {posts} headings={filterHeadings} />

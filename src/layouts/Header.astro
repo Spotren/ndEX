@@ -4,8 +4,8 @@ import HeaderGradient from '~/components/theme/HeaderGradient.astro'
 import SectionDivider from '~/components/base/SectionDivider.astro'
 import HeaderLink from '~/components/base/HeaderLink.astro'
 import SearchSwitch from '~/components/base/SearchSwitch.astro'
+import { NAVIGATION_CONFIG } from '~/config'
 import { getSiteData } from '~/lib/site-data'
-import { Image } from 'astro:assets'
 
 type Props = {
   showSearch?: boolean
@@ -13,6 +13,7 @@ type Props = {
 
 const { showSearch = true }: Props = Astro.props
 const siteData = await getSiteData()
+const siteBrand = siteData.body.brand || siteData.head.title
 ---
 
 <HeaderGradient />
@@ -20,11 +21,17 @@ const siteData = await getSiteData()
   <div class="home-shell-width home-header-row">
     <div class="home-header-brand">
       <a href="/" class="pointer-events-auto select-none" transition:persist>
-        <Image src={siteData.site.logo} alt={`${siteData.site.title} logo`} class="w-8 h-8 object-contain dark:invert" densities={[1, 2]} loading="eager" />
+        {
+          siteData.body.logo?.url ? (
+            <img src={siteData.body.logo.url} alt={siteData.body.logo.alt || `${siteBrand} logo`} class="w-8 h-8 object-contain" loading="eager" />
+          ) : (
+            <span class="text-base font-semibold tracking-tight text-foreground">{siteBrand}</span>
+          )
+        }
       </a>
       <div class="home-header-brand-links">
         {
-          siteData.headerLinks.map((link) => (
+          NAVIGATION_CONFIG.headerLinks.map((link) => (
             <HeaderLink href={link.url} background>
               {link.name}
             </HeaderLink>

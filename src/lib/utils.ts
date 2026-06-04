@@ -11,6 +11,26 @@ export function truncateText(text: string, maxLength: number) {
   return `${text.slice(0, maxLength).trimEnd()}...`
 }
 
+export function formatBrazilianPhoneDisplay(phone: string) {
+  const normalizedPhone = phone.trim()
+  if (!normalizedPhone) return ''
+
+  let digits = normalizedPhone.replace(/\D/g, '')
+  if (digits.length >= 12 && digits.startsWith('55')) {
+    digits = digits.slice(2)
+  }
+
+  if (digits.length === 11) {
+    return `${digits.slice(0, 2)}.${digits.slice(2, 7)}-${digits.slice(7)}`
+  }
+
+  if (digits.length === 10) {
+    return `${digits.slice(0, 2)}.${digits.slice(2, 6)}-${digits.slice(6)}`
+  }
+
+  return normalizedPhone
+}
+
 // 文章按时间排序
 export function postsSort(posts: CollectionEntry<'posts'>[]) {
   return posts.slice().sort((a, b) => {

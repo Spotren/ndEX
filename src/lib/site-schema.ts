@@ -1,126 +1,95 @@
 import { z } from 'astro/zod'
 
-const linkSchema = z.object({
+const imageAssetSchema = z
+  .object({
+    url: z.string().trim().min(1).optional(),
+    contentType: z.string().trim().min(1).optional(),
+  })
+  .optional()
+
+const logoSchema = z
+  .object({
+    url: z.string().trim().min(1).optional(),
+    alt: z.string().trim().min(1).optional(),
+  })
+  .optional()
+
+const priceTypeSchema = z.enum(['starting_at', 'fixed', 'free', 'none'])
+
+const reviewItemSchema = z.object({
   name: z.string().trim().min(1),
-  url: z.string().trim().min(1),
+  rating: z.number().nullable().optional(),
+  quote: z.string().trim().min(1),
+})
+
+const catalogItemSchema = z.object({
+  imageUrl: z.string().trim().optional().default(''),
+  title: z.string().trim().min(1),
+  category: z.string().trim().optional().default(''),
+  priceType: priceTypeSchema,
+  price: z.string().trim().optional().default(''),
+  content: z.string().trim().optional().default(''),
+  ctaText: z.string().trim().optional().default(''),
+  url: z.string().trim().optional().default(''),
+})
+
+const faqItemSchema = z.object({
+  category: z.string().trim().optional().default(''),
+  question: z.string().trim().min(1),
+  answer: z.string().trim().min(1),
 })
 
 const socialLinkSchema = z.object({
   name: z.string().trim().min(1),
   url: z.string().trim().min(1),
-  icon: z.string().trim().min(1),
+  icon: z.string().trim().optional().default(''),
   count: z.number().optional(),
-  label: z.string().trim().min(1).optional(),
+  label: z.string().trim().optional().default(''),
 })
 
-const heroMetricSchema = z.object({
-  icon: z.string().trim().min(1),
-  primaryValue: z.union([z.string(), z.number()]),
-  primaryLabel: z.string().trim().min(1).optional(),
-  secondaryValue: z.union([z.string(), z.number()]).optional(),
-  secondaryLabel: z.string().trim().min(1).optional(),
+const sectionSchema = z.object({
+  key: z.string().trim().min(1),
+  title: z.string().trim().optional().default(''),
+  description: z.string().trim().optional().default(''),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+  googleMapsUri: z.string().trim().optional().default(''),
+  items: z.array(reviewItemSchema).optional(),
+  products: z.array(catalogItemSchema).optional(),
+  services: z.array(catalogItemSchema).optional(),
+  faqs: z.array(faqItemSchema).optional(),
 })
 
-const homeSectionSchema = (image: () => any) =>
+export const siteSchema = (_image: () => unknown) =>
   z.object({
-    key: z.string().trim().min(1),
-    title: z.string().trim().min(1),
-    description: z.string(),
-    latitude: z.number().optional(),
-    longitude: z.number().optional(),
-    mapAlt: z.string().trim().min(1).optional(),
-    gmn_url: z.string().trim().min(1).optional(),
-    map_url: image().optional(),
-    items: z
-      .array(
-        z.object({
-          name: z.string().trim().min(1),
-          role: z.string().trim().min(1).optional(),
-          rating: z.number().int().min(1).max(5),
-          quote: z.string().trim().min(1),
-        })
-      )
+    head: z.object({
+      title: z.string().trim().min(1),
+      description: z.string().trim().optional().default(''),
+      website: z.string().trim().optional().default(''),
+      lang: z.string().trim().optional().default('en'),
+      icon: imageAssetSchema,
+      ogImage: imageAssetSchema,
+    }),
+    socialLinks: z.array(socialLinkSchema).default([]),
+    body: z.object({
+      logo: logoSchema,
+      category: z.string().trim().optional().default(''),
+      city: z.string().trim().optional().default(''),
+      brand: z.string().trim().optional().default(''),
+      tagline: z.string().trim().optional().default(''),
+      rating: z.number().optional(),
+      reviewCount: z.number().optional(),
+      phone: z.string().trim().optional().default(''),
+      address: z.string().trim().optional().default(''),
+      openStatus: z.string().trim().optional().default(''),
+      sections: z.array(sectionSchema).default([]),
+    }),
+    schemaGraph: z
+      .object({
+        '@context': z.string().trim().min(1),
+        '@graph': z.array(z.record(z.string(), z.unknown())),
+      })
       .optional(),
-    services: z
-      .array(
-        z.object({
-          name: z.string().trim().min(1),
-          type: z.string().trim().min(1),
-          price: z.string().trim().min(1).optional(),
-        })
-      )
-      .optional(),
-    products: z
-      .array(
-        z.object({
-          image: image(),
-          name: z.string().trim().min(1),
-          category: z.string().trim().min(1),
-          price: z.string().trim().min(1).optional(),
-          description: z.string().trim().min(1).optional(),
-          url: z.string().trim().min(1).optional(),
-        })
-      )
-      .optional(),
-    faqs: z
-      .array(
-        z.object({
-          category: z.string().trim().min(1),
-          question: z.string().trim().min(1),
-          answer: z.string().trim().min(1),
-        })
-      )
-      .optional(),
-  })
-
-export const siteSchema = (image: () => any) =>
-  z.object({
-    site: z.object({
-      title: z.string().trim().min(1).max(255),
-      seo_title: z.string().trim().min(1).max(255),
-      description: z.string().trim().min(1),
-      website: z.string().trim().min(1),
-      googleAnalyticsId: z.string().trim().min(1).nullable().optional(),
-      uberClientId: z.string().trim().min(1).nullable().optional(),
-      lang: z.string().trim().min(1),
-      author: z.string().trim().min(1),
-      city: z.string().trim().min(1),
-      ogImage: z.string().trim().min(1),
-      icon: image(),
-      logo: image(),
-    }),
-    headerLinks: z.array(linkSchema),
-    footerLinks: z.array(linkSchema),
-    hero: z.object({
-      brand: z.string().trim().min(1),
-      eyebrow: z.string().trim().min(1),
-      tagline: z.string().trim().min(1),
-    }),
-    heroMetric: heroMetricSchema,
-    homeLabels: z.object({
-      contactUs: z.string().trim().min(1),
-      socialLinkAriaLabelPrefix: z.string().trim().min(1),
-      locationDescriptionTemplate: z.string().trim().min(1),
-      openMapTitle: z.string().trim().min(1),
-      uberCtaTitle: z.string().trim().min(1),
-      uberCtaDescription: z.string().trim().min(1),
-      postsTitle: z.string().trim().min(1),
-      pinnedLabel: z.string().trim().min(1),
-      recentLabel: z.string().trim().min(1),
-      postsSummarySuffix: z.string().trim().min(1),
-    }),
-    socialLinks: z.array(socialLinkSchema),
-    nap: z.object({
-      company: z.string().trim().min(1),
-      status: z.string().trim().min(1),
-      address: z.string().trim().min(1),
-      phone: z.string().trim().min(1),
-      wap: z.boolean(),
-    }),
-    homeSections: z.array(homeSectionSchema(image)),
-    footer: z.object({
-      sourceUrl: z.string().trim().min(1),
-    }),
   })
 
 export type SiteContent = z.infer<ReturnType<typeof siteSchema>>

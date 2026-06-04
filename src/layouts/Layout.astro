@@ -14,11 +14,11 @@ type Props = {
 
 const { title, description, image, useTitleAsIs = false }: Props = Astro.props
 const siteData = await getSiteData()
-const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.site.title}`
+const documentTitle = useTitleAsIs ? title : `${title} | ${siteData.head.title}`
 ---
 
 <!doctype html>
-<html lang={siteData.site.lang}>
+<html lang={siteData.head.lang}>
   <head>
     <Head title={documentTitle} {description} {image} />
   </head>

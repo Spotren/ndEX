@@ -40,10 +40,10 @@ async function generateLocationMaps() {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
     const siteContent = JSON.parse(await readFile(siteContentPath, 'utf8'))
-    const locationSection = siteContent?.default?.homeSections?.find?.((section) => section?.key === 'location')
+    const locationSection = siteContent?.body?.sections?.find?.((section) => section?.key === 'location')
 
     if (!locationSection || typeof locationSection !== 'object') {
-      throw new Error('Missing `homeSections.location` entry in src/content/site.json.')
+      throw new Error('Missing `body.sections.location` entry in src/content/site.json.')
     }
 
     const latitude = parseRequiredCoordinate(locationSection.latitude, 'latitude')
