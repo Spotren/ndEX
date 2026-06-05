@@ -77,7 +77,7 @@ const { title, description, products }: Props = Astro.props
                 <div class="flex justify-between items-start gap-4">
                   <div class="min-w-0">
                     {
-                      product.type ? (
+                      product.type && product.type !== 'Grátis' ? (
                         <p class="inline-flex items-center gap-2 text-sm text-muted-foreground">
                           {product.type === 'A partir de' ? (
                             <span class="icon-[mdi--rocket-launch] text-base text-muted-foreground/80 leading-none"></span>
