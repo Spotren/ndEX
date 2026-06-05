@@ -48,24 +48,6 @@ const shouldUseGeneratedLocationMaps =
 const locationDescription = HOME_LABELS.locationDescriptionTemplate.replace('{city}', siteCity)
 const shouldShowHeroMetric = siteRating !== undefined || siteReviewCount !== undefined
 
-const formatCatalogPrice = (priceType?: string, price?: string) => {
-  const resolvedPrice = price?.trim() ?? ''
-
-  if (priceType === 'free') {
-    return HOME_LABELS.freePriceLabel
-  }
-
-  if (priceType === 'none') {
-    return HOME_LABELS.noPriceLabel
-  }
-
-  if (!resolvedPrice) {
-    return priceType === 'fixed' ? HOME_LABELS.fixedPriceLabel : HOME_LABELS.startingAtLabel
-  }
-
-  return priceType === 'fixed' ? resolvedPrice : `${HOME_LABELS.startingAtLabel} ${resolvedPrice}`
-}
-
 const formatServiceType = (priceType?: string) => {
   if (priceType === 'fixed') return HOME_LABELS.fixedPriceLabel
   if (priceType === 'free') return HOME_LABELS.freePriceLabel

@@ -27,7 +27,8 @@ export function formatPriceParts(
 ): { currency: string; integer: string; decimal: string; period: string } | null {
   if (!raw?.trim()) return null
 
-  const { currency, period } = { ...DEFAULT_PRICE_OPTIONS, ...options }
+  const currency = options?.currency ?? DEFAULT_PRICE_OPTIONS.currency ?? 'R$'
+  const period = options?.period ?? DEFAULT_PRICE_OPTIONS.period ?? ''
 
   let normalized = raw.trim()
 
@@ -39,7 +40,7 @@ export function formatPriceParts(
   const num = Number.parseFloat(normalized)
   if (!Number.isFinite(num)) return null
 
-  const [integer, decimalRaw] = num.toFixed(2).split('.')
+  const [integer = '0', decimalRaw = '00'] = num.toFixed(2).split('.')
   const decimal = `${decimalRaw}`
 
   return { currency, integer, decimal, period }
