@@ -77,11 +77,9 @@ const { title, description, products }: Props = Astro.props
                 <div class="flex justify-between items-start gap-4">
                   <div class="min-w-0">
                     {
-                      product.type === '__starting_at_icon__' ? (
-                        <span class="icon-[mdi--rocket-launch] text-xl text-muted-foreground/80 leading-none"></span>
-                      ) : (
-                        <p class="text-sm text-muted-foreground">{product.type || ''}</p>
-                      )
+                      product.type ? (
+                        <p class="text-sm text-muted-foreground">{product.type}</p>
+                      ) : null
                     }
                   </div>
                   <div class="shrink-0">
