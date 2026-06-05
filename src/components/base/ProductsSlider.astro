@@ -96,16 +96,16 @@ const { title, description, products }: Props = Astro.props
                   {
                     product.price && (() => {
                       const parts = formatPriceParts(product.price, { period: product.period })
-                      if (!parts) return <p class="font-mono text-base text-muted-foreground/90 whitespace-nowrap">{product.price}</p>
+                      if (!parts) return <div class="font-mono text-base text-muted-foreground/90 whitespace-nowrap">{product.price}</div>
                       return (
-                        <p class="font-mono text-base text-muted-foreground/90 whitespace-nowrap inline-flex items-stretch gap-1.5 leading-tight">
-                          <span class="text-sm leading-[1.7]">{parts.currency}</span>
-                          <span class="text-3xl font-semibold text-foreground">{parts.integer}</span>
+                        <div class="font-mono text-base text-muted-foreground/90 whitespace-nowrap inline-flex items-stretch gap-1.5 leading-tight">
+                          <div class="text-sm leading-[1.7]">{parts.currency}</div>
+                          <div class="text-3xl font-semibold text-foreground">{parts.integer}</div>
                           <div class="flex self-stretch flex-col justify-center leading-tight">
-                            <span class="text-sm">{parts.decimal}</span>
-                            {parts.period && <span class="text-xs text-muted-foreground/60">{parts.period}</span>}
+                            <div class="text-sm">{parts.decimal}</div>
+                            {parts.period && <div class="text-xs text-muted-foreground/60">{parts.period}</div>}
                           </div>
-                        </p>
+                        </div>
                       )
                     })()
                   }
