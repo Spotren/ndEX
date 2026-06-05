@@ -78,7 +78,12 @@ const { title, description, products }: Props = Astro.props
                   <div class="min-w-0">
                     {
                       product.type ? (
-                        <p class="text-sm text-muted-foreground">{product.type}</p>
+                        <p class="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                          {product.type === 'A partir de' ? (
+                            <span class="icon-[mdi--rocket-launch] text-base text-muted-foreground/80 leading-none"></span>
+                          ) : null}
+                          <span>{product.type}</span>
+                        </p>
                       ) : null
                     }
                   </div>
