@@ -69,7 +69,7 @@ export const SOCIAL_ICON_MAP: Record<string, string> = {
 export const PRICE_TYPE_LABELS: Record<string, string> = {
   fixed: '',
   starting_at: 'A partir de',
-  free: 'Free',
+  free: 'Grátis',
   none: '',
 }
 
