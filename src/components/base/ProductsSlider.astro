@@ -82,9 +82,9 @@ const { title, description, products }: Props = Astro.props
                           {product.type === 'A partir de' ? (
                             <span class="icon-[mdi--rocket-launch] text-base text-muted-foreground/80 leading-none"></span>
                           ) : product.type === 'GRÁTIS' ? (
-                            <span class="icon-[ph--piggy-bank] text-base text-muted-foreground/80 leading-none"></span>
+                            <span class="icon-[ph--piggy-bank] text-lg text-muted-foreground/80 leading-none"></span>
                           ) : product.type === 'Sob consulta' ? (
-                            <span class="icon-[ph--call-bell] text-base text-muted-foreground/80 leading-none"></span>
+                            <span class="icon-[ph--call-bell] text-lg text-muted-foreground/80 leading-none"></span>
                           ) : null}
                           <span>{product.type === 'GRÁTIS' ? 'Grátis' : product.type}</span>
                         </p>
