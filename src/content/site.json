@@ -1,16 +1,16 @@
 {
   "head": {
-    "title": "Spotren™ - Empresa de Software em São José do Rio Preto",
-    "description": "Empresa de Software para Negócios Locais",
-    "website": "https://spotren-teste-1f7acf96.vercel.app",
+    "title": "Spotren™. Empresa de Software em São José do Rio Preto",
+    "description": "Empresa de Software especializada em Sistemas, Sites e Plataformas para Comércios Locais e Profissionais Autônomos de São José do Rio Preto",
+    "website": "https://spotren-6ada0a14.vercel.app",
     "lang": "pt-BR",
     "icon": {
-      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/favicon/1780519723644233231-spotren-favicon-wp.ico",
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/favicon/1780619710591600759-spotren-favicon-wp.ico",
       "contentType": "image/x-icon"
     },
     "ogImage": {
-      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/og-image/1780544469762236160-og-image.webp",
-      "contentType": "image/webp"
+      "url": "",
+      "contentType": ""
     }
   },
   "socialLinks": [
@@ -21,7 +21,7 @@
   ],
   "body": {
     "logo": {
-      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/logo/1780519724542035663-spotren-favicon-wp-optmz.png",
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/logo/1780619696492441545-spotren-favicon-wp-optmz.png",
       "alt": "Logo Spotren™ Empresa de Software São José do Rio Preto"
     },
     "brand": "Spotren™",
@@ -36,73 +36,58 @@
     "sections": [
       {
         "key": "location",
-        "title": "Location",
-        "description": "",
+        "title": "Localização",
+        "description": "Onde estamos.",
         "latitude": -20.813157699999998,
         "longitude": -49.3796621,
         "googleMapsUri": "https://maps.google.com/?cid=18394367288973268008&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
       },
       {
         "key": "reviews",
-        "title": "Reviews",
-        "description": "",
+        "title": "Avaliações",
+        "description": "Depoimentos de clientes.",
         "items": [
-          {
-            "name": "Daiana Braga",
-            "rating": 5,
-            "quote": "Sou profissional de educação e durante a pandemia engajei na criação de um blog para dar continuidade ao meu trabalho e a partir desse blog comecei a empreender com EAD. A Analisa Site foi parceira importante na divulgação da minha plataforma digital, permitindo que clientes encotrassem meu trabalho com maior facilidade. Além disso, a AS é uma empresa com excelentes profissionais que têm me atendido muito bem. Recomendo!"
-          },
           {
             "name": "Ariane",
             "rating": 5,
             "quote": "Trabalho sério, comprometimento e muito atento às demandas do mercado. Um portfólio excelente, com entregas muito profissionais e eficientes, ótima experiência!"
           },
           {
-            "name": "fefe",
+            "name": "HR História Regional",
             "rating": 5,
-            "quote": "muito bom, trabalho rápido e eficiente 👏🏻👏🏻👏🏻"
+            "quote": "Ótimo atendimento, respondem rapido e entregam o prometido de verdade ,  poucas empresas cumprem o esperado assim."
           }
         ]
       },
       {
         "key": "products",
-        "title": "Products",
-        "description": "",
+        "title": "Produtos",
+        "description": "Soluções disponíveis para contratar.",
         "products": [
           {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/catalog/1780546697059604096-teste-thumbs-spotren-ndex.png",
-            "title": "ndEX",
-            "category": "Sites",
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
+            "title": "ndEX Builder v1",
+            "category": "Construtor de Sites",
             "priceType": "fixed",
-            "price": "R$ 70 /mês",
-            "content": "Site otimizado para Negócios Locais. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.",
+            "price": "70.40",
+            "content": "Site otimizado para Negócios Locais",
             "ctaText": "Assinar",
-            "url": "https://google.com"
+            "url": "https://wa.me/17996502614"
           }
         ]
       },
       {
         "key": "services",
-        "title": "Services",
-        "description": "",
+        "title": "Serviços",
+        "description": "Serviços sob medida para o seu negócio.",
         "services": [
           {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/catalog/1780590890073670819-teste-thumbs-spotren-ndex.png",
-            "title": "Software / Plataforma SaaS Personalizada",
-            "category": "Software / SaaS",
+            "imageUrl": "",
+            "title": "Software / SaaS Personalizado",
+            "category": "",
             "priceType": "starting_at",
             "price": "R$ 1.500",
-            "content": "Desenvolvemos soluções Web personalizadas para empresas em Rio Preto, transformando suas ideias em plataformas digitais eficientes e inovadoras.",
-            "ctaText": "Entrar e contato",
-            "url": "https://wa.me/17996502614"
-          },
-          {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/1f7acf96-cf5a-4dea-91c2-b87715ad10c9/catalog/1780590942231493151-teste-thumbs-spotren-ndex.avif",
-            "title": "Site para Advogado",
-            "category": "Sites",
-            "priceType": "starting_at",
-            "price": "R$ 600",
-            "content": "Você tem um novo boleto emitido por Fatura Cartão C6, no valor de R$ 128,07 que vence em 10/06/2026.",
+            "content": "",
             "ctaText": "",
             "url": ""
           }
@@ -111,12 +96,12 @@
       {
         "key": "faqs",
         "title": "FAQs",
-        "description": "",
+        "description": "Dúvidas comuns sobre o site e o serviço.",
         "faqs": [
           {
-            "category": "Sites",
-            "question": "Como criar um site?",
-            "answer": "Assim"
+            "category": "Performance",
+            "question": "O site da ndEX é rápido?",
+            "answer": "Sim, nossos sites recebem Nota 100/100 no Google PageSpeed Insights."
           }
         ]
       }
