@@ -28,6 +28,11 @@ const { services }: Props = Astro.props
                 <span class="icon-[mdi--rocket-launch] text-xl text-muted-foreground/80 leading-none"></span>
                 {service.price ? <span class="text-muted-foreground/90">{service.price}</span> : ''}
               </span>
+            ) : service.type === '__fixed_icon__' ? (
+              <span class="inline-flex items-end gap-3 leading-none">
+                <span class="icon-[mdi--piggy-bank-outline] text-xl text-muted-foreground/80 leading-none"></span>
+                {service.price ? <span class="text-muted-foreground/90">{service.price}</span> : ''}
+              </span>
             ) : (
               <span class="text-muted-foreground/90">
                 {service.type}

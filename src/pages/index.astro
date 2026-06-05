@@ -208,7 +208,12 @@ if (hasPinnedPosts) {
                   <ServicesList
                     services={section.services.map((service) => ({
                       name: service.title,
-                      type: service.priceType === 'starting_at' ? '__starting_at_icon__' : formatServiceType(service.priceType),
+                      type:
+                        service.priceType === 'starting_at'
+                          ? '__starting_at_icon__'
+                          : service.priceType === 'fixed'
+                            ? '__fixed_icon__'
+                            : formatServiceType(service.priceType),
                       price:
                         service.priceType === 'fixed' || service.priceType === 'starting_at'
                           ? service.price || undefined
