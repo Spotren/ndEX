@@ -1,6 +1,6 @@
 {
   "head": {
-    "title": "Spotren™. Empresa de Software em São José do Rio Preto",
+    "title": "Spotren™ Empresa de Software em São José do Rio Preto",
     "description": "Empresa de Software especializada em Sistemas, Sites e Plataformas para Comércios Locais e Profissionais Autônomos de São José do Rio Preto",
     "website": "https://spotren-6ada0a14.vercel.app",
     "lang": "pt-BR",
@@ -45,7 +45,7 @@
       {
         "key": "reviews",
         "title": "Avaliações",
-        "description": "Depoimentos de clientes.",
+        "description": "Veja o que clientes reais dizem sobre a experiência com o negócio.",
         "items": [
           {
             "name": "Ariane",

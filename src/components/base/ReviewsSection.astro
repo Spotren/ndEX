@@ -24,11 +24,11 @@ type Props = {
 const { title, description, reviews, metric }: Props = Astro.props
 ---
 
-<div class="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start" data-reviews-section>
+<div class="grid gap-8 md:grid-cols-[0.75fr_1.25fr] md:items-start" data-reviews-section>
   <div class="flex flex-col gap-6">
     <div>
       <h2 class="text-2xl sm:text-3xl tracking-tight">{title}</h2>
-      <p class="text-muted-foreground mt-1">{description}</p>
+      <p class="text-muted-foreground mt-2">{description}</p>
     </div>
     <div class="flex items-center gap-2">
       <span class:list={[metric.icon, 'h-6 w-6 text-muted-foreground']}></span>
@@ -72,21 +72,24 @@ const { title, description, reviews, metric }: Props = Astro.props
           data-review-panel
           data-review-index={index}
           class:list={[
-            'min-w-0 transition-opacity duration-200 ease-out',
+            'flex min-w-0 items-start gap-4 transition-opacity duration-200 ease-out',
             index === 0 ? 'opacity-100 relative' : 'opacity-0 pointer-events-none absolute inset-0',
           ]}
         >
-          <div class="rounded-3xl border border-border/60 bg-card/40 p-6 sm:p-8">
-            {
-              typeof review.rating === 'number' && review.rating > 0 && (
-                <div class="mb-5 flex items-center gap-1 text-amber-500">
-                  {Array.from({ length: review.rating }).map(() => <span class="icon-[mdi--star] size-5"></span>)}
-                </div>
-              )
-            }
-            <blockquote class="text-lg leading-relaxed text-foreground sm:text-xl">"{review.quote}"</blockquote>
+          <div class="inline-flex shrink-0 items-center justify-center text-muted-foreground [margin:0_-56px_0_0]">
+            <span class="icon-[mdi--format-quote-close] size-16"></span>
+          </div>
+          <div class="min-w-0 rounded-3xl border border-border/60 bg-card/40 px-6 pt-12 pb-6 sm:px-8 sm:pt-14 sm:pb-8">
+            <blockquote class="text-sm font-normal leading-relaxed text-foreground sm:text-base">{review.quote}</blockquote>
             <div class="mt-6">
               <p class="font-medium text-foreground">{review.name}</p>
+              {
+                typeof review.rating === 'number' && review.rating > 0 && (
+                  <div class="mt-2 flex items-center gap-1 text-amber-500">
+                    {Array.from({ length: review.rating }).map(() => <span class="icon-[mdi--star] size-4"></span>)}
+                  </div>
+                )
+              }
               {review.role && <p class="text-muted-foreground text-sm">{review.role}</p>}
             </div>
           </div>
