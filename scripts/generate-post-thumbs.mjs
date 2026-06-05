@@ -37,15 +37,21 @@ async function generatePostThumbs() {
     }
 
     const targetPath = path.join(outputDirectory, `${slug}.avif`)
-    const coverBuffer = await readFile(coverPath)
-    const thumbBuffer = await sharp(coverBuffer)
-      .resize(380, 200, {
-        fit: 'cover',
-        position: 'centre',
-      })
-      .avif({ quality: 58, effort: 6 })
-      .toBuffer()
+    try {
+      const coverBuffer = await readFile(coverPath)
+      const thumbBuffer = await sharp(coverBuffer)
+        .resize(380, 200, {
+          fit: 'cover',
+          position: 'centre',
+        })
+        .avif({ quality: 58, effort: 6 })
+        .toBuffer()
 
-    await writeFile(targetPath, thumbBuffer)
+      await writeFile(targetPath, thumbBuffer)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      console.warn(`[generate-post-thumbs] Skipping "${slug}" because the cover could not be processed: ${coverPath}`)
+      console.warn(`[generate-post-thumbs] ${message}`)
+    }
   }
 }
