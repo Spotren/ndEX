@@ -2,8 +2,8 @@ import { z } from 'astro/zod'
 
 const imageAssetSchema = z
   .object({
-    url: z.string().trim().min(1).optional(),
-    contentType: z.string().trim().min(1).optional(),
+    url: z.string().trim().optional().default(''),
+    contentType: z.string().trim().optional().default(''),
   })
   .optional()
 
