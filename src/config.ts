@@ -46,8 +46,8 @@ export const HOME_LABELS = {
   postsSummarySuffix: 'posts para explorar',
   startingAtLabel: 'A partir de',
   fixedPriceLabel: 'Fixed',
-  freePriceLabel: 'Free',
-  noPriceLabel: 'Sem preço',
+  freePriceLabel: 'Grátis',
+  noPriceLabel: 'Sob consulta',
 }
 
 export const HERO_METRIC_CONFIG = {
