@@ -35,8 +35,8 @@ const catalogItemSchema = z.object({
 
 const faqItemSchema = z.object({
   category: z.string().trim().optional().default(''),
-  question: z.string().trim().min(1),
-  answer: z.string().trim().min(1),
+  question: z.string().trim().optional().default(''),
+  answer: z.string().trim().optional().default(''),
 })
 
 const socialLinkSchema = z.object({
@@ -57,7 +57,10 @@ const sectionSchema = z.object({
   items: z.array(reviewItemSchema).optional(),
   products: z.array(catalogItemSchema).optional(),
   services: z.array(catalogItemSchema).optional(),
-  faqs: z.array(faqItemSchema).optional(),
+  faqs: z
+    .array(faqItemSchema)
+    .optional()
+    .transform((items) => (items ?? []).filter((item) => item.question.trim() && item.answer.trim())),
 })
 
 export const siteSchema = (_image: () => unknown) =>

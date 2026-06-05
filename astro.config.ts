@@ -8,8 +8,10 @@ import { remarkPlugins, rehypePlugins } from './plugins'
 import { THEME_CONFIG } from './src/config'
 import siteContent from './src/content/site.json'
 
+const siteUrl = 'website' in siteContent.head && typeof siteContent.head.website === 'string' ? siteContent.head.website : 'https://example.com'
+
 export default defineConfig({
-  site: siteContent.head.website,
+  site: siteUrl,
   base: THEME_CONFIG.base,
   prefetch: false,
   vite: {

@@ -214,7 +214,7 @@ if (hasPinnedPosts) {
                     }))}
                   />
                 </>
-              ) : section.key === 'faqs' && section.faqs ? (
+              ) : section.key === 'faqs' && section.faqs && section.faqs.length > 0 ? (
                 <>
                   <FaqSection title={section.title} description={section.description} faqs={section.faqs} />
                 </>

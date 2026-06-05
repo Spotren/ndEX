@@ -13,11 +13,19 @@ type Props = {
 
 const { title, description, faqs }: Props = Astro.props
 
-const categories = Array.from(new Set(faqs.map((item) => item.category.trim()).filter(Boolean)))
+const visibleFaqs = faqs.filter((item) => item.question.trim() && item.answer.trim())
+const categories = Array.from(new Set(visibleFaqs.map((item) => item.category.trim()).filter(Boolean)))
 const groups = categories.map((category) => ({
   category,
-  items: faqs.filter((item) => item.category.trim() === category),
+  items: visibleFaqs.filter((item) => item.category.trim() === category),
 }))
+const uncategorized = visibleFaqs.filter((item) => !item.category.trim())
+if (uncategorized.length > 0) {
+  groups.push({
+    category: title,
+    items: uncategorized,
+  })
+}
 ---
 
 <div class="grid gap-8 md:grid-cols-[0.4fr_0.6fr] md:items-start" data-faq-section>

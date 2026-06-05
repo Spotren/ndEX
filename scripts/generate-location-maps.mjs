@@ -31,7 +31,7 @@ async function generateLocationMaps() {
     const buildOrigin = process.env.PUBLIC_SPOTREN_BUILD_ORIGIN?.trim()
 
     if (!staticMapURL || !buildOrigin) {
-      console.warn('Skipping static location map generation because PUBLIC_SPOTREN_STATIC_MAP_URL or PUBLIC_SPOTREN_BUILD_ORIGIN is not configured.')
+      console.log('Skipping static location map generation because PUBLIC_SPOTREN_STATIC_MAP_URL or PUBLIC_SPOTREN_BUILD_ORIGIN is not configured.')
       return
     }
 
