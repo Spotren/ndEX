@@ -21,9 +21,20 @@ const { services }: Props = Astro.props
             {service.name}
           </div>
         </div>
-        <div class="flex-shrink-0 text-sm text-muted-foreground/90 transition-colors duration-200 group-hover:text-primary whitespace-nowrap font-mono">
-          {service.type}
-          {service.price ? ` ${service.price}` : ''}
+        <div class="flex-shrink-0 text-base transition-colors duration-200 group-hover:text-primary whitespace-nowrap font-mono">
+          {
+            service.type === '__starting_at_icon__' ? (
+              <span class="inline-flex items-end gap-3 leading-none">
+                <span class="icon-[mdi--rocket-launch] text-xl text-muted-foreground/80 leading-none"></span>
+                {service.price ? <span class="text-muted-foreground/90">{service.price}</span> : ''}
+              </span>
+            ) : (
+              <span class="text-muted-foreground/90">
+                {service.type}
+                {service.price ? ` ${service.price}` : ''}
+              </span>
+            )
+          }
         </div>
       </article>
     ))

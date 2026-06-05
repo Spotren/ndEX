@@ -1,10 +1,14 @@
 ---
+import { formatPriceParts } from '~/lib/utils'
+
 type ProductItem = {
   imageSrc?: string
   name: string
   category: string
   price?: string
   url?: string
+  type?: string
+  period?: string
 }
 
 type Props = {
@@ -70,7 +74,35 @@ const { title, description, products }: Props = Astro.props
               <div class="space-y-2 p-5">
                 <p class="text-sm text-muted-foreground">{product.category}</p>
                 <h3 class="text-xl font-medium tracking-tight text-foreground">{product.name}</h3>
-                {product.price && <p class="font-mono text-base text-muted-foreground/90 whitespace-nowrap">{product.price}</p>}
+                <div class="flex justify-between items-start gap-4">
+                  <div class="min-w-0">
+                    {
+                      product.type === '__starting_at_icon__' ? (
+                        <span class="icon-[mdi--rocket-launch] text-xl text-muted-foreground/80 leading-none"></span>
+                      ) : (
+                        <p class="text-sm text-muted-foreground">{product.type || ''}</p>
+                      )
+                    }
+                  </div>
+                  <div class="shrink-0">
+                {
+                  product.price && (() => {
+                    const parts = formatPriceParts(product.price, { period: product.period })
+                    if (!parts) return <p class="font-mono text-base text-muted-foreground/90 whitespace-nowrap">{product.price}</p>
+                    return (
+                      <p class="font-mono text-base text-muted-foreground/90 whitespace-nowrap inline-flex items-start gap-1.5 leading-tight">
+                        <span class="text-sm leading-[1.7] pr-1">{parts.currency}</span>
+                        <span class="text-3xl font-semibold text-foreground">{parts.integer}</span>
+                        <span class="inline-flex flex-col leading-tight">
+                          <span class="text-sm">{parts.decimal}</span>
+                          {parts.period && <span class="text-xs text-muted-foreground/60">{parts.period}</span>}
+                        </span>
+                      </p>
+                    )
+                  })()
+                }
+                  </div>
+                </div>
               </div>
             </Tag>
           )

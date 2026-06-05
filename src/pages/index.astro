@@ -1,7 +1,7 @@
 ---
 import { existsSync } from 'node:fs'
 import path from 'node:path'
-import { CONTACT_CONFIG, HERO_METRIC_CONFIG, HOME_LABELS, POSTS_CONFIG, SOCIAL_ICON_MAP } from '~/config.ts'
+import { CONTACT_CONFIG, HERO_METRIC_CONFIG, HOME_LABELS, POSTS_CONFIG, PRICE_TYPE_LABELS, SOCIAL_ICON_MAP } from '~/config.ts'
 import FloatingContactCard from '~/components/base/FloatingContactCard.astro'
 import FaqSection from '~/components/base/FaqSection.astro'
 import HeroMetric from '~/components/base/HeroMetric.astro'
@@ -194,8 +194,10 @@ if (hasPinnedPosts) {
                       imageSrc: product.imageUrl,
                       name: product.title,
                       category: product.category,
-                      price: formatCatalogPrice(product.priceType, product.price),
+                      price: product.price,
                       url: product.url,
+                      type: PRICE_TYPE_LABELS[product.priceType] ?? '',
+                      period: product.period || '',
                     }))}
                   />
                 </>
@@ -206,7 +208,7 @@ if (hasPinnedPosts) {
                   <ServicesList
                     services={section.services.map((service) => ({
                       name: service.title,
-                      type: formatServiceType(service.priceType),
+                      type: service.priceType === 'starting_at' ? '__starting_at_icon__' : formatServiceType(service.priceType),
                       price:
                         service.priceType === 'fixed' || service.priceType === 'starting_at'
                           ? service.price || undefined

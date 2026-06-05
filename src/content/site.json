@@ -15,6 +15,14 @@
   },
   "socialLinks": [
     {
+      "name": "facebook",
+      "url": "https://www.facebook.com/rafa.spotren"
+    },
+    {
+      "name": "instagram",
+      "url": "https://www.instagram.com/spotren.now"
+    },
+    {
       "name": "linkedin",
       "url": "https://www.linkedin.com/company/spotren"
     }
@@ -45,7 +53,7 @@
       {
         "key": "reviews",
         "title": "Avaliações",
-        "description": "Veja o que clientes reais dizem sobre a experiência com o negócio.",
+        "description": "Veja o que clientes reais dizem sobre a experiência com a Spotren™",
         "items": [
           {
             "name": "Ariane",
@@ -62,14 +70,15 @@
       {
         "key": "products",
         "title": "Produtos",
-        "description": "Soluções disponíveis para contratar.",
+        "description": "Soluções disponíveis para contratar agora.",
         "products": [
           {
             "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
             "title": "ndEX Builder v1",
             "category": "Construtor de Sites",
-            "priceType": "fixed",
+            "priceType": "starting_at",
             "price": "70.40",
+            "period": "/mês",
             "content": "Site otimizado para Negócios Locais",
             "ctaText": "Assinar",
             "url": "https://wa.me/17996502614"
@@ -79,7 +88,7 @@
       {
         "key": "services",
         "title": "Serviços",
-        "description": "Serviços sob medida para o seu negócio.",
+        "description": "Software sob medida para o seu negócio.",
         "services": [
           {
             "imageUrl": "",
@@ -96,7 +105,7 @@
       {
         "key": "faqs",
         "title": "FAQs",
-        "description": "Dúvidas comuns sobre o site e o serviço.",
+        "description": "Perguntas comuns sobre o site e o serviço.",
         "faqs": [
           {
             "category": "Performance",

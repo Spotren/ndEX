@@ -6,6 +6,45 @@ export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes))
 }
 
+export type PriceFormatOptions = {
+  currency?: string
+  period?: string
+}
+
+const DEFAULT_PRICE_OPTIONS: PriceFormatOptions = {
+  currency: 'R$',
+  period: '',
+}
+
+/**
+ * Formata um preço separando as partes.
+ * Exemplo: "70.40" → { currency: "R$", integer: "70", decimal: ",40", period: "" }
+ * Aceita formato "1234.56" ou "1.234,56".
+ */
+export function formatPriceParts(
+  raw: string,
+  options?: PriceFormatOptions
+): { currency: string; integer: string; decimal: string; period: string } | null {
+  if (!raw?.trim()) return null
+
+  const { currency, period } = { ...DEFAULT_PRICE_OPTIONS, ...options }
+
+  let normalized = raw.trim()
+
+  // Detecta formato brasileiro (1.234,56) e converte para 1234.56
+  if (/\.\d{3}/.test(normalized) || normalized.includes(',')) {
+    normalized = normalized.replace(/\./g, '').replace(',', '.')
+  }
+
+  const num = Number.parseFloat(normalized)
+  if (!Number.isFinite(num)) return null
+
+  const [integer, decimalRaw] = num.toFixed(2).split('.')
+  const decimal = `${decimalRaw}`
+
+  return { currency, integer, decimal, period }
+}
+
 export function truncateText(text: string, maxLength: number) {
   if (text.length <= maxLength) return text
   return `${text.slice(0, maxLength).trimEnd()}...`

@@ -28,6 +28,7 @@ const catalogItemSchema = z.object({
   category: z.string().trim().optional().default(''),
   priceType: priceTypeSchema,
   price: z.string().trim().optional().default(''),
+  period: z.string().trim().optional().default(''),
   content: z.string().trim().optional().default(''),
   ctaText: z.string().trim().optional().default(''),
   url: z.string().trim().optional().default(''),
