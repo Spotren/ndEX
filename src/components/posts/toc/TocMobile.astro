@@ -11,7 +11,6 @@ interface Props {
 }
 
 const { headings } = Astro.props
-const hasHeadings = headings.length > 0
 
 // 过滤并处理标题
 const filteredHeadings = headings
@@ -21,6 +20,8 @@ const filteredHeadings = headings
     text: h.text.replace(/\s*[Hh][1-6]$/g, ''),
     order: index + 1,
   }))
+
+const hasHeadings = filteredHeadings.length > 1
 
 // 计算相对缩进 - 基于实际存在的最小层级
 const minDepth = filteredHeadings.length > 0 ? Math.min(...filteredHeadings.map((h) => h.depth)) : 2

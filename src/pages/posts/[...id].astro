@@ -51,7 +51,7 @@ const siteData = await getSiteData()
   image={frontmatter.ogImage?.src ? `${siteData.head.website}${frontmatter.ogImage.src}` : siteData.head.ogImage?.url}
 >
   <div class="relative flex flex-col justify-between h-fit z-[1]">
-    <TocMobile {post} {posts} headings={filterHeadings} />
+    {hasValidHeadings && <TocMobile {post} {posts} headings={filterHeadings} />}
     <PostLayout {frontmatter} minutesRead={remarkPluginFrontmatter.minutesRead} wordCount={remarkPluginFrontmatter.wordCount}>
       <Content />
       {

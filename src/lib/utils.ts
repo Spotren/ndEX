@@ -6,6 +6,15 @@ export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes))
 }
 
+export function encodeTagPathSegment(tag: string) {
+  return encodeURIComponent(tag.trim())
+}
+
+export function buildTagHref(tag: string, page?: number) {
+  const encodedTag = encodeTagPathSegment(tag)
+  return page && page > 1 ? `/tags/${encodedTag}/${page}` : `/tags/${encodedTag}`
+}
+
 export type PriceFormatOptions = {
   currency?: string
   period?: string

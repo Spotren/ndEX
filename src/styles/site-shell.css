@@ -18,3 +18,16 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.post-desktop-rail {
+  position: fixed;
+  top: 7.5rem;
+  left: calc(50% + var(--layout-half-width) + 1rem);
+  width: clamp(12rem, 18vw, 18rem);
+}
+
+.post-desktop-rail--bottom {
+  top: auto;
+  bottom: 6rem;
+  width: auto;
+}

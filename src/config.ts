@@ -45,7 +45,7 @@ export const HOME_LABELS = {
   recentLabel: 'Recente',
   postsSummarySuffix: 'posts para explorar',
   startingAtLabel: 'A partir de',
-  fixedPriceLabel: 'Fixed',
+  fixedPriceLabel: 'Somente',
   freePriceLabel: 'Grátis',
   noPriceLabel: 'Sob consulta',
 }
