@@ -8,5 +8,6 @@
 @source "../content/site.json";
 
 @import "./base.css";
+@import "./header-shared.css";
 @import "./header-gradient.css";
 @import "./site-shell.css";

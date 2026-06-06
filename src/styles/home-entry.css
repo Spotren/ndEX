@@ -26,5 +26,6 @@
 @source not "../components/posts/toc/*.astro";
 
 @import "./base.css";
+@import "./header-shared.css";
 @import "./site-shell.css";
 @import "./home.css";
