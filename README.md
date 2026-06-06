@@ -105,6 +105,22 @@ Header and footer links can be managed via `headerLinks` and `footerLinks` in `s
 | `pnpm format` | Formats code using Prettier. |
 | `pnpm check` | Runs Astro check for diagnostics. |
 
+### Local Audit
+
+For local performance audits, the command commonly used in this workspace is:
+
+```bash
+ndex-audit-local
+```
+
+This is a **global environment command**, not a script versioned inside this repository. If it is missing on a machine, inspect it with:
+
+```bash
+type ndex-audit-local
+```
+
+The repository itself does not currently define this command in `package.json`.
+
 ## License
 
 Distributed under the MIT License. See [MIT LICENSE](LICENSE) for more information.
