@@ -1,0 +1,59 @@
+.home-header-gradient {
+  position: fixed;
+  inset: 0;
+  margin-inline: 0;
+  max-width: none;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.dark .home-header-gradient {
+  opacity: 1;
+}
+
+.home-header-gradient-shell {
+  position: absolute;
+  left: 50%;
+  top: -14.5px;
+  margin-left: -41.5rem;
+  width: 80rem;
+  height: 25rem;
+}
+
+.dark .home-header-gradient-shell {
+  mask-image: linear-gradient(white, transparent);
+}
+
+.home-header-gradient-fill {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background-image: linear-gradient(to right, rgb(96 165 250 / 0.25), rgb(30 64 175 / 0.25));
+  mask-image: radial-gradient(farthest-side at top, white, transparent);
+}
+
+.dark .home-header-gradient-fill {
+  opacity: 1;
+  background-image: linear-gradient(to right, rgb(59 130 246 / 0.3), rgb(30 64 175 / 0.3));
+}
+
+.home-header-gradient-blur {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -19rem;
+  width: 69.5625rem;
+  fill: hsl(var(--background));
+  filter: blur(26px);
+}
+
+.dark .home-header-gradient-blur {
+  fill: rgb(9 9 11);
+}
+
+@media (min-width: 40rem) {
+  .home-header-gradient {
+    display: block;
+  }
+}
