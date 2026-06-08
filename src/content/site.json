@@ -76,6 +76,50 @@
             "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
             "title": "ndEX Builder v1",
             "category": "Construtor de Sites",
+            "priceType": "none",
+            "price": "70.40",
+            "period": "",
+            "content": "Site otimizado para Negócios Locais",
+            "ctaText": "Assinar",
+            "url": "https://wa.me/17996502614"
+          },
+          {
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
+            "title": "ndEX Builder v1",
+            "category": "Construtor de Sites",
+            "priceType": "free",
+            "price": "70.40",
+            "period": "",
+            "content": "Site otimizado para Negócios Locais",
+            "ctaText": "Assinar",
+            "url": "https://wa.me/17996502614"
+          },
+          {
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
+            "title": "ndEX Builder v1",
+            "category": "Construtor de Sites",
+            "priceType": "fixed",
+            "price": "70.40",
+            "period": "/mês",
+            "content": "Site otimizado para Negócios Locais",
+            "ctaText": "Assinar",
+            "url": "https://wa.me/17996502614"
+          },
+          {
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
+            "title": "ndEX Builder v1",
+            "category": "Construtor de Sites",
+            "priceType": "starting_at",
+            "price": "70.40",
+            "period": "",
+            "content": "Site otimizado para Negócios Locais",
+            "ctaText": "Assinar",
+            "url": "https://wa.me/17996502614"
+          },
+          {
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
+            "title": "ndEX Builder v1",
+            "category": "Construtor de Sites",
             "priceType": "fixed",
             "price": "70.40",
             "period": "",
@@ -96,6 +140,36 @@
             "category": "",
             "priceType": "starting_at",
             "price": "R$ 1.500",
+            "content": "",
+            "ctaText": "",
+            "url": ""
+          },
+          {
+            "imageUrl": "",
+            "title": "Site para Advogados",
+            "category": "",
+            "priceType": "fixed",
+            "price": "R$ 750",
+            "content": "",
+            "ctaText": "",
+            "url": ""
+          },
+          {
+            "imageUrl": "",
+            "title": "Site para Advogados",
+            "category": "",
+            "priceType": "free",
+            "price": "R$ 750",
+            "content": "",
+            "ctaText": "",
+            "url": ""
+          },
+          {
+            "imageUrl": "",
+            "title": "Site para Advogados",
+            "category": "",
+            "priceType": "none",
+            "price": "R$ 750",
             "content": "",
             "ctaText": "",
             "url": ""
