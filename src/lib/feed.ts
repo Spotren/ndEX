@@ -20,12 +20,37 @@ interface RSSConfig {
 // 站点配置
 const siteData = await getSiteData()
 const config: RSSConfig = {
-  siteUrl: siteData.head.website,
+  siteUrl: normalizeSiteUrl(siteData.head.website),
   title: siteData.head.title,
   description: siteData.head.description,
   author: SITE_CONFIG.author,
   lang: siteData.head.lang,
   posts: await getAllPosts(),
+}
+
+function normalizeSiteUrl(siteUrl: string | undefined): string {
+  const normalized = siteUrl?.trim().replace(/\/+$/, '') ?? ''
+  if (!normalized) return ''
+
+  try {
+    return new URL(normalized).toString().replace(/\/+$/, '')
+  } catch {
+    return ''
+  }
+}
+
+function resolveAbsoluteUrl(path: string, siteUrl: string): string {
+  if (!path) return ''
+
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path
+  }
+
+  if (!siteUrl) {
+    return path
+  }
+
+  return new URL(path, `${siteUrl}/`).toString()
 }
 
 // XML转义函数
@@ -97,7 +122,7 @@ async function processImagePaths(htmlContent: string, siteUrl: string, postId: s
     const [fullMatch, beforeSrc, src, afterSrc] = match
 
     // 跳过已经是绝对路径的图片
-    if (src.startsWith('http') || src.startsWith('//') || src.startsWith('/_astro/')) {
+    if (src.startsWith('http') || src.startsWith('//')) {
       continue
     }
 
@@ -110,14 +135,14 @@ async function processImagePaths(htmlContent: string, siteUrl: string, postId: s
         try {
           // 使用 imageModule.default 获取 ImageMetadata
           const optimizedImage = await getImage({ src: imageModule.default })
-          const absoluteUrl = new URL(optimizedImage.src, siteUrl).toString()
+          const absoluteUrl = resolveAbsoluteUrl(optimizedImage.src, siteUrl)
 
           const newImgTag = `<img${beforeSrc}src="${absoluteUrl}"${afterSrc}>`
           processedContent = processedContent.replace(fullMatch, newImgTag)
         } catch (error) {
           console.warn(`Failed to process image: ${imagePath}`, error)
           // 回退到基本的绝对路径
-          const fallbackUrl = `${siteUrl}/src/content/posts/${postId}/${src}`
+          const fallbackUrl = resolveAbsoluteUrl(`/src/content/posts/${postId}/${src}`, siteUrl)
           const newImgTag = `<img${beforeSrc}src="${fallbackUrl}"${afterSrc}>`
           processedContent = processedContent.replace(fullMatch, newImgTag)
         }
@@ -137,7 +162,7 @@ async function addCoverImage(post: CollectionEntry<'posts'>, siteUrl: string): P
   try {
     if (post.data.cover && typeof post.data.cover === 'object' && post.data.cover.src) {
       const optimizedImage = await getImage({ src: post.data.cover })
-      const absoluteUrl = new URL(optimizedImage.src, siteUrl).toString()
+      const absoluteUrl = resolveAbsoluteUrl(optimizedImage.src, siteUrl)
       const coverHtml = `<img src="${absoluteUrl}" alt="${post.data.title}" style="width: 100%; height: auto; margin-bottom: 1em;" />`
       return coverHtml
     }
@@ -217,7 +242,7 @@ export async function generateRSS20(): Promise<string> {
   <channel>
     <title>${escapeXml(title)}</title>
     <description>${escapeXml(description)}</description>
-    <link>${siteUrl}</link>
+    <link>${siteUrl || '/'}</link>
     <language>${lang}</language>
     <managingEditor>${escapeXml(author)}</managingEditor>
     <webMaster>${escapeXml(author)}</webMaster>
@@ -225,14 +250,14 @@ export async function generateRSS20(): Promise<string> {
     <pubDate>${lastBuildDate}</pubDate>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <generator>Astro Litos Theme</generator>
-    <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="${resolveAbsoluteUrl('/rss.xml', siteUrl)}" rel="self" type="application/rss+xml" />
     ${processedPosts
       .map(
         (post) => `
     <item>
       <title>${escapeXml(post.data.title)}</title>
-      <link>${siteUrl}/posts/${post.id}</link>
-      <guid>${siteUrl}/posts/${post.id}</guid>
+      <link>${resolveAbsoluteUrl(`/posts/${post.id}`, siteUrl)}</link>
+      <guid>${resolveAbsoluteUrl(`/posts/${post.id}`, siteUrl)}</guid>
       <updated>${(post.data.updatedDate || post.data.pubDate).toISOString()}</updated>
       <pubDate>${post.data.pubDate.toISOString()}</pubDate>
       <description><![CDATA[${post.data.description || ''}]]></description>
@@ -257,14 +282,14 @@ export async function generateAtom10(): Promise<string> {
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>${escapeXml(title)}</title>
   <subtitle>${escapeXml(description)}</subtitle>
-  <link href="${siteUrl}/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="${siteUrl}" rel="alternate" type="text/html"/>
+  <link href="${resolveAbsoluteUrl('/atom.xml', siteUrl)}" rel="self" type="application/atom+xml"/>
+  <link href="${siteUrl || '/'}" rel="alternate" type="text/html"/>
   <updated>${lastBuildDate}</updated>
   <language>${lang}</language>
-  <id>${siteUrl}/</id>
+  <id>${siteUrl || '/'}</id>
   <author>
     <name>${escapeXml(author)}</name>
-    <uri>${siteUrl}</uri>
+    <uri>${siteUrl || '/'}</uri>
   </author>
   <generator uri="https://github.com/ndEX/Litos" version="5.0">Astro Litos Theme</generator>
   <rights>Copyright © ${new Date().getFullYear()} ${escapeXml(author)}</rights>
@@ -273,8 +298,8 @@ export async function generateAtom10(): Promise<string> {
       (post) => `
   <entry>
     <title>${escapeXml(post.data.title)}</title>
-    <link href="${siteUrl}/posts/${post.id}" rel="alternate" type="text/html"/>
-    <id>${siteUrl}/posts/${post.id}</id>
+    <link href="${resolveAbsoluteUrl(`/posts/${post.id}`, siteUrl)}" rel="alternate" type="text/html"/>
+    <id>${resolveAbsoluteUrl(`/posts/${post.id}`, siteUrl)}</id>
     <updated>${(post.data.updatedDate || post.data.pubDate).toISOString()}</updated>
     <published>${post.data.pubDate.toISOString()}</published>
     <author>
