@@ -1,6 +1,4 @@
 ---
-import { formatPriceParts } from '~/lib/utils'
-
 type ServiceItem = {
   name: string
   type: string
@@ -30,48 +28,12 @@ const { services }: Props = Astro.props
             service.type === '__starting_at_icon__' ? (
               <span class="inline-flex items-end gap-3 leading-none">
                 <span class="icon-[mdi--rocket-launch] text-xl text-muted-foreground/80 leading-none"></span>
-                {
-                  service.price
-                    ? (() => {
-                        const rawPrice = service.currency ? `${service.currency} ${service.price}` : service.price
-                        const parts = formatPriceParts(rawPrice, { period: service.period })
-                        if (!parts) return <span class="text-muted-foreground/90">{rawPrice}{service.period ? ` ${service.period}` : ''}</span>
-                        return (
-                          <span class="inline-flex items-stretch gap-1.5 text-muted-foreground/90 leading-tight">
-                            <span class="text-sm leading-[1.7]">{parts.currency}</span>
-                            <span class="text-3xl font-semibold text-foreground">{parts.integer}</span>
-                            <span class="flex self-stretch flex-col justify-center leading-tight">
-                              <span class="text-sm">{parts.decimal}</span>
-                              {parts.period && <span class="text-xs text-muted-foreground/60">{parts.period}</span>}
-                            </span>
-                          </span>
-                        )
-                      })()
-                    : ''
-                }
+                {service.price ? <span class="text-muted-foreground/90">{service.currency ? `${service.currency} ` : ''}{service.price}{service.period ? ` ${service.period}` : ''}</span> : ''}
               </span>
             ) : service.type === '__fixed_icon__' ? (
               <span class="inline-flex items-end gap-3 leading-none">
                 <span class="icon-[mdi--cash-multiple] text-xl text-muted-foreground/80 leading-none"></span>
-                {
-                  service.price
-                    ? (() => {
-                        const rawPrice = service.currency ? `${service.currency} ${service.price}` : service.price
-                        const parts = formatPriceParts(rawPrice, { period: service.period })
-                        if (!parts) return <span class="text-muted-foreground/90">{rawPrice}{service.period ? ` ${service.period}` : ''}</span>
-                        return (
-                          <span class="inline-flex items-stretch gap-1.5 text-muted-foreground/90 leading-tight">
-                            <span class="text-sm leading-[1.7]">{parts.currency}</span>
-                            <span class="text-3xl font-semibold text-foreground">{parts.integer}</span>
-                            <span class="flex self-stretch flex-col justify-center leading-tight">
-                              <span class="text-sm">{parts.decimal}</span>
-                              {parts.period && <span class="text-xs text-muted-foreground/60">{parts.period}</span>}
-                            </span>
-                          </span>
-                        )
-                      })()
-                    : ''
-                }
+                {service.price ? <span class="text-muted-foreground/90">{service.currency ? `${service.currency} ` : ''}{service.price}{service.period ? ` ${service.period}` : ''}</span> : ''}
               </span>
             ) : (
               <span class="text-muted-foreground/90">
