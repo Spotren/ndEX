@@ -37,7 +37,7 @@ async function generateProductThumbs() {
         }
 
         const thumbBuffer = await sharp(sourceBuffer)
-          .resize(282, 159, {
+          .resize(321, 181, {
             fit: 'cover',
             position: 'centre',
           })
