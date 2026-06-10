@@ -31,12 +31,12 @@ async function generateProductThumbs() {
       const targetPath = path.join(outputDirectory, `${sectionIndex}-${productIndex}.avif`)
 
       try {
-        const sourceBuffer = await readImageSource(imageSource)
-        if (!sourceBuffer) {
+        const source = await readImageSource(imageSource)
+        if (!source?.buffer) {
           continue
         }
 
-        const thumbBuffer = await sharp(sourceBuffer)
+        const thumbBuffer = await sharp(source.buffer)
           .resize(321, 181, {
             fit: 'cover',
             position: 'centre',
@@ -46,6 +46,15 @@ async function generateProductThumbs() {
 
         await writeFile(targetPath, thumbBuffer)
       } catch (error) {
+        const source = await readImageSource(imageSource).catch(() => null)
+        if (source?.isAvif && isUnsupportedAvifDecodeError(error)) {
+          await writeFile(targetPath, source.buffer)
+          console.warn(
+            `[generate-product-thumbs] Copied original AVIF for "${product?.title || `${sectionIndex}-${productIndex}`}" because the local decoder could not resize this bitstream.`
+          )
+          continue
+        }
+
         const message = error instanceof Error ? error.message : String(error)
         console.warn(`[generate-product-thumbs] Skipping "${product?.title || `${sectionIndex}-${productIndex}`}" because the image could not be processed: ${imageSource}`)
         console.warn(`[generate-product-thumbs] ${message}`)
@@ -60,12 +69,28 @@ async function readImageSource(imageSource) {
     if (!response.ok) {
       throw new Error(`Image request failed with status ${response.status}.`)
     }
-    return Buffer.from(await response.arrayBuffer())
+    return {
+      buffer: Buffer.from(await response.arrayBuffer()),
+      isAvif: isAvifSource(imageSource, response.headers.get('content-type')),
+    }
   }
 
   const resolvedPath = path.resolve(projectRoot, imageSource.replace(/^\//, ''))
   if (!existsSync(resolvedPath)) {
     throw new Error(`Local image not found at ${resolvedPath}.`)
   }
-  return readFile(resolvedPath)
+  return {
+    buffer: await readFile(resolvedPath),
+    isAvif: isAvifSource(resolvedPath),
+  }
+}
+
+function isAvifSource(source, contentType = '') {
+  return source.toLowerCase().endsWith('.avif') || contentType.toLowerCase().includes('image/avif')
+}
+
+function isUnsupportedAvifDecodeError(error) {
+  const message = error instanceof Error ? error.message : String(error)
+  const normalized = message.toLowerCase()
+  return normalized.includes('bitstream not supported by this decoder') || normalized.includes('heif: invalid input')
 }
