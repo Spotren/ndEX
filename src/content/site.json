@@ -2,10 +2,10 @@
   "head": {
     "title": "Spotren™ Empresa de Software em São José do Rio Preto",
     "description": "Empresa de Software especializada em Sistemas, Sites e Plataformas para Comércios Locais e Profissionais Autônomos de São José do Rio Preto",
-    "website": "https://spotren-6ada0a14.vercel.app",
+    "website": "https://spotren.site",
     "lang": "pt-BR",
     "icon": {
-      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/favicon/1780619710591600759-spotren-favicon-wp.ico",
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/favicon/1781043875849419270-spotren-favicon-wp.ico",
       "contentType": "image/x-icon"
     },
     "ogImage": {
@@ -16,11 +16,11 @@
   "socialLinks": [
     {
       "name": "facebook",
-      "url": "https://www.facebook.com/rafa.spotren"
+      "url": "https://www.facebook.com/rafa.spotren/"
     },
     {
       "name": "instagram",
-      "url": "https://www.instagram.com/spotren.now"
+      "url": "https://www.instagram.com/rafa.spotren/"
     },
     {
       "name": "linkedin",
@@ -29,7 +29,7 @@
   ],
   "body": {
     "logo": {
-      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/logo/1780619696492441545-spotren-favicon-wp-optmz.png",
+      "url": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/logo/1781043876777605604-spotren-favicon-wp-optmz.png",
       "alt": "Logo Spotren™ Empresa de Software São José do Rio Preto"
     },
     "brand": "Spotren™",
@@ -53,7 +53,7 @@
       {
         "key": "reviews",
         "title": "Avaliações",
-        "description": "Veja o que clientes reais dizem sobre a experiência com a Spotren™",
+        "description": "Veja o que clientes reais dizem sobre a experiência com o negócio.",
         "items": [
           {
             "name": "Ariane",
@@ -70,61 +70,54 @@
       {
         "key": "products",
         "title": "Produtos",
-        "description": "Soluções disponíveis para contratar agora.",
+        "description": "Soluções disponíveis para contratar.",
         "products": [
           {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
-            "title": "ndEX Builder v1",
-            "category": "Construtor de Sites",
-            "priceType": "none",
-            "price": "70.40",
-            "period": "",
-            "content": "Site otimizado para Negócios Locais",
-            "ctaText": "Assinar",
-            "url": "https://wa.me/17996502614"
-          },
-          {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
-            "title": "ndEX Builder v1",
-            "category": "Construtor de Sites",
-            "priceType": "free",
-            "price": "70.40",
-            "period": "",
-            "content": "Site otimizado para Negócios Locais",
-            "ctaText": "Assinar",
-            "url": "https://wa.me/17996502614"
-          },
-          {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
-            "title": "ndEX Builder v1",
-            "category": "Construtor de Sites",
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/catalog/1781114579746364752-construtor-de-sites-locais-ndex_optmz.png",
+            "title": "Construtor de Sites Locais ndEX",
+            "category": "Sites Locais",
             "priceType": "fixed",
-            "price": "70.40",
-            "period": "/mês",
-            "content": "Site otimizado para Negócios Locais",
-            "ctaText": "Assinar",
+            "currency": "R$",
+            "price": "35.20",
+            "period": "/ mes",
+            "content": "Construtor de sites locais pronto para colocar empresas e profissionais no ar com páginas rápidas, responsivas e otimizadas para SEO local. Ideal para negócios que querem aparecer melhor no Google, destacar serviços, mostrar avaliações, produtos e formas de contato, com foco em geração de leads e presença digital profissional.",
+            "ctaText": "Construir um site no ndEX",
+            "url": "https://wa.me/17996502614?text=ndEX"
+          },
+          {
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/catalog/1781110880348381007-site-para-comerciantes-e-profissionais-locais-spotren_optmz.png",
+            "title": "Site para Comerciantes e Profissionais Locais",
+            "category": "Sites Locais",
+            "priceType": "fixed",
+            "currency": "R$",
+            "price": "70,40",
+            "period": "/ mes",
+            "content": "Site profissional para comerciantes e profissionais locais que querem ser encontrados no Google, apresentar serviços com clareza e transformar visitas em contatos pelo WhatsApp. Ideal para negócios de bairro, autônomos e pequenos escritórios que precisam de uma presença online simples, rápida e focada em conversão.",
+            "ctaText": "Chamar no Whats",
             "url": "https://wa.me/17996502614"
           },
           {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
-            "title": "ndEX Builder v1",
-            "category": "Construtor de Sites",
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/catalog/1781045257876600535-teste-thumbs-spotren-ndex.avif",
+            "title": "Sites Institucionais Corporativos",
+            "category": "WordPress",
             "priceType": "starting_at",
-            "price": "70.40",
-            "period": "",
-            "content": "Site otimizado para Negócios Locais",
-            "ctaText": "Assinar",
+            "currency": "R$",
+            "price": "250",
+            "period": "/ mes",
+            "content": "Site personalizado para fortalecer sua marca e atrair clientes por meio de conteúdo relevante.",
+            "ctaText": "Contato",
             "url": "https://wa.me/17996502614"
           },
           {
-            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/6ada0a14-cd51-48bd-8f54-acc6e3658549/catalog/1780620491966448652-teste-thumbs-spotren-ndex.avif",
-            "title": "ndEX Builder v1",
-            "category": "Construtor de Sites",
-            "priceType": "fixed",
-            "price": "70.40",
-            "period": "",
-            "content": "Site otimizado para Negócios Locais",
-            "ctaText": "Assinar",
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/catalog/1781103327337078961-teste-thumbs-spotren-ndex.avif",
+            "title": "Lojas Virtuais WooCommerce",
+            "category": "WordPress",
+            "priceType": "starting_at",
+            "currency": "R$",
+            "price": "750",
+            "period": "/ mes",
+            "content": "",
+            "ctaText": "Contato",
             "url": "https://wa.me/17996502614"
           }
         ]
@@ -132,59 +125,104 @@
       {
         "key": "services",
         "title": "Serviços",
-        "description": "Software sob medida para o seu negócio.",
+        "description": "Serviços sob medida para o seu negócio.",
         "services": [
           {
             "imageUrl": "",
-            "title": "Software / SaaS Personalizado",
-            "category": "",
+            "title": "Manutenção em Sites e Lojas Virtuais",
+            "category": "Suporte Técnico",
             "priceType": "starting_at",
-            "price": "R$ 1.500",
-            "content": "",
-            "ctaText": "",
-            "url": ""
+            "currency": "R$",
+            "price": "350",
+            "period": "",
+            "content": "Atualizações, backups e suporte contínuo para manter seu site seguro e funcionando.",
+            "ctaText": "Contratar",
+            "url": "https://wa.me/17996502614"
           },
           {
             "imageUrl": "",
-            "title": "Site para Advogados",
-            "category": "",
+            "title": "Melhorias de SEO Técnico",
+            "category": "Marketing Digital",
+            "priceType": "starting_at",
+            "currency": "R$",
+            "price": "450",
+            "period": "",
+            "content": "",
+            "ctaText": "Contratar",
+            "url": "https://wa.me/17996502614"
+          },
+          {
+            "imageUrl": "",
+            "title": "Gestão de perfil do Google Meu Negócio",
+            "category": "GMN",
             "priceType": "fixed",
-            "price": "R$ 750",
+            "currency": "R$",
+            "price": "450",
+            "period": "/ mes",
             "content": "",
-            "ctaText": "",
-            "url": ""
+            "ctaText": "Contratar",
+            "url": "https://wa.me/17996502614"
           },
           {
             "imageUrl": "",
-            "title": "Site para Advogados",
-            "category": "",
+            "title": "Reunião de Alinhamento",
+            "category": "Call",
             "priceType": "free",
-            "price": "R$ 750",
+            "currency": "",
+            "price": "",
+            "period": "",
             "content": "",
-            "ctaText": "",
-            "url": ""
+            "ctaText": "Agendar",
+            "url": "https://meet.brevo.com/rafa-santos"
           },
           {
             "imageUrl": "",
-            "title": "Site para Advogados",
-            "category": "",
+            "title": "SaaS ou Software Desktop",
+            "category": "Software",
             "priceType": "none",
-            "price": "R$ 750",
+            "currency": "",
+            "price": "",
+            "period": "",
             "content": "",
-            "ctaText": "",
-            "url": ""
+            "ctaText": "Contato",
+            "url": "https://wa.me/17996502614"
           }
         ]
       },
       {
         "key": "faqs",
         "title": "FAQs",
-        "description": "Perguntas comuns sobre o site e o serviço.",
+        "description": "Dúvidas comuns sobre o site e o serviço.",
         "faqs": [
           {
-            "category": "Performance",
-            "question": "O site da ndEX é rápido?",
-            "answer": "Sim, nossos sites recebem Nota 100/100 no Google PageSpeed Insights."
+            "category": "Serviços",
+            "question": "Quanto tempo leva para criar um site?",
+            "answer": "O prazo varia conforme a complexidade, mas geralmente entregamos sites institucionais em 15 a 30 dias úteis."
+          },
+          {
+            "category": "Serviços",
+            "question": "Vocês oferecem suporte após a entrega?",
+            "answer": "Sim, oferecemos planos de manutenção mensal com suporte técnico e atualizações."
+          },
+          {
+            "category": "Produtos",
+            "question": "A plataforma EAD suporta muitos alunos?",
+            "answer": "Sim, nossa plataforma é escalável e suporta desde pequenos cursos até milhares de alunos simultâneos."
+          },
+          {
+            "category": "Produtos",
+            "question": "Posso personalizar o design do meu site?",
+            "answer": "Sim, todos os sites são personalizados de acordo com a identidade visual da sua marca."
+          },
+          {
+            "category": "Geral",
+            "question": "Vocês atendem apenas em São José do Rio Preto?",
+            "answer": "Atendemos clientes em todo o Brasil, com reuniões online e entregas remotas."
+          },
+          {
+            "category": "Geral",
+            "question": "Qual o investimento médio para um site?",
+            "answer": "Os valores variam conforme as funcionalidades, mas entramos em contato para um orçamento sem compromisso."
           }
         ]
       }
