@@ -27,6 +27,7 @@ const catalogItemSchema = z.object({
   title: z.string().trim().min(1),
   category: z.string().trim().optional().default(''),
   priceType: priceTypeSchema,
+  currency: z.string().trim().optional().default(''),
   price: z.string().trim().optional().default(''),
   period: z.string().trim().optional().default(''),
   content: z.string().trim().optional().default(''),

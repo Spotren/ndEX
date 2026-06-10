@@ -199,10 +199,12 @@ if (hasPinnedPosts) {
                           : service.priceType === 'fixed'
                             ? '__fixed_icon__'
                             : formatServiceType(service.priceType),
+                      currency: service.currency || undefined,
                       price:
                         service.priceType === 'fixed' || service.priceType === 'starting_at'
                           ? service.price || undefined
                           : undefined,
+                      period: service.period || undefined,
                     }))}
                   />
                 </>
