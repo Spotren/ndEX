@@ -1,4 +1,5 @@
 ---
+import { TOC_LABELS } from '~/config'
 import { cn } from '~/lib/utils'
 
 interface Props {
@@ -22,7 +23,7 @@ const { class: className, id = 'backToTopDesktop' } = Astro.props
     'opacity-0 invisible translate-y-4 transition-all duration-300 ease-out',
     className
   )}
-  aria-label="Back to top"
+  aria-label={TOC_LABELS.backToTop}
 >
   <span class="icon-[ph--arrow-up] size-4 transition-transform duration-200 group-hover:-translate-y-0.5"></span>
 </button>

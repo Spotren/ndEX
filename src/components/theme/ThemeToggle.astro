@@ -1,12 +1,13 @@
 ---
+import { THEME_LABELS } from '~/config'
 ---
 
 <button
   type="button"
   data-theme-toggle
   class="relative size-5 flex items-center justify-center cursor-pointer transition-transform hover:scale-105 active:scale-95"
-  aria-label="Switch theme"
-  title="Switch theme"
+  aria-label={THEME_LABELS.switchTheme}
+  title={THEME_LABELS.switchTheme}
 >
   <span data-theme-toggle-icon class="icon-[tabler--sun-filled] size-5"></span>
 </button>

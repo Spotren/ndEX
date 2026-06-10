@@ -1,4 +1,5 @@
 ---
+import { LICENSE_LABELS } from '~/config'
 import { cn } from '~/lib/utils'
 
 interface Props {
@@ -111,7 +112,7 @@ const currentUrl =
     <div class="flex items-start sm:items-center gap-2">
       <span class="icon-[lucide--pen-line] text-primary/70 mt-0.5 flex-shrink-0 text-sm sm:text-base"></span>
       <div class="flex-1 min-w-0">
-        <span class="text-muted-foreground/80">Author: </span>
+        <span class="text-muted-foreground/80">{LICENSE_LABELS.author} </span>
         <span class="font-medium text-foreground/80">{author}</span>
       </div>
     </div>
@@ -119,7 +120,7 @@ const currentUrl =
     <div class="flex items-start sm:items-center gap-2">
       <span class="icon-[lucide--book-open] text-primary/70 mt-0.5 flex-shrink-0 text-sm sm:text-base"></span>
       <div class="flex-1 min-w-0">
-        <span class="text-muted-foreground/80">Post: </span>
+        <span class="text-muted-foreground/80">{LICENSE_LABELS.post} </span>
         <span class="font-medium text-foreground/80 break-words">{title}</span>
       </div>
     </div>
@@ -127,7 +128,7 @@ const currentUrl =
     <div class="flex items-start sm:items-center gap-2">
       <span class="icon-[lucide--link] text-primary/70 mt-0.5 flex-shrink-0 text-sm sm:text-base"></span>
       <div class="flex-1 min-w-0">
-        <span class="text-muted-foreground/80">Link: </span>
+        <span class="text-muted-foreground/80">{LICENSE_LABELS.link} </span>
         <a
           href={currentUrl}
           class="font-medium text-primary/80 hover:text-primary transition-colors break-all inline-block"
@@ -142,7 +143,7 @@ const currentUrl =
     <div class="flex items-start sm:items-center gap-2">
       <span class="icon-[lucide--file-badge] text-primary/70 mt-0.5 flex-shrink-0 text-sm sm:text-base"></span>
       <div class="flex-1 min-w-0">
-        <span class="text-muted-foreground/80">License: </span>
+        <span class="text-muted-foreground/80">{LICENSE_LABELS.license} </span>
         {
           config.url ? (
             <a

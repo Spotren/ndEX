@@ -1,4 +1,5 @@
 ---
+import { CAROUSEL_LABELS } from '~/config'
 import { formatPriceParts } from '~/lib/utils'
 
 type ProductItem = {
@@ -29,7 +30,7 @@ const { title, description, products }: Props = Astro.props
     <div class="hidden items-center gap-3 sm:flex">
       <button
         type="button"
-        aria-label="Previous products"
+        aria-label={CAROUSEL_LABELS.previousProducts}
         data-products-prev
         class="inline-flex size-11 items-center justify-center rounded-full border border-border/60 text-foreground transition hover:bg-accent pointer-events-none opacity-30"
       >
@@ -37,7 +38,7 @@ const { title, description, products }: Props = Astro.props
       </button>
       <button
         type="button"
-        aria-label="Next products"
+        aria-label={CAROUSEL_LABELS.nextProducts}
         data-products-next
         class="inline-flex size-11 items-center justify-center rounded-full border border-border/60 text-foreground transition hover:bg-accent"
       >

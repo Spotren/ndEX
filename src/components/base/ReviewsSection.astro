@@ -1,4 +1,6 @@
 ---
+import { CAROUSEL_LABELS } from '~/config'
+
 type ReviewItem = {
   name: string
   role?: string
@@ -50,7 +52,7 @@ const { title, description, reviews, metric }: Props = Astro.props
       <button
         type="button"
         data-reviews-prev
-        aria-label="Previous review"
+        aria-label={CAROUSEL_LABELS.previousReview}
         class="inline-flex size-11 items-center justify-center rounded-full border border-border/60 text-foreground transition hover:bg-accent"
       >
         <span class="icon-[mdi--arrow-left] size-5"></span>
@@ -58,7 +60,7 @@ const { title, description, reviews, metric }: Props = Astro.props
       <button
         type="button"
         data-reviews-next
-        aria-label="Next review"
+        aria-label={CAROUSEL_LABELS.nextReview}
         class="inline-flex size-11 items-center justify-center rounded-full border border-border/60 text-foreground transition hover:bg-accent"
       >
         <span class="icon-[mdi--arrow-right] size-5"></span>

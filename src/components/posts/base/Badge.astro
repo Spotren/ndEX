@@ -1,4 +1,5 @@
 ---
+import { BADGE_LABELS } from '~/config'
 import { buildTagHref, cn } from '~/lib/utils'
 
 interface Props {
@@ -36,14 +37,16 @@ const iconConfig = {
 }
 
 const iconClass = iconConfig[type]
+const taggedPostsAriaLabel = BADGE_LABELS.taggedPostsAriaLabelTemplate.replace('{tag}', content)
+const taggedPostsTitle = BADGE_LABELS.taggedPostsTitleTemplate.replace('{tag}', content)
 ---
 
 {
   type === 'tag' ? (
     <a
       href={buildTagHref(content)}
-      aria-label={`View posts tagged with ${content}`}
-      title={`Posts tagged with ${content}`}
+      aria-label={taggedPostsAriaLabel}
+      title={taggedPostsTitle}
       class={cn(
         'inline-flex items-center font-medium  transition-colors duration-200 select-none',
         sizeClasses[size],
@@ -62,7 +65,7 @@ const iconClass = iconConfig[type]
         variantClasses[finalVariant],
         className
       )}
-      title="Recommended post"
+      title={BADGE_LABELS.recommendedPost}
     >
       {showIcon && <span class={iconClass} />}
       <span class="font-medium tracking-wide">{content}</span>

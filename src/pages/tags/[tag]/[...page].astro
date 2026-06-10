@@ -2,7 +2,7 @@
 import '~/styles/post-effects.css'
 import type { GetStaticPaths, Page } from 'astro'
 import type { CollectionEntry } from 'astro:content'
-import { POSTS_CONFIG } from '~/config'
+import { POSTS_CONFIG, TAGS_LABELS } from '~/config'
 import Layout from '~/layouts/Layout.astro'
 import Pagination from '~/components/base/Pagination.astro'
 import List from '~/components/posts/card/List.astro'
@@ -42,7 +42,7 @@ const description = `Posts with the tag #${tag}`
         <nav class="flex items-center gap-3 text-sm text-muted-foreground/80">
           <a href="/tags" class="group flex items-center gap-2 hover:text-primary transition-colors">
             <span class="icon-[ph--tag-simple] w-4 h-4"></span>
-            <span>Tags</span>
+            <span>{TAGS_LABELS.breadcrumb}</span>
           </a>
           <span class="text-muted-foreground/30">/</span>
           <span class="text-foreground/90">#{tag}</span>
@@ -55,7 +55,7 @@ const description = `Posts with the tag #${tag}`
           <div class="flex flex-col items-end justify-center gap-1 text-sm text-muted-foreground/70">
             <div class="flex items-center gap-2">
               <span class="icon-[ph--article-medium] w-4 h-4"></span>
-              <span>{page.total} {page.total === 1 ? 'post' : 'posts'}</span>
+              <span>{page.total} {page.total === 1 ? TAGS_LABELS.singlePost : TAGS_LABELS.multiplePosts}</span>
             </div>
           </div>
         </div>
