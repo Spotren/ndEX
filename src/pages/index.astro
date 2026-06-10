@@ -149,7 +149,7 @@ if (hasPinnedPosts) {
       </div>
     </div>
     {
-      sections.map((section) => (
+      sections.map((section, sectionIndex) => (
         <>
           <SectionDivider />
           <div class="home-section-shell">
@@ -172,7 +172,10 @@ if (hasPinnedPosts) {
                   <ProductsSlider
                     title={section.title}
                     description={section.description}
-                    products={section.products.map((product) => ({
+                    products={section.products.map((product, productIndex) => ({
+                      thumbSrc: existsSync(path.resolve(process.cwd(), `public/generated/product-thumbs/${sectionIndex}-${productIndex}.avif`))
+                        ? `/generated/product-thumbs/${sectionIndex}-${productIndex}.avif`
+                        : undefined,
                       imageSrc: product.imageUrl,
                       name: product.title,
                       category: product.category,

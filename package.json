@@ -6,10 +6,11 @@
   "scripts": {
     "generate:location-maps": "node ./scripts/generate-location-maps.mjs",
     "generate:post-thumbs": "node ./scripts/generate-post-thumbs.mjs",
+    "generate:product-thumbs": "node ./scripts/generate-product-thumbs.mjs",
     "dev": "astro dev",
-    "prebuild": "pnpm run generate:location-maps && pnpm run generate:post-thumbs",
+    "prebuild": "pnpm run generate:location-maps && pnpm run generate:post-thumbs && pnpm run generate:product-thumbs",
     "build": "astro check && astro build",
-    "precheck": "pnpm run generate:location-maps && pnpm run generate:post-thumbs",
+    "precheck": "pnpm run generate:location-maps && pnpm run generate:post-thumbs && pnpm run generate:product-thumbs",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",

@@ -4,6 +4,7 @@ import { formatPriceParts } from '~/lib/utils'
 
 type ProductItem = {
   imageSrc?: string
+  thumbSrc?: string
   name: string
   category: string
   price?: string
@@ -63,8 +64,8 @@ const { title, description, products }: Props = Astro.props
             >
               <div class="border-b border-border/40 bg-muted/20">
                 {
-                  product.imageSrc ? (
-                    <img src={product.imageSrc} alt={product.name} loading="lazy" class="aspect-video w-full object-cover" draggable="false" />
+                  product.imageSrc || product.thumbSrc ? (
+                    <img src={product.thumbSrc || product.imageSrc} alt={product.name} width="282" height="159" loading="lazy" decoding="async" class="aspect-video w-full object-cover" draggable="false" />
                   ) : (
                     <div class="flex aspect-video w-full items-center justify-center bg-muted/40 text-muted-foreground">
                       <span class="icon-[mdi--image-outline] size-10"></span>
