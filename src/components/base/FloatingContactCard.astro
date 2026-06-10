@@ -1,4 +1,6 @@
 ---
+import { HOME_LABELS } from '~/config.ts'
+
 type Position = 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left'
 
 type Props = {
@@ -32,7 +34,7 @@ const positionClasses: Record<Position, string> = {
       ]}
     >
       <span class:list={[wap ? 'icon-[ri--whatsapp-fill]' : 'icon-[mdi--phone]', 'size-6 shrink-0 text-foreground']}></span>
-      <p class="text-sm font-medium text-muted-foreground">Contact us now</p>
+      <p class="text-sm font-medium text-muted-foreground">{HOME_LABELS.contactUs}</p>
     </a>
   )
 }
