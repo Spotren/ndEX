@@ -31,6 +31,7 @@ const siteOpenStatus = siteData.body.openStatus
 const siteCity = siteData.body.city || ''
 const phoneDigits = sitePhone.replace(/\D/g, '')
 const phoneHref = CONTACT_CONFIG.wap ? `https://wa.me/${phoneDigits}` : `tel:${phoneDigits}`
+const phoneLabel = CONTACT_CONFIG.wap ? HOME_LABELS.contactInfoWhatsApp : HOME_LABELS.contactInfoPhone
 const uberClientId = import.meta.env.PUBLIC_UBER_CLIENT_ID
 const generatedLocationMapLightURL = '/generated/location-map-light.avif'
 const generatedLocationMapDarkURL = '/generated/location-map-dark.avif'
@@ -118,7 +119,7 @@ if (hasPinnedPosts) {
                 >
                   <span class:list={[CONTACT_CONFIG.wap ? 'icon-[ri--whatsapp-fill]' : 'icon-[mdi--phone]', 'mt-0.5 size-6 shrink-0 text-foreground']}></span>
                   <div>
-                    <p class="text-xs tracking-wide text-muted-foreground">{HOME_LABELS.contactUs}</p>
+                    <p class="text-sm text-muted-foreground">{phoneLabel}</p>
                     <p class="font-mono text-sm font-medium text-muted-foreground">{sitePhoneDisplay || sitePhone}</p>
                   </div>
                 </a>

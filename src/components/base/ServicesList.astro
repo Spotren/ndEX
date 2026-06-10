@@ -17,6 +17,9 @@ const { services }: Props = Astro.props
 <div>
   {
     services.map((service) => (
+      (() => {
+        const currency = service.currency || (service.price ? 'R$' : '')
+        return (
       <article class="group flex items-center justify-between py-3 border-b border-border/30 last:border-b-0">
         <div class="flex-1 pr-4">
           <div class="text-base font-medium text-muted-foreground/90 transition-colors duration-200 group-hover:text-primary line-clamp-1">
@@ -28,22 +31,24 @@ const { services }: Props = Astro.props
             service.type === '__starting_at_icon__' ? (
               <span class="inline-flex items-end gap-3 leading-none">
                 <span class="icon-[mdi--rocket-launch] text-xl text-muted-foreground/80 leading-none"></span>
-                {service.price ? <span class="text-muted-foreground/90">{service.currency ? `${service.currency} ` : ''}{service.price}{service.period ? ` ${service.period}` : ''}</span> : ''}
+                {service.price ? <span class="text-muted-foreground/90">{currency ? `${currency} ` : ''}{service.price}{service.period ? ` ${service.period}` : ''}</span> : ''}
               </span>
             ) : service.type === '__fixed_icon__' ? (
               <span class="inline-flex items-end gap-3 leading-none">
                 <span class="icon-[mdi--cash-multiple] text-xl text-muted-foreground/80 leading-none"></span>
-                {service.price ? <span class="text-muted-foreground/90">{service.currency ? `${service.currency} ` : ''}{service.price}{service.period ? ` ${service.period}` : ''}</span> : ''}
+                {service.price ? <span class="text-muted-foreground/90">{currency ? `${currency} ` : ''}{service.price}{service.period ? ` ${service.period}` : ''}</span> : ''}
               </span>
             ) : (
               <span class="text-muted-foreground/90">
                 {service.type}
-                {service.price ? ` ${service.currency ? `${service.currency} ` : ''}${service.price}${service.period ? ` ${service.period}` : ''}` : ''}
+                {service.price ? ` ${currency ? `${currency} ` : ''}${service.price}${service.period ? ` ${service.period}` : ''}` : ''}
               </span>
             )
           }
         </div>
       </article>
+        )
+      })()
     ))
   }
 </div>

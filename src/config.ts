@@ -34,7 +34,9 @@ export const NAVIGATION_CONFIG = {
 }
 
 export const HOME_LABELS = {
-  contactUs: 'Contato',
+  contactUs: 'Chamar no Whats',
+  contactInfoWhatsApp: 'WhatsApp',
+  contactInfoPhone: 'Telefone',
   socialLinkAriaLabelPrefix: 'Link do',
   locationDescriptionTemplate: 'Onde estamos em {city}',
   openMapTitle: 'Abrir Mapa',
