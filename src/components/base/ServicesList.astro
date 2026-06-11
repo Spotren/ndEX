@@ -6,6 +6,9 @@ type ServiceItem = {
   currency?: string
   period?: string
   content?: string
+  imageUrl?: string
+  ctaText?: string
+  url?: string
 }
 
 type Props = {
@@ -21,6 +24,7 @@ const { services }: Props = Astro.props
       (() => {
         const currency = service.currency || (service.price ? 'R$' : '')
         const hasContent = Boolean(service.content?.trim())
+        const hasAside = Boolean(service.imageUrl?.trim() || (service.url?.trim() && service.ctaText?.trim()))
         const serviceMeta =
           service.type === '__starting_at_icon__' ? (
             <span class="inline-flex items-end gap-3 leading-none">
@@ -55,8 +59,46 @@ const { services }: Props = Astro.props
               {serviceMeta}
             </span>
           </summary>
-          <div class="pb-4 pl-7 pr-4">
+          <div class:list={[
+            'pb-4 pl-7 pr-4',
+            hasAside && 'md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:gap-6',
+          ]}>
             <p class="text-sm leading-6 text-muted-foreground">{service.content}</p>
+            {
+              hasAside && (
+                <div class="mt-4 w-full md:mt-0 md:ml-auto md:max-w-[380px]">
+                  {
+                    service.imageUrl?.trim() ? (
+                      <div class="overflow-hidden rounded-2xl border border-border/50 bg-muted/20">
+                        <img
+                          src={service.imageUrl}
+                          alt={service.name}
+                          width="760"
+                          height="428"
+                          loading="lazy"
+                          decoding="async"
+                          class="aspect-video w-full object-cover"
+                          draggable="false"
+                        />
+                      </div>
+                    ) : null
+                  }
+                  {
+                    service.url?.trim() && service.ctaText?.trim() ? (
+                      <a
+                        href={service.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        class="mt-4 inline-flex w-full items-center justify-center gap-3 rounded-2xl border border-border/60 bg-card/40 px-4 py-3 text-center text-sm font-medium text-foreground transition hover:bg-accent/40"
+                      >
+                        <span>{service.ctaText}</span>
+                        <span class="icon-[mdi--arrow-top-right] size-4 shrink-0"></span>
+                      </a>
+                    ) : null
+                  }
+                </div>
+              )
+            }
           </div>
         </details>
       ) : (
