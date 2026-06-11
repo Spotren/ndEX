@@ -1,68 +1,65 @@
 ---
-title: 'Getting Started with Northwind Dental Studio'
-description: 'Quick start for the Northwind Dental Studio site: prerequisites, setup, and the first publishing steps.'
-pubDate: 2025-08-15
+title: 'Getting Started with ndEX'
+description: 'Quick start for local development and safe update boundaries for the Spotren-managed ndEX template.'
+pubDate: 2026-06-11
 author: 'ndEX'
 cover: assets/cover-company.png
 recommend: false
-tags: ['Litos', 'Documentation']
+tags: ['ndEX', 'Documentation']
 license: 'CC-BY-NC-SA-4.0'
 ---
 
-This theme was developed during my free time, and the documentation may not be comprehensive enough, but I will try my best to explain it.
+`ndEX` is a managed site template. In Spotren environments, the product provisions repository content and deploys the site automatically. Local development is mainly for template evolution, debugging, and contract-compatible changes.
 
-### Prerequisite
+## Prerequisites
 
-Before starting, ensure you have the following tools installed in your development environment:
+- :link[Node.js]{id=https://nodejs.org/en/download}
+- :link[pnpm]{id=https://pnpm.io/installation}
+- :link[Git]{id=https://git-scm.com/}
 
-- :link[Node.js]{id=https://nodejs.org/en/download} - Required for running the development environment.
-- :link[pnpm]{id=https://pnpm.io/installation} - Our preferred package manager for dependency management.
-- :link[Git]{id=https://git-scm.com/} - For version control and project management.
-- :link[VS Code]{id=https://code.visualstudio.com/} - Recommended code editor with excellent development experience.
-
-> [!NOTE]
-> If you have other alternative tools, then you don't need to follow the recommendations in this article.
-
-### Startup project
-
-There are two ways to do this:
-
-- :link[Fork the repository]{id=https://github.com/ndEX/Litos/fork}
-- :link[Use this template]{id=https://github.com/ndEX/Litos/generate} - In the future, content-free branches will be launched, which do not require deleting and replacing content.
-
-After you have your own repository, you can clone it to your local machine.
-
-### Update Theme
-
-When the theme releases a new version, you can pull the latest changes without losing your content by following these steps:
-
-**1. Add upstream remote (only needed once)**
+## Local startup
 
 ```bash
-git remote add upstream https://github.com/ndEX/Litos.git
+pnpm install
+pnpm dev
 ```
 
-**2. Fetch and merge the latest theme**
+The local site runs at `http://localhost:4321`.
 
-```bash
-git fetch upstream
-git merge upstream/main --no-edit
-```
+## Managed paths
 
-**3. Resolve conflicts (if any)**
+When a site is provisioned through Spotren, these paths should be treated as generated or synchronized content:
 
-Conflicts typically only occur in files you have modified, such as `src/config.ts`. In that case, just keep your own configuration and accept the rest of the theme updates.
+- `src/content/site.json`
+- `src/content/posts/**`
+- `public/favicon.ico` or `public/favicon.png`
 
-> [!TIP]
-> To minimize conflicts, try to only modify the following files:
->
-> - `src/config.ts` — Site configuration
-> - `src/content/` — Your posts and structured site content
-> - `public/` — Your static assets (favicon, images, etc.)
-> - `.env` — Environment variables
->
-> Avoid modifying theme source files (components, styles, layouts) directly. This ensures smooth updates every time.
+The template source can still keep example content in those paths, but managed sites may overwrite them at any time during provisioning or template sync.
 
-### End
+## Safe template changes
 
-The following documents will be divided into pages, such as readme, posts...
+Prefer changes that preserve the contract expected by `spotren-app`:
+
+- keep `src/lib/site-schema.ts` backward compatible
+- keep `src/content/site.json` as a single document with `head`, `socialLinks`, `body`, and optional `schemaGraph`
+- preserve supported `body.sections[].key` values
+- avoid moving managed file paths without updating the provisioner
+
+## Generated assets
+
+The template includes helper scripts that derive assets from structured content:
+
+- `pnpm generate:location-maps`
+- `pnpm generate:post-thumbs`
+- `pnpm generate:product-thumbs`
+
+These run automatically before `pnpm build` and `pnpm check`.
+
+## Template updates
+
+If you are evolving the template itself, update the template repository first and then let Spotren template sync propagate compatible changes to managed site repositories.
+
+If you introduce a breaking content change, update both:
+
+- the template schema and renderers in this repository
+- the provisioning and sync logic in `spotren-app`
