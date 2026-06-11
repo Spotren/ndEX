@@ -1,7 +1,7 @@
 {
   "head": {
     "title": "Spotren™ Empresa de Software em São José do Rio Preto",
-    "description": "Empresa de Software especializada em Sistemas, Sites e Plataformas para Comércios Locais e Profissionais Autônomos de São José do Rio Preto",
+    "description": "Empresa de Software especializada em Sistemas, Sites e Plataformas Digitais para Comércios Locais e Profissionais Autônomos de São José do Rio Preto.",
     "website": "https://spotren.site",
     "lang": "pt-BR",
     "icon": {
@@ -33,7 +33,7 @@
       "alt": "Logo Spotren™ Empresa de Software São José do Rio Preto"
     },
     "brand": "Spotren™",
-    "tagline": "Empresa de Software especializada em Sistemas, Sites e Plataformas para Comércios Locais e Profissionais Liberais / Autônomos de São José do Rio Preto",
+    "tagline": "Empresa de Software especializada em Sistemas, Sites e Plataformas Digitais para Comércios Locais e Profissionais Autônomos de São José do Rio Preto.",
     "category": "Empresa de Software",
     "city": "São José do Rio Preto",
     "rating": 5,
@@ -128,15 +128,15 @@
         "description": "Serviços sob medida para o seu negócio.",
         "services": [
           {
-            "imageUrl": "",
+            "imageUrl": "https://storage.googleapis.com/spotren-site-template-images-428176724323/sites/449f9a51-a72b-476f-92be-56dee7e9878f/10c36363-eede-4092-a988-09e1af28b254/catalog/1781199845027128424-teste-thumbs-spotren-ndex.avif",
             "title": "Manutenção em Sites e Lojas Virtuais",
             "category": "Suporte Técnico",
             "priceType": "starting_at",
             "currency": "R$",
             "price": "350",
             "period": "",
-            "content": "Atualizações, backups e suporte contínuo para manter seu site seguro e funcionando.",
-            "ctaText": "Contratar",
+            "content": "Cuidamos da manutenção contínua de sites e lojas virtuais com correções, atualizações, ajustes de desempenho, revisão de integrações, suporte técnico e prevenção de falhas.",
+            "ctaText": "Manter meu site",
             "url": "https://wa.me/17996502614"
           },
           {
@@ -203,11 +203,6 @@
             "category": "Serviços",
             "question": "Vocês oferecem suporte após a entrega?",
             "answer": "Sim, oferecemos planos de manutenção mensal com suporte técnico e atualizações."
-          },
-          {
-            "category": "Produtos",
-            "question": "A plataforma EAD suporta muitos alunos?",
-            "answer": "Sim, nossa plataforma é escalável e suporta desde pequenos cursos até milhares de alunos simultâneos."
           },
           {
             "category": "Produtos",
