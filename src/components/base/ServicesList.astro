@@ -6,7 +6,6 @@ type ServiceItem = {
   currency?: string
   period?: string
   content?: string
-  imageUrl?: string
   ctaText?: string
   url?: string
 }
@@ -24,7 +23,7 @@ const { services }: Props = Astro.props
       (() => {
         const currency = service.currency || (service.price ? 'R$' : '')
         const hasContent = Boolean(service.content?.trim())
-        const hasAside = Boolean(service.imageUrl?.trim() || (service.url?.trim() && service.ctaText?.trim()))
+        const hasAside = Boolean(service.url?.trim() && service.ctaText?.trim())
         const serviceMeta =
           service.type === '__starting_at_icon__' ? (
             <span class="inline-flex items-end gap-3 leading-none">
@@ -70,22 +69,6 @@ const { services }: Props = Astro.props
             {
               hasAside && (
                 <div class="mt-4 w-full md:mt-0 md:ml-auto md:max-w-[380px]">
-                  {
-                    service.imageUrl?.trim() ? (
-                      <div class="mb-4 overflow-hidden rounded-2xl border border-border/50 bg-muted/20">
-                        <img
-                          src={service.imageUrl}
-                          alt={service.name}
-                          width="760"
-                          height="428"
-                          loading="lazy"
-                          decoding="async"
-                          class="aspect-video w-full object-cover"
-                          draggable="false"
-                        />
-                      </div>
-                    ) : null
-                  }
                   {
                     service.url?.trim() && service.ctaText?.trim() ? (
                       <a
